@@ -1,0 +1,53 @@
+{
+  "name": "guarahooks-cli",
+  "version": "0.0.1",
+  "description": "A CLI to help you manage you manage guarahooks's hooks in your applications.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
+  "main": "./dist/index.js",
+  "bin": {
+    "guarahooks": "dist/index.js"
+  },
+  "preferGlobal": true,
+  "author": "Mehdi",
+  "homepage": "https://guarahooks.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h3rmel/guarahooks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/h3rmel/guarahooks/issues"
+  },
+  "keywords": [
+    "guarahooks",
+    "typescript",
+    "hooks",
+    "cli",
+    "guarahooks-cli",
+    "guarahooks-ts",
+    "react-hooks"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js "
+  },
+  "dependencies": {
+    "commander": "^14.0.0"
+  },
+  "devDependencies": {
+    "package-json": "^10.0.1",
+    "tsup": "^8.5.0",
+    "type-fest": "^4.41.0",
+    "typescript": "^5.8.3"
+  }
+}
