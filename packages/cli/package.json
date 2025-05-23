@@ -1,53 +1,80 @@
 {
   "name": "guarahooks-cli",
-  "version": "0.0.1",
-  "description": "A CLI to help you manage you manage guarahooks's hooks in your applications.",
-  "publishConfig": {
-    "access": "public"
+  "version": "0.1.0",
+  "description": "CLI for installing and managing guarahooks - React hooks library",
+  "license": "MIT",
+  "author": {
+    "name": "Isaac Hermel Reginato",
+    "url": "https://github.com/h3rmel"
   },
-  "type": "module",
-  "types": "./dist/index.d.ts",
-  "exports": "./dist/index.js",
-  "main": "./dist/index.js",
-  "bin": {
-    "guarahooks": "dist/index.js"
-  },
-  "preferGlobal": true,
-  "author": "Mehdi",
   "homepage": "https://guarahooks.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/h3rmel/guarahooks.git"
+    "url": "https://github.com/h3rmel/guarahooks.git",
+    "directory": "packages/cli"
   },
   "bugs": {
     "url": "https://github.com/h3rmel/guarahooks/issues"
   },
   "keywords": [
-    "guarahooks",
-    "typescript",
+    "react",
     "hooks",
     "cli",
-    "guarahooks-cli",
-    "guarahooks-ts",
-    "react-hooks"
+    "guarahooks",
+    "typescript",
+    "javascript"
   ],
-  "license": "MIT",
+  "bin": {
+    "guarahooks-cli": "./dist/index.js"
+  },
+  "type": "module",
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
+    "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
-    "start": "node dist/index.js "
+    "prepublishOnly": "pnpm build && pnpm typecheck",
+    "publish:dry": "npm publish --dry-run",
+    "publish:beta": "npm publish --tag beta",
+    "publish:latest": "npm publish",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "release:patch": "pnpm version:patch && pnpm publish:latest",
+    "release:minor": "pnpm version:minor && pnpm publish:latest",
+    "release:major": "pnpm version:major && pnpm publish:latest",
+    "release": "./scripts/release.sh",
+    "release:auto:patch": "./scripts/release.sh patch",
+    "release:auto:minor": "./scripts/release.sh minor",
+    "release:auto:major": "./scripts/release.sh major",
+    "test:install": "npm pack && npm install -g guarahooks-cli-*.tgz"
   },
   "dependencies": {
-    "commander": "^14.0.0"
+    "@babel/core": "^7.27.1",
+    "@babel/parser": "^7.27.2",
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "cosmiconfig": "^9.0.0",
+    "execa": "^9.5.3",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.0",
+    "gradient-string": "^3.0.0",
+    "node-fetch": "^3.3.2",
+    "ora": "^8.2.0",
+    "prompts": "^2.4.2",
+    "ts-morph": "^26.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "zod": "^3.25.26"
   },
   "devDependencies": {
-    "package-json": "^10.0.1",
+    "@types/fs-extra": "^11.0.4",
+    "@types/gradient-string": "^1.1.6",
+    "@types/node": "^22.15.21",
+    "@types/prompts": "^2.4.9",
     "tsup": "^8.5.0",
-    "type-fest": "^4.41.0",
     "typescript": "^5.8.3"
   }
 }

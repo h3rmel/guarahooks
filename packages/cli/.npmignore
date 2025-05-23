@@ -1,0 +1,22 @@
+# Source files
+src/
+tsconfig.json
+tsup.config.ts
+
+# Development files
+*.log
+*.tgz
+node_modules/
+.DS_Store
+.vscode/
+.idea/
+
+# Test files
+__tests__/
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+
+# Build artifacts
+*.map 

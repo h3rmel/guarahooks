@@ -1,21 +1,18 @@
-import { getPackageInfo } from '~/utils/package';
+#!/usr/bin/env node
 import { Command } from 'commander';
 
-async function main() {
-  const packageInfo = await getPackageInfo();
+import { add } from './commands/add.js';
+import { docs } from './commands/docs.js';
+import { init } from './commands/init.js';
+import { list } from './commands/list.js';
 
-  const program = new Command()
-    .name('guarahooks-cli')
-    .description(
-      "A CLI to help you manage you manage guarahooks's hooks in your applications.",
-    )
-    .version(
-      packageInfo.version ?? '0.0.1',
-      '-v, --version',
-      'Displays the current version of the CLI.',
-    );
+const program = new Command()
+  .name('guarahooks-cli')
+  .description(
+    'CLI for installing and managing guarahooks - React hooks library',
+  )
+  .version('0.1.0');
 
-  program.parse();
-}
+program.addCommand(init).addCommand(add).addCommand(list).addCommand(docs);
 
-main();
+program.parse();
