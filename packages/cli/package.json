@@ -1,6 +1,6 @@
 {
   "name": "guarahooks-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI for installing and managing guarahooks - React hooks library",
   "license": "MIT",
   "author": {
