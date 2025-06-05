@@ -8,6 +8,20 @@ import { cn } from '@/lib/utils';
 
 import { Index } from '@/__registry__';
 
+interface RegistryItem {
+  name: string;
+  description: string;
+  type: string;
+  component: React.ComponentType;
+  files: Array<{
+    path: string;
+    type: string;
+    target: string;
+  }>;
+  registryDependencies?: unknown;
+  meta?: unknown;
+}
+
 interface HookPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
   align?: 'center' | 'start' | 'end';
@@ -26,7 +40,7 @@ export function HookPreview({
   const Code = Codes[0];
 
   const Preview = React.useMemo(() => {
-    const Hook = Index[name]?.component;
+    const Hook = (Index[name] as RegistryItem)?.component;
 
     if (!Hook) {
       console.error(`Hook with name "${name}" not found in registry.`);

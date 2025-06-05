@@ -17,7 +17,7 @@ export const docsConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: 'GetStarted',
+      title: 'Get Started',
       items: [
         {
           title: 'Introduction',

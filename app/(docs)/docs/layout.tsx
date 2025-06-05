@@ -22,7 +22,7 @@ export default function DocsLayout({
         className={cn(
           'fixed lg:sticky top-[96px] h-[calc(100vh-128px)]',
           'hidden lg:block lg:flex-[18%]',
-          'my-8 border-r',
+          'my-8',
         )}
       >
         <div className={cn('no-scrollbar h-full overflow-auto')}>

@@ -24,11 +24,12 @@ export function DocsSidebarItem({ items, pathname }: DocsSidebarNavItemsProps) {
             className={cn(
               'inline-flex items-center justify-between',
               'text-foreground text-left text-sm',
-              'pr-1 py-1 pl-2 rounded-md',
+              'pr-1 py-1 pl-2 rounded-md border border-transparent',
               'transition-all duration-200',
-              'hover:bg-accent/50',
+              'hover:bg-accent/50 hover:border-border',
               item.disabled && 'cursor-not-allowed opacity-60',
-              pathname === item.href && 'bg-accent/50 text-foreground',
+              pathname === item.href &&
+                'bg-accent/50 text-foreground border-border',
             )}
           >
             <span className="transition-all duration-200 group-hover:translate-x-0.5">
