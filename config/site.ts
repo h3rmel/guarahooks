@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'guarahooks',
   url: 'https://guarahooks.com',
   description:
-    'A set of reusable and customizable hooks that you can copy-and-paste into your apps. Free. Open Source and Open Code.',
+    'A free, open-source collection of reusable React hooks you can copy and paste into your apps.',
   links: {
     github: 'https://github.com/h3rmel/guarahooks',
   },

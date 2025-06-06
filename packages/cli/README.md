@@ -1,16 +1,14 @@
 # guara-cli
 
-A CLI for adding hooks to your project.
+A CLI for installing hooks in your project.
 
 ## Usage
 
-There's no need to initialize anything right now. Just start adding the hooks to your project.
+No initialization needed—just start adding hooks to your project.
 
 ## add
 
-Use the `add` command to add hooks to your project.
-
-The `add` command adds a hook to your project and install all required dependencies.
+Use the `add` command to install a hook and any required dependencies in your project.
 
 ```bash
 npx guara-cli add [hook]
@@ -22,7 +20,7 @@ npx guara-cli add [hook]
 npx guara-cli add use-window-size
 ```
 
-You can also run the command without any arguments to view a list of all available components:
+Run the command without arguments to list available hooks:
 
 ```bash
 npx guara-cli add

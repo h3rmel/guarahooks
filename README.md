@@ -1,4 +1,4 @@
-<img alt="guarahooks - Copy-and-paste hooks into your apps." src="./public/og.webp" width="100%" style="border-radius: 16px">
+<img alt="Screenshot of the guarahooks hero with the copy-and-paste tagline" src="./public/og.webp" width="100%" style="border-radius: 16px">
 
 <div align="center">
   <a href="https://github.com/h3rmel/guarahooks"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/h3rmel/guarahooks?style=for-the-badge"></a>
@@ -7,7 +7,7 @@
 
 # guarahooks
 
-A set of reusable and customizable hooks that you can copy-and-paste into your apps. Free. Open Source and Open Code.
+A free, open-source collection of reusable React hooks you can copy and paste into your apps.
 
 ## Documentation
 
@@ -15,7 +15,7 @@ Visit https://guarahooks.com to view the documentation.
 
 ## Contributing
 
-Visit our [contributing guide](https://github.com/h3rmel/guarahooks/blob/main/CONTRIBUTING.md) to learn how to contribute. It only takes ~5 minutes to add a hook!
+See our [contributing guide](https://github.com/h3rmel/guarahooks/blob/main/CONTRIBUTING.md) to learn how to contribute. Adding a hook usually takes about five minutes.
 
 ## Authors
 
