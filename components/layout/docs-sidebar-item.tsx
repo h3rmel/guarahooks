@@ -15,7 +15,7 @@ export function DocsSidebarItem({ items, pathname }: DocsSidebarNavItemsProps) {
   if (items.length === 0) return null;
 
   return (
-    <div className={cn('relative', 'flex flex-col gap-1')}>
+    <div className={cn('relative', 'grow flex flex-col gap-1')}>
       {items.map((item, index) =>
         item.href && !item.disabled ? (
           <Link

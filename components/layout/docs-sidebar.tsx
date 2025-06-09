@@ -19,7 +19,7 @@ export function DocsSidebar({ items }: DocsSidebarProps) {
   if (items.length === 0) return null;
 
   return (
-    <ul className={cn('flex flex-col items-start gap-8', 'pr-4')}>
+    <ul className={cn('flex flex-col items-start gap-8')}>
       {items.map((item, index) => (
         <li key={index} className={cn('flex flex-col gap-2 w-full')}>
           <h4

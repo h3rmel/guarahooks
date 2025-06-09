@@ -13,15 +13,15 @@ export default function DocsLayout({
     <section
       className={cn(
         'size-full max-w-screen-2xl px-3 2xl:px-0',
-        'flex flex-row grow gap-32',
+        'grid grid-cols-12 gap-32',
         'mx-auto',
       )}
     >
       <aside
         id="docs-sidebar"
         className={cn(
-          'fixed lg:sticky top-[96px] h-[calc(100vh-128px)]',
-          'hidden lg:block lg:flex-[18%]',
+          'sticky top-[96px] h-[calc(100vh-128px)]',
+          'hidden lg:block col-span-3',
           'my-8',
         )}
       >
@@ -29,7 +29,7 @@ export default function DocsLayout({
           <DocsSidebar items={docsConfig.sidebarNav} />
         </div>
       </aside>
-      <div className={cn('w-full lg:flex-[82%]')}>{children}</div>
+      <div className={cn('col-span-9')}>{children}</div>
     </section>
   );
 }
