@@ -47,7 +47,7 @@ export function CommandMenu({ ...props }: DialogProps) {
     preventDefault: true,
   });
 
-  const runCommand = useCallback((command: () => unknown) => {
+  const runCommand = useCallback((command: () => void) => {
     setOpen(false);
     command();
   }, []);

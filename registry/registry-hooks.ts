@@ -583,4 +583,60 @@ export const hooks: Registry['items'] = [
     ],
     categories: ['utilities'],
   },
+  {
+    name: 'use-next-auth',
+    type: 'registry:hook',
+    title: 'UseNextAuth',
+    description: 'Wrapper around NextAuth session methods.',
+    files: [
+      {
+        path: 'registry/hooks/use-next-auth.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-next-auth.tsx',
+      },
+    ],
+    categories: ['auth'],
+  },
+  {
+    name: 'use-react-hook-form',
+    type: 'registry:hook',
+    title: 'UseReactHookForm',
+    description: 'Simplifies React Hook Form setup.',
+    files: [
+      {
+        path: 'registry/hooks/use-react-hook-form.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-react-hook-form.tsx',
+      },
+    ],
+    categories: ['forms'],
+  },
+  {
+    name: 'use-better-auth',
+    type: 'registry:hook',
+    title: 'UseBetterAuth',
+    description: 'Simple authentication flow using fetch.',
+    files: [
+      {
+        path: 'registry/hooks/use-better-auth.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-better-auth.tsx',
+      },
+    ],
+    categories: ['auth'],
+  },
+  {
+    name: 'use-formik',
+    type: 'registry:hook',
+    title: 'UseFormik',
+    description: 'Lightweight form state management with Formik.',
+    files: [
+      {
+        path: 'registry/hooks/use-formik.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-formik.tsx',
+      },
+    ],
+    categories: ['forms'],
+  },
 ];

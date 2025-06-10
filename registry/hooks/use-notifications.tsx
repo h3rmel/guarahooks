@@ -4,13 +4,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 type NotificationPermission = 'default' | 'granted' | 'denied';
 
-type NotificationOptions = {
+type NotificationOptions<TData = void> = {
   body?: string;
   icon?: string;
   image?: string;
   badge?: string;
   tag?: string;
-  data?: unknown;
+  data?: TData;
   requireInteraction?: boolean;
   silent?: boolean;
   sound?: string;
@@ -27,10 +27,13 @@ type NotificationOptions = {
   }>;
 };
 
-type UseNotificationsReturn = {
+type UseNotificationsReturn<TData = void> = {
   permission: NotificationPermission;
   requestPermission: () => Promise<NotificationPermission>;
-  showNotification: (title: string, options?: NotificationOptions) => void;
+  showNotification: (
+    title: string,
+    options?: NotificationOptions<TData>,
+  ) => void;
   isSupported: boolean;
   isSecureContext: boolean;
   supportsActions: boolean;
@@ -55,7 +58,9 @@ function checkFeatureSupport(feature: NotificationFeature): boolean {
   return isSupported;
 }
 
-export function useNotifications(): UseNotificationsReturn {
+export function useNotifications<
+  TData = void,
+>(): UseNotificationsReturn<TData> {
   const [permission, setPermission] =
     useState<NotificationPermission>('default');
   const [isSupported, setIsSupported] = useState(false);
@@ -110,7 +115,7 @@ export function useNotifications(): UseNotificationsReturn {
   }, [isSupported, isSecureContext]);
 
   const showNotification = useCallback(
-    (title: string, options?: NotificationOptions) => {
+    (title: string, options?: NotificationOptions<TData>) => {
       if (!isSupported) {
         // Fallback for browsers that do not support notifications
         console.warn(

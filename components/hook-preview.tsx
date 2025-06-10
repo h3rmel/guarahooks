@@ -18,8 +18,8 @@ interface RegistryItem {
     type: string;
     target: string;
   }>;
-  registryDependencies?: unknown;
-  meta?: unknown;
+  registryDependencies?: string[];
+  meta?: Record<string, string | number | boolean | null>;
 }
 
 interface HookPreviewProps extends React.HTMLAttributes<HTMLDivElement> {

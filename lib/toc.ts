@@ -10,8 +10,11 @@ function flattenNode(node: Node) {
   visit(node, (n) => {
     if (!('type' in n)) return;
     if (!textTypes.includes(n.type as string)) return;
-    if ('value' in n && typeof (n as { value: unknown }).value === 'string') {
-      p.push((n as { value: string }).value);
+    if ('value' in n) {
+      const value = (n as { value?: string }).value;
+      if (typeof value === 'string') {
+        p.push(value);
+      }
     }
   });
   return p.join('');
@@ -75,7 +78,7 @@ function getItems(node: Node | null | undefined, current: Item): Item | Items {
 }
 
 function getToc() {
-  return function (tree: Node, file: { data: unknown }) {
+  return function (tree: Node, file: { data: Items }) {
     const table = toc(tree as Parameters<typeof toc>[0]);
     const result = getItems(table.map, {} as Item);
     file.data = result as Items;

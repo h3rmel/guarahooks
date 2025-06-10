@@ -44,15 +44,15 @@ npx shadcn@latest add "https://guarahooks.com/r/use-session-storage"
 | Prop           | Type                       | Default | Description                                   |
 | -------------- | -------------------------- | ------- | --------------------------------------------- |
 | `key`          | `string`                   | -       | The key to store the value in session storage |
-| `initialValue` | `unknown`                  | -       | The initial value to store in session storage |
+| `initialValue` | `string`                   | -       | The initial value to store in session storage |
 | `options?`     | `UseSessionStorageOptions` | -       | The options for the hook                      |
 
 ### Options
 
-| Prop           | Type                     | Default          | Description                           |
-| -------------- | ------------------------ | ---------------- | ------------------------------------- |
-| `serialize?`   | `(value: unknown) => string` | `JSON.stringify` | The function to serialize the value   |
-| `deserialize?` | `(value: string) => unknown` | `JSON.parse`     | The function to deserialize the value |
+| Prop           | Type                       | Default | Description |
+| -------------- | -------------------------- | ------- | ----------- | ------------------ | ---------------- | ------------------------------------- |
+| `serialize?`   | `(value: string            | number  | boolean     | object) => string` | `JSON.stringify` | The function to serialize the value   |
+| `deserialize?` | `(value: string) => string | number  | boolean     | object`            | `JSON.parse`     | The function to deserialize the value |
 
 ## Key Features & Details
 

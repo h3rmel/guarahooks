@@ -5,7 +5,9 @@
 
 import * as React from 'react';
 
-export const Index: Record<string, unknown> = {
+import type { RegistryItem } from '../components/hook-preview';
+
+export const Index: Record<string, RegistryItem> = {
   'use-window-size': {
     name: 'use-window-size',
     description: "Tracks the current window's dimensions.",

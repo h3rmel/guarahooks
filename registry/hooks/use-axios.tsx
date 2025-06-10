@@ -15,101 +15,211 @@ export interface UseAxiosProps {
   headers?: Record<string, string>;
   timeout?: number;
   config?: AxiosRequestConfig;
+  interceptors?: AxiosInterceptors;
 }
 
-export interface UseAxiosReturn {
+export interface AxiosInterceptors {
+  request?: {
+    onFulfilled?: (
+      config: AxiosRequestConfig,
+    ) => AxiosRequestConfig | Promise<AxiosRequestConfig>;
+    onRejected?: (error: AxiosError) => void;
+  };
+  response?: {
+    onFulfilled?: (
+      response: AxiosResponse,
+    ) => AxiosResponse | Promise<AxiosResponse>;
+    onRejected?: (error: AxiosError) => void;
+  };
+}
+
+export interface UseAxiosReturn<TData = void> {
   instance: AxiosInstance;
   loading: boolean;
   error: AxiosError | null;
-  data: unknown;
-  get: <T = unknown>(
+  data: TData | null;
+  get: <TReturn = TData>(
     url: string,
     config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T>>;
-  post: <T = unknown>(
+  ) => Promise<AxiosResponse<TReturn>>;
+  post: <TReturn = TData, TBody = void>(
     url: string,
-    data?: unknown,
+    data?: TBody,
     config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T>>;
-  put: <T = unknown>(
+  ) => Promise<AxiosResponse<TReturn>>;
+  put: <TReturn = TData, TBody = void>(
     url: string,
-    data?: unknown,
+    data?: TBody,
     config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T>>;
-  delete: <T = unknown>(
+  ) => Promise<AxiosResponse<TReturn>>;
+  delete: <TReturn = TData>(
     url: string,
     config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T>>;
-  patch: <T = unknown>(
+  ) => Promise<AxiosResponse<TReturn>>;
+  patch: <TReturn = TData, TBody = void>(
     url: string,
-    data?: unknown,
+    data?: TBody,
     config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T>>;
+  ) => Promise<AxiosResponse<TReturn>>;
+  setHeaders: (headers: Record<string, string>) => void;
+  /** Reset headers to an empty object */
+  resetHeaders: () => void;
+  /** Reset base URL to the current prop value */
+  resetBaseURL: () => void;
+  setInterceptors: (interceptors: AxiosInterceptors) => void;
+  /** Reset interceptors to the current prop value */
+  resetInterceptors: () => void;
+  cancelRequest: () => void;
   resetError: () => void;
+  resetData: () => void;
+  setBaseURL: (url: string) => void;
+  /** Update the default request timeout */
+  setTimeout: (ms: number) => void;
+  /** Reset the request timeout to the current prop value */
+  resetTimeout: () => void;
+  /** Merge additional Axios configuration options */
+  setConfig: (config: AxiosRequestConfig) => void;
+  /** Reset the Axios config to the current prop value */
+  resetConfig: () => void;
 }
 
-export function useAxios({
+export function useAxios<TData = void>({
   baseURL = '',
   headers = {},
   timeout = 10000,
   config = {},
-}: UseAxiosProps = {}): UseAxiosReturn {
+  interceptors,
+}: UseAxiosProps = {}): UseAxiosReturn<TData> {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<AxiosError | null>(null);
-  const [data, setData] = useState<unknown>(null);
+  const [data, setData] = useState<TData | null>(null);
+  const [baseURLState, setBaseURLState] = useState(baseURL);
+  const [timeoutState, setTimeoutState] = useState(timeout);
+  const [configState, setConfigState] = useState(config);
+  const [headersState, setHeadersState] = useState(headers);
+
+  // Sync baseURL prop changes
+  useEffect(() => {
+    setBaseURLState(baseURL);
+  }, [baseURL]);
+
+  useEffect(() => {
+    setTimeoutState(timeout);
+  }, [timeout]);
+
+  useEffect(() => {
+    setConfigState(config);
+  }, [config]);
+
+  useEffect(() => {
+    setHeadersState(headers);
+  }, [headers]);
+  const [interceptorsState, setInterceptorsState] = useState<
+    AxiosInterceptors | undefined
+  >(interceptors);
 
   // Create a ref to store the axios instance to prevent recreation on each render
   const instanceRef = useRef<AxiosInstance | null>(null);
+  const controllerRef = useRef<AbortController | null>(null);
 
   // Initialize axios instance
   useEffect(() => {
-    instanceRef.current = axios.create({
-      baseURL,
-      headers,
-      timeout,
-      ...config,
+    const instance = axios.create({
+      baseURL: baseURLState,
+      headers: headersState,
+      timeout: timeoutState,
+      ...configState,
     });
 
+    if (interceptorsState?.request) {
+      instance.interceptors.request.use(
+        interceptorsState.request.onFulfilled,
+        interceptorsState.request.onRejected,
+      );
+    }
+
+    if (interceptorsState?.response) {
+      instance.interceptors.response.use(
+        interceptorsState.response.onFulfilled,
+        interceptorsState.response.onRejected,
+      );
+    }
+
+    instanceRef.current = instance;
+
     return () => {
+      controllerRef.current?.abort();
       instanceRef.current = null;
+      controllerRef.current = null;
     };
-  }, [baseURL, timeout, config]);
+  }, [
+    baseURLState,
+    headersState,
+    timeoutState,
+    configState,
+    interceptorsState,
+  ]);
 
   // Get the current instance
   const getInstance = useCallback((): AxiosInstance => {
     if (!instanceRef.current) {
-      instanceRef.current = axios.create({
-        baseURL,
-        headers,
-        timeout,
-        ...config,
+      const instance = axios.create({
+        baseURL: baseURLState,
+        headers: headersState,
+        timeout: timeoutState,
+        ...configState,
       });
+
+      if (interceptorsState?.request) {
+        instance.interceptors.request.use(
+          interceptorsState.request.onFulfilled,
+          interceptorsState.request.onRejected,
+        );
+      }
+
+      if (interceptorsState?.response) {
+        instance.interceptors.response.use(
+          interceptorsState.response.onFulfilled,
+          interceptorsState.response.onRejected,
+        );
+      }
+
+      instanceRef.current = instance;
     }
     return instanceRef.current;
-  }, [baseURL, headers, timeout, config]);
+  }, [
+    baseURLState,
+    headersState,
+    timeoutState,
+    configState,
+    interceptorsState,
+  ]);
 
   // Helper to handle request execution
   const executeRequest = useCallback(
-    async <T = unknown,>(
+    async <TReturn = TData, TBody = void>(
       method: string,
       url: string,
-      data?: unknown,
+      data?: TBody,
       customConfig?: AxiosRequestConfig,
-    ): Promise<AxiosResponse<T>> => {
+    ): Promise<AxiosResponse<TReturn>> => {
       setLoading(true);
       setError(null);
 
       try {
         const instance = getInstance();
+        const controller = new AbortController();
+        controllerRef.current = controller;
 
-        const response = await instance.request<T>({
+        const response = await instance.request<TReturn>({
           method,
           url,
           data,
+          signal: controller.signal,
           ...customConfig,
         });
 
-        setData(response.data);
+        setData(response.data as TData);
         return response;
       } catch (err) {
         const axiosError = err as AxiosError;
@@ -117,6 +227,7 @@ export function useAxios({
         throw axiosError;
       } finally {
         setLoading(false);
+        controllerRef.current = null;
       }
     },
     [getInstance],
@@ -124,43 +235,131 @@ export function useAxios({
 
   // Request methods
   const get = useCallback(
-    <T = unknown,>(url: string, config?: AxiosRequestConfig) => {
-      return executeRequest<T>('get', url, undefined, config);
+    <TReturn = TData,>(url: string, config?: AxiosRequestConfig) => {
+      return executeRequest<TReturn>('get', url, undefined, config);
     },
     [executeRequest],
   );
 
   const post = useCallback(
-    <T = unknown,>(url: string, data?: unknown, config?: AxiosRequestConfig) => {
-      return executeRequest<T>('post', url, data, config);
+    <TReturn = TData, TBody = void>(
+      url: string,
+      data?: TBody,
+      config?: AxiosRequestConfig,
+    ) => {
+      return executeRequest<TReturn>('post', url, data, config);
     },
     [executeRequest],
   );
 
   const put = useCallback(
-    <T = unknown,>(url: string, data?: unknown, config?: AxiosRequestConfig) => {
-      return executeRequest<T>('put', url, data, config);
+    <TReturn = TData, TBody = void>(
+      url: string,
+      data?: TBody,
+      config?: AxiosRequestConfig,
+    ) => {
+      return executeRequest<TReturn>('put', url, data, config);
     },
     [executeRequest],
   );
 
   const del = useCallback(
-    <T = unknown,>(url: string, config?: AxiosRequestConfig) => {
-      return executeRequest<T>('delete', url, undefined, config);
+    <TReturn = TData,>(url: string, config?: AxiosRequestConfig) => {
+      return executeRequest<TReturn>('delete', url, undefined, config);
     },
     [executeRequest],
   );
 
   const patch = useCallback(
-    <T = unknown,>(url: string, data?: unknown, config?: AxiosRequestConfig) => {
-      return executeRequest<T>('patch', url, data, config);
+    <TReturn = TData, TBody = void>(
+      url: string,
+      data?: TBody,
+      config?: AxiosRequestConfig,
+    ) => {
+      return executeRequest<TReturn>('patch', url, data, config);
     },
     [executeRequest],
   );
 
+  const setHeaders = useCallback(
+    (newHeaders: Record<string, string>) => {
+      setHeadersState((prev) => ({
+        ...prev,
+        ...newHeaders,
+      }));
+
+      const instance = getInstance();
+      instance.defaults.headers = {
+        ...instance.defaults.headers,
+        ...newHeaders,
+      } as Record<string, string>;
+    },
+    [getInstance],
+  );
+
+  const resetHeaders = useCallback(() => {
+    setHeadersState({});
+
+    const instance = getInstance();
+    instance.defaults.headers = {} as Record<string, string>;
+  }, [getInstance]);
+
+  const setInterceptors = useCallback((next: AxiosInterceptors) => {
+    setInterceptorsState(next);
+  }, []);
+
+  const resetInterceptors = useCallback(() => {
+    setInterceptorsState(interceptors);
+  }, [interceptors]);
+
+  const resetBaseURL = useCallback(() => {
+    setBaseURLState(baseURL);
+
+    const instance = getInstance();
+    instance.defaults.baseURL = baseURL;
+  }, [baseURL, getInstance]);
+
+  const cancelRequest = useCallback(() => {
+    controllerRef.current?.abort();
+    controllerRef.current = null;
+  }, []);
+
   const resetError = useCallback(() => {
     setError(null);
   }, []);
+
+  const resetData = useCallback(() => {
+    setData(null);
+  }, []);
+
+  const setBaseURL = useCallback((url: string) => {
+    setBaseURLState(url);
+  }, []);
+
+  const setTimeout = useCallback((ms: number) => {
+    setTimeoutState(ms);
+  }, []);
+
+  const resetTimeout = useCallback(() => {
+    setTimeoutState(timeout);
+
+    const instance = getInstance();
+    instance.defaults.timeout = timeout;
+  }, [timeout, getInstance]);
+
+  const setConfig = useCallback((next: AxiosRequestConfig) => {
+    setConfigState((prev) => ({
+      ...prev,
+      ...next,
+    }));
+  }, []);
+
+  const resetConfig = useCallback(() => {
+    setConfigState(config);
+
+    const instance = getInstance();
+    Object.assign(instance.defaults, config);
+  }, [config, getInstance]);
 
   return {
     instance: getInstance(),
@@ -172,6 +371,18 @@ export function useAxios({
     put,
     delete: del,
     patch,
+    setHeaders,
+    resetHeaders,
+    resetBaseURL,
+    setInterceptors,
+    resetInterceptors,
+    cancelRequest,
     resetError,
+    resetData,
+    setBaseURL,
+    setTimeout,
+    resetTimeout,
+    setConfig,
+    resetConfig,
   };
 }
