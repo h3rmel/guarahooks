@@ -53,7 +53,7 @@ function TooltipContent({
         {...props}
       >
         {children}
-        <TooltipPrimitive.Arrow className="bg-secondary border border-t-0 border-l-0 dark:border-0 fill-secondary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
+        <TooltipPrimitive.Arrow className="bg-secondary border border-t-0 border-l-0 dark:border-0 fill-secondary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45" />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   );

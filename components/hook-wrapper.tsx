@@ -22,10 +22,7 @@ export const HookWrapper = ({
 
   return (
     <div
-      className={cn(
-        'max-w-screen relative rounded-[8px] border bg-background',
-        className,
-      )}
+      className={cn('max-w-screen relative border bg-background', className)}
       key={key}
     >
       <div className="flex items-center justify-end gap-2 p-4">
