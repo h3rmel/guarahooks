@@ -6,6 +6,13 @@ author: h3rmel
 published: true
 ---
 
+<Callout>
+  **Note on React Strict Mode:** In development with React Strict Mode enabled,
+  this hook may invoke its callback twice (e.g., mount/unmount/mount). This is
+  intentional to flush side effects and will not occur in production builds or
+  outside Strict Mode.
+</Callout>
+
 <HookPreview name="use-on-unmount-demo" />
 
 ## Installation
