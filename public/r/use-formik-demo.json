@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-formik-demo",
+  "type": "registry:example",
+  "title": "UseFormikDemo",
+  "description": "use-formik's hook in action.",
+  "registryDependencies": [
+    "card",
+    "label",
+    "input",
+    "button",
+    "sonner",
+    "https://guarahooks.com/r/use-formik.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-formik-demo.tsx",
+      "content": "'use client';\n\nimport React from 'react';\n\nimport { toast } from 'sonner';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\nimport { Label } from '@/components/ui/label';\n\nimport { useFormikHook } from '@/hooks/guarahooks/use-formik';\n\ninterface FormValues {\n  firstName: string;\n  lastName: string;\n}\n\nexport default function UseFormikDemo() {\n  const { values, errors, touched, handleChange, handleBlur, onSubmit } =\n    useFormikHook<FormValues>({\n      initialValues: { firstName: '', lastName: '' },\n      validate: (values) => {\n        const errors: Partial<FormValues> = {};\n\n        if (!values.firstName) {\n          errors.firstName = 'First name is required';\n        }\n\n        if (!values.lastName) {\n          errors.lastName = 'Last name is required';\n        }\n\n        return errors;\n      },\n      onSubmit: () => {}, // This will be overridden by our onSubmit handler\n    });\n\n  const handleFormSubmit = (data: FormValues) => {\n    console.log('Form Data:', data);\n    toast.success(`Hello, ${data.firstName} ${data.lastName}!`);\n  };\n\n  return (\n    <form onSubmit={onSubmit(handleFormSubmit)} className=\"max-w-md w-full\">\n      <Card className=\"w-full\">\n        <CardHeader>\n          <CardTitle>useFormik</CardTitle>\n          <CardDescription>\n            Simplified Formik usage with validation\n          </CardDescription>\n        </CardHeader>\n        <CardContent className=\"space-y-4\">\n          <div className=\"grid gap-2\">\n            <Label htmlFor=\"firstName\">First Name</Label>\n            <Input\n              id=\"firstName\"\n              name=\"firstName\"\n              value={values.firstName}\n              onChange={handleChange}\n              onBlur={handleBlur}\n            />\n            {touched.firstName && errors.firstName && (\n              <p className=\"text-destructive\">{errors.firstName}</p>\n            )}\n          </div>\n          <div className=\"grid gap-2\">\n            <Label htmlFor=\"lastName\">Last Name</Label>\n            <Input\n              id=\"lastName\"\n              name=\"lastName\"\n              value={values.lastName}\n              onChange={handleChange}\n              onBlur={handleBlur}\n            />\n            {touched.lastName && errors.lastName && (\n              <p className=\"text-destructive\">{errors.lastName}</p>\n            )}\n          </div>\n        </CardContent>\n        <CardFooter>\n          <Button type=\"submit\" className=\"w-full\">\n            Submit\n          </Button>\n        </CardFooter>\n      </Card>\n    </form>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-formik-demo.tsx"
+    }
+  ]
+}

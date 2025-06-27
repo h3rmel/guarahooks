@@ -21,19 +21,23 @@ Fork and clone the repository.
    cd guarahooks
    ```
 
-4. **Create a new branch for your changes**
+4. **Use Node.js 18**
+
+   Ensure that you're using **Node.js 18**. If it's not installed, run `nvm install` and then `nvm use` to switch to the version defined in `.nvmrc`. You'll also need **pnpm 9.15.3** or newer installed globally.
+
+5. **Create a new branch for your changes**
 
    ```bash
    git checkout -b my-new-branch
    ```
 
-5. **Install dependencies**
+6. **Install dependencies**
 
    ```bash
-   pnpm i
+   pnpm install
    ```
 
-6. **Run the project**
+7. **Run the project**
    ```bash
    pnpm dev
    ```

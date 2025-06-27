@@ -5,7 +5,9 @@
 
 import * as React from 'react';
 
-export const Index: Record<string, unknown> = {
+import type { RegistryItem } from '../components/hook-preview';
+
+export const Index: Record<string, RegistryItem> = {
   'use-window-size': {
     name: 'use-window-size',
     description: "Tracks the current window's dimensions.",
@@ -952,6 +954,98 @@ export const Index: Record<string, unknown> = {
     ],
     component: React.lazy(async () => {
       const mod = await import('@/registry/hooks/use-abort-controller.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-next-auth': {
+    name: 'use-next-auth',
+    description: 'Enhanced wrapper for NextAuth.js session management.',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-next-auth.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-next-auth.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-next-auth.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-react-hook-form': {
+    name: 'use-react-hook-form',
+    description: 'Custom wrapper for React Hook Form.',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-react-hook-form.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-react-hook-form.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-react-hook-form.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-better-auth': {
+    name: 'use-better-auth',
+    description: 'Flexible authentication hook.',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-better-auth.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-better-auth.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-better-auth.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-formik': {
+    name: 'use-formik',
+    description: 'Custom wrapper for Formik.',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-formik.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-formik.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-formik.tsx');
       const exportName =
         Object.keys(mod).find(
           (key) =>
@@ -2091,6 +2185,128 @@ export const Index: Record<string, unknown> = {
       const mod = await import(
         '@/registry/example/use-abort-controller-demo.tsx'
       );
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-react-hook-form-demo': {
+    name: 'use-react-hook-form-demo',
+    description: "use-react-hook-form's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'card',
+      'label',
+      'input',
+      'button',
+      'https://guarahooks.com/r/use-react-hook-form.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-react-hook-form-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-react-hook-form-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import(
+        '@/registry/example/use-react-hook-form-demo.tsx'
+      );
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-formik-demo': {
+    name: 'use-formik-demo',
+    description: "use-formik's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'card',
+      'label',
+      'input',
+      'button',
+      'sonner',
+      'https://guarahooks.com/r/use-formik.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-formik-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-formik-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/example/use-formik-demo.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-next-auth-demo': {
+    name: 'use-next-auth-demo',
+    description: "use-next-auth's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'card',
+      'button',
+      'badge',
+      'sonner',
+      'https://guarahooks.com/r/use-next-auth.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-next-auth-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-next-auth-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/example/use-next-auth-demo.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-better-auth-demo': {
+    name: 'use-better-auth-demo',
+    description: "use-better-auth's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'card',
+      'button',
+      'badge',
+      'input',
+      'label',
+      'tabs',
+      'sonner',
+      'https://guarahooks.com/r/use-better-auth.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-better-auth-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-better-auth-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/example/use-better-auth-demo.tsx');
       const exportName =
         Object.keys(mod).find(
           (key) =>

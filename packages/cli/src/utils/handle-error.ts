@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 import { logger } from '@/src/utils/logger';
 
-export function handleError(error: unknown) {
+export function handleError(error: Error | string): never {
   // Handle SIGINT (Ctrl+C) silently
   if (
     error instanceof Error &&

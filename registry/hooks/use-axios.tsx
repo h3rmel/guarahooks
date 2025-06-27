@@ -9,7 +9,6 @@ import axios, {
   AxiosResponse,
 } from 'axios';
 
-// Types
 export interface UseAxiosProps {
   baseURL?: string;
   headers?: Record<string, string>;
@@ -131,14 +130,22 @@ export function useAxios({
   );
 
   const post = useCallback(
-    <T = unknown,>(url: string, data?: unknown, config?: AxiosRequestConfig) => {
+    <T = unknown,>(
+      url: string,
+      data?: unknown,
+      config?: AxiosRequestConfig,
+    ) => {
       return executeRequest<T>('post', url, data, config);
     },
     [executeRequest],
   );
 
   const put = useCallback(
-    <T = unknown,>(url: string, data?: unknown, config?: AxiosRequestConfig) => {
+    <T = unknown,>(
+      url: string,
+      data?: unknown,
+      config?: AxiosRequestConfig,
+    ) => {
       return executeRequest<T>('put', url, data, config);
     },
     [executeRequest],
@@ -152,7 +159,11 @@ export function useAxios({
   );
 
   const patch = useCallback(
-    <T = unknown,>(url: string, data?: unknown, config?: AxiosRequestConfig) => {
+    <T = unknown,>(
+      url: string,
+      data?: unknown,
+      config?: AxiosRequestConfig,
+    ) => {
       return executeRequest<T>('patch', url, data, config);
     },
     [executeRequest],

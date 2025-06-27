@@ -577,6 +577,62 @@
       "categories": ["utilities"]
     },
     {
+      "name": "use-next-auth",
+      "type": "registry:hook",
+      "title": "UseNextAuth",
+      "description": "Enhanced wrapper for NextAuth.js session management.",
+      "files": [
+        {
+          "path": "registry/hooks/use-next-auth.tsx",
+          "type": "registry:hook",
+          "target": "hooks/guarahooks/use-next-auth.tsx"
+        }
+      ],
+      "categories": ["auth"]
+    },
+    {
+      "name": "use-react-hook-form",
+      "type": "registry:hook",
+      "title": "UseReactHookForm",
+      "description": "Custom wrapper for React Hook Form.",
+      "files": [
+        {
+          "path": "registry/hooks/use-react-hook-form.tsx",
+          "type": "registry:hook",
+          "target": "hooks/guarahooks/use-react-hook-form.tsx"
+        }
+      ],
+      "categories": ["forms"]
+    },
+    {
+      "name": "use-better-auth",
+      "type": "registry:hook",
+      "title": "UseBetterAuth",
+      "description": "Flexible authentication hook.",
+      "files": [
+        {
+          "path": "registry/hooks/use-better-auth.tsx",
+          "type": "registry:hook",
+          "target": "hooks/guarahooks/use-better-auth.tsx"
+        }
+      ],
+      "categories": ["auth"]
+    },
+    {
+      "name": "use-formik",
+      "type": "registry:hook",
+      "title": "UseFormik",
+      "description": "Custom wrapper for Formik.",
+      "files": [
+        {
+          "path": "registry/hooks/use-formik.tsx",
+          "type": "registry:hook",
+          "target": "hooks/guarahooks/use-formik.tsx"
+        }
+      ],
+      "categories": ["forms"]
+    },
+    {
       "name": "use-window-size-demo",
       "type": "registry:example",
       "title": "UseWindowSizeDemo",
@@ -1322,6 +1378,90 @@
           "path": "registry/example/use-abort-controller-demo.tsx",
           "type": "registry:example",
           "target": "components/example/use-abort-controller-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-react-hook-form-demo",
+      "type": "registry:example",
+      "title": "UseReactHookFormDemo",
+      "description": "use-react-hook-form's hook in action.",
+      "registryDependencies": [
+        "card",
+        "label",
+        "input",
+        "button",
+        "https://guarahooks.com/r/use-react-hook-form.json"
+      ],
+      "files": [
+        {
+          "path": "registry/example/use-react-hook-form-demo.tsx",
+          "type": "registry:example",
+          "target": "components/example/use-react-hook-form-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-formik-demo",
+      "type": "registry:example",
+      "title": "UseFormikDemo",
+      "description": "use-formik's hook in action.",
+      "registryDependencies": [
+        "card",
+        "label",
+        "input",
+        "button",
+        "sonner",
+        "https://guarahooks.com/r/use-formik.json"
+      ],
+      "files": [
+        {
+          "path": "registry/example/use-formik-demo.tsx",
+          "type": "registry:example",
+          "target": "components/example/use-formik-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-next-auth-demo",
+      "type": "registry:example",
+      "title": "UseNextAuthDemo",
+      "description": "use-next-auth's hook in action.",
+      "registryDependencies": [
+        "card",
+        "button",
+        "badge",
+        "sonner",
+        "https://guarahooks.com/r/use-next-auth.json"
+      ],
+      "files": [
+        {
+          "path": "registry/example/use-next-auth-demo.tsx",
+          "type": "registry:example",
+          "target": "components/example/use-next-auth-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-better-auth-demo",
+      "type": "registry:example",
+      "title": "UseBetterAuthDemo",
+      "description": "use-better-auth's hook in action.",
+      "registryDependencies": [
+        "card",
+        "button",
+        "badge",
+        "input",
+        "label",
+        "tabs",
+        "sonner",
+        "https://guarahooks.com/r/use-better-auth.json"
+      ],
+      "files": [
+        {
+          "path": "registry/example/use-better-auth-demo.tsx",
+          "type": "registry:example",
+          "target": "components/example/use-better-auth-demo.tsx"
         }
       ]
     }

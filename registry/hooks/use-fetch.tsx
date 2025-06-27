@@ -2,7 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export interface UseFetchOptions extends RequestInit {}
+export interface UseFetchOptions<TBody = BodyInit | null, TReturn = void>
+  extends Omit<RequestInit, 'body'> {
+  body?: TBody;
+  immediate?: boolean;
+  parse?: (response: Response) => Promise<TReturn>;
+  initialData?: TReturn;
+}
 
 export interface UseFetchResult<T> {
   data: T | null;
@@ -13,11 +19,16 @@ export interface UseFetchResult<T> {
   aborted: boolean;
 }
 
-export function useFetch<T = unknown>(
+export function useFetch<
+  TReturn = void,
+  TBody extends BodyInit | null = BodyInit | null,
+>(
   url: string,
-  options?: UseFetchOptions,
-): UseFetchResult<T> {
-  const [data, setData] = useState<T | null>(null);
+  options: UseFetchOptions<TBody, TReturn> = {},
+): UseFetchResult<TReturn> {
+  const { immediate = true, parse, initialData, ...fetchOptions } = options;
+
+  const [data, setData] = useState<TReturn | null>(initialData ?? null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [aborted, setAborted] = useState<boolean>(false);
@@ -44,19 +55,21 @@ export function useFetch<T = unknown>(
     setAborted(false);
 
     try {
-      const response = await fetch(url, { ...options, signal });
+      const response = await fetch(url, { ...fetchOptions, signal });
 
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      const json = (await response.json()) as T;
+      const result = parse
+        ? await parse(response)
+        : ((await response.json()) as TReturn);
 
       if (isMounted.current) {
-        setData(json);
+        setData(result);
       }
 
-      return json;
+      return result;
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') {
         setAborted(true);
@@ -70,11 +83,12 @@ export function useFetch<T = unknown>(
         setLoading(false);
       }
     }
-  }, [url, JSON.stringify(options)]);
+  }, [url, JSON.stringify(fetchOptions), parse]);
 
   useEffect(() => {
+    if (!immediate) return;
     fetchData();
-  }, [fetchData]);
+  }, [fetchData, immediate]);
 
   const refetch = useCallback(() => {
     fetchData();

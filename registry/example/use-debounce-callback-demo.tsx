@@ -18,8 +18,8 @@ export function UseDebounceCallbackDemo() {
   const [inputValue, setInputValue] = useState('');
   const [debouncedValue, setDebouncedValue] = useState('');
 
-  const updateDebouncedValue = useCallback((value: unknown) => {
-    setDebouncedValue(value as string);
+  const updateDebouncedValue = useCallback((value: string) => {
+    setDebouncedValue(value);
   }, []);
 
   const debouncedUpdate = useDebounceCallback(updateDebouncedValue, 500);

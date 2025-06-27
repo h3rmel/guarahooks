@@ -59,7 +59,7 @@ pnpm add axios
 The hook returns an object with the following properties:
 
 | Property     | Type                                                                                                   | Description                              |
-| ------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| ------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- | --- | ------------------------------------------ |
 | `instance`   | `AxiosInstance`                                                                                        | Axios instance that can be used directly |
 | `loading`    | `boolean`                                                                                              | Loading state for requests               |
 | `error`      | `AxiosError \| null`                                                                                   | Error from the most recent request       |
@@ -69,7 +69,7 @@ The hook returns an object with the following properties:
 | `put`        | `<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>` | Execute a PUT request                    |
 | `delete`     | `<T = unknown>(url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>`                 | Execute a DELETE request                 |
 | `patch`      | `<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>` | Execute a PATCH request                  |
-| `resetError` | `() => void`                                                                                           | Reset error state                        |
+| `resetError` | `() => void`                                                                                           | Reset error state                        |     | Merge options into the Axios configuration |
 
 ## Key Features & Details
 
@@ -92,7 +92,7 @@ The `useAxios` hook provides a convenient wrapper around the Axios HTTP client, 
 ### Performance Considerations
 
 - Uses React useRef to maintain a single Axios instance across renders
-- Cleans up resources when component unmounts
+- Cancels any in-flight request when the component unmounts
 - Provides loading state to avoid unnecessary re-renders
 - Includes error handling to prevent uncaught exceptions
 
@@ -111,8 +111,13 @@ The `useAxios` hook provides a convenient wrapper around the Axios HTTP client, 
 ```tsx
 import { useAxios } from '@/hooks/use-axios';
 
+interface User {
+  name: string;
+  email: string;
+}
+
 function UserProfile() {
-  const { get, loading, error, data } = useAxios({
+  const { get, loading, error, data } = useAxios<User>({
     baseURL: 'https://api.example.com',
   });
 

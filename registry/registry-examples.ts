@@ -747,4 +747,88 @@ export const examples: Registry['items'] = [
       },
     ],
   },
+  {
+    name: 'use-react-hook-form-demo',
+    type: 'registry:example',
+    title: 'UseReactHookFormDemo',
+    description: "use-react-hook-form's hook in action.",
+    registryDependencies: [
+      'card',
+      'label',
+      'input',
+      'button',
+      'https://guarahooks.com/r/use-react-hook-form.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-react-hook-form-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-react-hook-form-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-formik-demo',
+    type: 'registry:example',
+    title: 'UseFormikDemo',
+    description: "use-formik's hook in action.",
+    registryDependencies: [
+      'card',
+      'label',
+      'input',
+      'button',
+      'sonner',
+      'https://guarahooks.com/r/use-formik.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-formik-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-formik-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-next-auth-demo',
+    type: 'registry:example',
+    title: 'UseNextAuthDemo',
+    description: "use-next-auth's hook in action.",
+    registryDependencies: [
+      'card',
+      'button',
+      'badge',
+      'sonner',
+      'https://guarahooks.com/r/use-next-auth.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-next-auth-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-next-auth-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-better-auth-demo',
+    type: 'registry:example',
+    title: 'UseBetterAuthDemo',
+    description: "use-better-auth's hook in action.",
+    registryDependencies: [
+      'card',
+      'button',
+      'badge',
+      'input',
+      'label',
+      'tabs',
+      'sonner',
+      'https://guarahooks.com/r/use-better-auth.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-better-auth-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-better-auth-demo.tsx',
+      },
+    ],
+  },
 ];

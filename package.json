@@ -9,6 +9,17 @@
     "name": "Isaac Hermel Reginato",
     "url": "https://github.com/h3rmel"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/h3rmel/guarahooks"
+  },
+  "bugs": {
+    "url": "https://github.com/h3rmel/guarahooks/issues"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9.15.3"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "prebuild": "pnpm build:docs && pnpm build:registry",
@@ -21,7 +32,7 @@
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\"",
     "prepare": "husky",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "node ./scripts/check-node.mjs && node ./scripts/check-pnpm.mjs && pnpm dlx only-allow pnpm"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.7",
@@ -37,19 +48,23 @@
     "@radix-ui/react-tooltip": "^1.2.0",
     "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.9.0",
+    "better-auth": "^0.0.5",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "formik": "^2.4.6",
     "hast-util-to-jsx-runtime": "^2.3.6",
     "jotai": "^2.12.3",
     "lucide-react": "^0.488.0",
     "motion": "^12.7.1",
     "next": "15.3.0",
+    "next-auth": "^4.24.6",
     "next-themes": "^0.4.6",
     "posthog-js": "^1.239.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.57.0",
     "rimraf": "^6.0.1",
     "shadcn": "^2.4.0",
     "shiki": "^3.2.2",
@@ -61,14 +76,14 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@content-collections/cli": "^0.1.6",
     "@content-collections/core": "^0.8.2",
     "@content-collections/mdx": "^0.2.2",
     "@content-collections/next": "^0.2.6",
     "@eslint/eslintrc": "^3",
-    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.2",
     "@tailwindcss/postcss": "^4",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
@@ -86,7 +101,7 @@
     "lint-staged": "^15.5.1",
     "mdast-util-toc": "^7.1.0",
     "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
+    "prettier-plugin-tailwindcss": "^0.6.12",
     "rehype": "^13.0.2",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-pretty-code": "^0.14.1",

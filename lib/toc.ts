@@ -10,8 +10,11 @@ function flattenNode(node: Node) {
   visit(node, (n) => {
     if (!('type' in n)) return;
     if (!textTypes.includes(n.type as string)) return;
-    if ('value' in n && typeof (n as { value: unknown }).value === 'string') {
-      p.push((n as { value: string }).value);
+    if ('value' in n) {
+      const value = (n as { value?: string }).value;
+      if (typeof value === 'string') {
+        p.push(value);
+      }
     }
   });
   return p.join('');

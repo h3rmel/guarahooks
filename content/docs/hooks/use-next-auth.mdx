@@ -1,0 +1,241 @@
+---
+title: useNextAuth
+date: 2025-06-24
+description: Enhanced wrapper for NextAuth.js session management.
+author: matbrgz
+published: true
+---
+
+<Callout>
+**Important:** This hook requires NextAuth.js to be properly configured in your application. Make sure your app is wrapped with NextAuth's `<SessionProvider>` component. See the [NextAuth.js setup guide](https://next-auth.js.org/getting-started/client#sessionprovider) for complete installation instructions.
+</Callout>
+
+<HookPreview name="use-next-auth-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx guarahooks@latest add use-next-auth
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependencies:</Step>
+
+```bash
+npm install next-auth
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-next-auth" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop              | Type                                           | Default     | Description                                                   |
+| ----------------- | ---------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| `onSessionChange` | `(session: T \| null, status: string) => void` | `undefined` | Optional callback triggered when session changes              |
+| `refreshInterval` | `number`                                       | `undefined` | Interval in milliseconds to refresh the session automatically |
+| `onError`         | `(error: Error) => void`                       | `undefined` | Optional callback for handling authentication errors          |
+
+See [NextAuth.js useSession](https://next-auth.js.org/getting-started/client#usesession) for more details about the underlying session API.
+
+## Data
+
+| Property          | Type                                                | Description                                             |
+| ----------------- | --------------------------------------------------- | ------------------------------------------------------- |
+| `session`         | `T \| null`                                         | The current session object or null if not authenticated |
+| `status`          | `'authenticated' \| 'unauthenticated' \| 'loading'` | The current authentication status                       |
+| `isAuthenticated` | `boolean`                                           | Computed boolean indicating if user is authenticated    |
+| `signIn`          | `typeof signIn`                                     | NextAuth signIn function with error handling            |
+| `signOut`         | `typeof signOut`                                    | NextAuth signOut function with error handling           |
+| `refresh`         | `() => Promise<void>`                               | Function to manually refresh the session                |
+
+## Key Features & Details
+
+- Built on NextAuth.js – see [NextAuth.js Docs](https://next-auth.js.org/getting-started/introduction) for full API.
+- Enhanced error handling with try-catch blocks and optional error callbacks.
+- Automatic session refresh at configurable intervals to keep sessions valid.
+- Session change detection with callbacks for analytics, logging, or UI updates.
+- Computed `isAuthenticated` property for easier conditional rendering.
+- Development mode logging of session and status changes.
+- Type-safe with TypeScript generics for custom session interfaces.
+
+## Common Use Cases
+
+- Protected routes with authentication checks and loading states.
+- Role-based access control with typed session data.
+- Automatic session refresh for long-running applications.
+- Error handling and user feedback for authentication failures.
+- Session change tracking for analytics and user experience.
+
+## Examples
+
+### NextAuth.js Setup
+
+Before using the hook, ensure NextAuth.js is properly configured:
+
+```tsx
+// app/layout.tsx or pages/_app.tsx
+
+import { SessionProvider } from 'next-auth/react';
+
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
+}
+```
+
+### Basic Usage
+
+```tsx
+const { session, status, isAuthenticated, signIn, signOut } = useNextAuth();
+
+if (status === 'loading') {
+  return <div>Loading...</div>;
+}
+
+if (isAuthenticated) {
+  return (
+    <div>
+      <p>Welcome, {session?.user?.name}!</p>
+      <button onClick={() => signOut()}>Sign Out</button>
+    </div>
+  );
+}
+
+return <button onClick={() => signIn()}>Sign In</button>;
+```
+
+### With Session Change Callbacks
+
+```tsx
+const { session, refresh } = useNextAuth({
+  onSessionChange: (session, status) => {
+    console.log('Session changed:', session, status);
+    // Track session changes in analytics
+  },
+  onError: (error) => {
+    console.error('Auth error:', error);
+    // Handle authentication errors
+  },
+});
+
+return (
+  <div>
+    <p>Current status: {status}</p>
+    <button onClick={refresh}>Refresh Session</button>
+  </div>
+);
+```
+
+### With Auto-Refresh
+
+```tsx
+const { session, status } = useNextAuth({
+  refreshInterval: 5 * 60 * 1000, // Refresh every 5 minutes
+  onSessionChange: (session, status) => {
+    if (status === 'unauthenticated') {
+      // Redirect to login or show auth modal
+      window.location.href = '/login';
+    }
+  },
+});
+
+return <div>Auto-refreshing session every 5 minutes</div>;
+```
+
+### With Custom Session Type
+
+```tsx
+import type { Session } from 'next-auth';
+
+interface CustomSession extends Session {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    role: 'admin' | 'user';
+  };
+}
+
+const { session } = useNextAuth<CustomSession>();
+
+// Now session.user.role is typed as 'admin' | 'user'
+const isAdmin = session?.user?.role === 'admin';
+
+return (
+  <div>
+    {isAdmin && <AdminPanel />}
+    <UserDashboard />
+  </div>
+);
+```
+
+### Protected Route Example
+
+```tsx
+function ProtectedPage() {
+  const { isAuthenticated, status } = useNextAuth();
+
+  if (status === 'loading') return <Loading />;
+  if (!isAuthenticated) return <Redirect to="/login" />;
+
+  return <ProtectedContent />;
+}
+```
+
+### Error Handling with Toast
+
+```tsx
+const { signIn, signOut } = useNextAuth({
+  onError: (error) => {
+    toast.error(`Authentication error: ${error.message}`);
+  },
+});
+
+const handleSignIn = async () => {
+  try {
+    await signIn();
+    toast.success('Signed in successfully!');
+  } catch (error) {
+    // Error already handled by onError callback
+  }
+};
+
+return <button onClick={handleSignIn}>Sign In</button>;
+```
+
+## Related
+
+- [NextAuth.js Documentation](https://next-auth.js.org/getting-started/introduction)
+- [NextAuth.js Configuration](https://next-auth.js.org/configuration/options)
+- [NextAuth.js Providers](https://next-auth.js.org/providers/)
+- [NextAuth.js TypeScript](https://next-auth.js.org/getting-started/typescript)

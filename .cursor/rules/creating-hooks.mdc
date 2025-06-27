@@ -161,8 +161,8 @@ Document browser support if relevant:
 
 ## Related
 
-- [Related Documentation Link](https://example.com)
-- [Related API Documentation](https://example.com)
+- [Related Documentation Link](https:/example.com)
+- [Related API Documentation](https:/example.com)
 ````
 
 ## Required Updates
@@ -225,6 +225,8 @@ Update `@/config/docs.ts` adding to the appropriate category:
 - `state-management`: Hooks for state management
 - `utilities`: Utility hooks
 - `lifecycle`: Component lifecycle related hooks
+- `auth`: Authentication handlers
+- `form`: Form handlers
 
 ## Implementation Checklist
 

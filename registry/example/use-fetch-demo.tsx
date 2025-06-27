@@ -14,11 +14,21 @@ import {
 
 import { useFetch } from '@/registry/hooks/use-fetch';
 
+interface HttpBinResponse {
+  args: Record<string, string>;
+  data: string;
+  files: Record<string, string>;
+  form: Record<string, string>;
+  headers: Record<string, string>;
+  json: Record<string, string | number | boolean | null> | null;
+  origin: string;
+  url: string;
+}
+
 export default function UseFetchDemo() {
   // Using a slow endpoint to simulate network delay for testing abort
-  const { data, error, loading, refetch, abort, aborted } = useFetch<
-    Record<string, unknown>
-  >('https://httpbin.org/delay/5');
+  const { data, error, loading, refetch, abort, aborted } =
+    useFetch<HttpBinResponse>('https://httpbin.org/delay/5');
 
   return (
     <Card className="relative max-w-lg w-full">

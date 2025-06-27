@@ -57,14 +57,9 @@ export function rehypeComponent() {
           const filePath = path.join(process.cwd(), src);
           let source = fs.readFileSync(filePath, 'utf8');
 
-          // Replace imports.
-          // TODO: Use @swc/core and a visitor to replace this.
-          // For now a simple regex should do.
-          // source = source.replaceAll(
-          //   `@/registry/${style.name}/`,
-          //   "@/components/",
-          // );
-          source = source.replaceAll('export default', 'export');
+          // Replace imports. A simple regex handles our current patterns.
+          source = source.replace(/@\/registry\//g, '@/components/');
+          source = source.replace(/\bexport\s+default\s+/g, 'export ');
 
           // Add code as children so that rehype can take over at build time.
           node.children?.push(
@@ -73,13 +68,6 @@ export function rehypeComponent() {
               properties: {
                 __src__: src,
               },
-              // attributes: [
-              //   {
-              //     name: "styleName",
-              //     type: "mdxJsxAttribute",
-              //     value: style.name,
-              //   },
-              // ],
               children: [
                 u('element', {
                   tagName: 'code',
@@ -124,14 +112,9 @@ export function rehypeComponent() {
           const filePath = path.join(process.cwd(), src);
           let source = fs.readFileSync(filePath, 'utf8');
 
-          // Replace imports.
-          // TODO: Use @swc/core and a visitor to replace this.
-          // For now a simple regex should do.
-          // source = source.replaceAll(
-          //   `@/registry/${style.name}/`,
-          //   "@/components/",
-          // );
-          source = source.replaceAll('export default', 'export');
+          // Replace imports. A simple regex handles our current patterns.
+          source = source.replace(/@\/registry\//g, '@/components/');
+          source = source.replace(/\bexport\s+default\s+/g, 'export ');
 
           // Add code as children so that rehype can take over at build time.
           node.children?.push(
@@ -169,18 +152,4 @@ export function rehypeComponent() {
 
 function getNodeAttributeByName(node: UnistNode, name: string) {
   return node.attributes?.find((attribute) => attribute.name === name);
-}
-
-function getComponentSourceFileContent(node: UnistNode) {
-  const src = getNodeAttributeByName(node, 'src')?.value as string;
-
-  if (!src) {
-    return null;
-  }
-
-  // Read the source file.
-  const filePath = path.join(process.cwd(), src);
-  const source = fs.readFileSync(filePath, 'utf8');
-
-  return source;
 }

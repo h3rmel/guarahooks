@@ -41,10 +41,10 @@ npx shadcn@latest add "https://guarahooks.com/r/use-fetch"
 
 ## Props
 
-| Prop       | Type              | Default     | Description                          |
-| ---------- | ----------------- | ----------- | ------------------------------------ |
-| `url`      | `string`          | `undefined` | The endpoint URL to fetch data from. |
-| `options?` | `UseFetchOptions` | `undefined` | Optional Fetch API settings.         |
+| Prop       | Type                 | Default     | Description                          |
+| ---------- | -------------------- | ----------- | ------------------------------------ |
+| `url`      | `string`             | `undefined` | The endpoint URL to fetch data from. |
+| `options?` | `UseFetchOptions<B>` | `undefined` | Optional Fetch API settings.         |
 
 ## Data
 
@@ -88,7 +88,7 @@ const { data, error, loading, refetch } = useFetch<Post[]>(
 ### POST Request
 
 ```tsx
-const { data, error, loading } = useFetch<ResponseData>(
+const { data, error, loading } = useFetch<ResponseData, { name: string }>(
   'https://api.example.com/items',
   {
     method: 'POST',
@@ -107,7 +107,7 @@ const { data, error, loading } = useFetch<ResponseData>(
 ### Abort Request
 
 ```tsx
-const { loading, abort } = useFetch<Record<string, unknown>>(
+const { loading, abort } = useFetch<Record<string, string>, void>(
   'https://api.example.com/data',
 );
 

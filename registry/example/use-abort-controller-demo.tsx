@@ -16,11 +16,29 @@ import {
 
 import { useAbortController } from '@/registry/hooks/use-abort-controller';
 
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+interface HttpBinResponse {
+  args: Record<string, string>;
+  data: string;
+  files: Record<string, string>;
+  form: Record<string, string>;
+  headers: Record<string, string>;
+  json: Record<string, string | number | boolean | null> | null;
+  origin: string;
+  url: string;
+}
+
 export default function UseAbortControllerDemo() {
   const [fetchStatus, setFetchStatus] = useState<
     'idle' | 'loading' | 'success' | 'error' | 'aborted'
   >('idle');
-  const [data, setData] = useState<Record<string, unknown> | null>(null);
+  const [data, setData] = useState<Post | HttpBinResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const {
@@ -46,7 +64,7 @@ export default function UseAbortControllerDemo() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
+      const result: Post = await response.json();
       setData(result);
       setFetchStatus('success');
     } catch (err: unknown) {
@@ -73,7 +91,7 @@ export default function UseAbortControllerDemo() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
+      const result: HttpBinResponse = await response.json();
       setData(result);
       setFetchStatus('success');
     } catch (err: unknown) {

@@ -127,7 +127,10 @@ const components = {
   ),
   a: ({ className, ...props }: React.ComponentProps<'a'>) => (
     <a
-      className={cn('font-medium underline underline-offset-4', className)}
+      className={cn(
+        'font-medium underline underline-offset-4 hover:underline-offset-[6px] transition-all',
+        className,
+      )}
       {...props}
     />
   ),

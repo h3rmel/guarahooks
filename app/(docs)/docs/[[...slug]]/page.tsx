@@ -5,13 +5,6 @@ import { allDocs } from 'content-collections';
 import { Contribute } from '@/components/contribute';
 import { Mdx } from '@/components/mdx-components';
 import { TableOfContents } from '@/components/table-of-contents';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 
 import { getTableOfContents } from '@/lib/toc';
 import { cn } from '@/lib/utils';

@@ -37,7 +37,11 @@ export function UseCopyToClipboardDemo() {
           <Button onClick={() => copy(text)} disabled={!text}>
             Copiar
           </Button>
-          {copied && <span className="text-green-500 ml-2">Copiado!</span>}
+          {copied && (
+            <span className="text-green-500 bg-green-500/20 px-2 py-0.5 rounded-md">
+              Copied!
+            </span>
+          )}
         </div>
       </CardContent>
     </Card>
