@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-ky-demo",
+  "type": "registry:example",
+  "title": "UseKyDemo",
+  "description": "use-ky's hook in action.",
+  "registryDependencies": [
+    "card",
+    "input",
+    "button",
+    "label",
+    "alert",
+    "lucide-react",
+    "https://guarahooks.com/r/use-ky.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-ky-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\nimport { AlertCircleIcon, Loader2Icon } from 'lucide-react';\nimport { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\nimport { Label } from '@/components/ui/label';\n\nimport { useKy } from '@/hooks/guarahooks/use-ky';\n\nexport default function UseKyDemoComponent() {\n  const [url, setUrl] = useState(\n    'https://jsonplaceholder.typicode.com/posts/1',\n  );\n  const [data, setData] = useState<unknown>(null);\n  const [error, setError] = useState<unknown>(null);\n  const [loading, setLoading] = useState<boolean>(false);\n\n  const kyClient = useKy({ prefixUrl: 'https://jsonplaceholder.typicode.com' });\n\n  const handleGetRequest = async () => {\n    setLoading(true);\n    setError(null);\n    try {\n      const result = await kyClient.get(\n        url.replace('https://jsonplaceholder.typicode.com', ''),\n      );\n      setData(result);\n    } catch (err) {\n      setError(err);\n    } finally {\n      setLoading(false);\n    }\n  };\n\n  return (\n    <div className=\"space-y-8 max-w-sm w-full\">\n      <Card className=\"max-w-sm w-full\">\n        <CardHeader>\n          <CardTitle>useKy GET Request</CardTitle>\n          <CardDescription>Fetch data using ky</CardDescription>\n        </CardHeader>\n        <CardContent>\n          <div className=\"grid w-full gap-2\">\n            <Label htmlFor=\"url\">URL</Label>\n            <Input\n              id=\"url\"\n              value={url}\n              onChange={(e) => setUrl(e.target.value)}\n              placeholder=\"https://jsonplaceholder.typicode.com/posts/1\"\n            />\n          </div>\n        </CardContent>\n        <CardFooter>\n          <Button onClick={handleGetRequest} disabled={loading} className=\"w-full\">\n            {loading ? (\n              <><Loader2Icon className=\"mr-2 h-4 w-4 animate-spin\" /> Loading...</>\n            ) : (\n              'Send GET Request'\n            )}\n          </Button>\n        </CardFooter>\n      </Card>\n\n      {error != null && (\n        <Alert variant=\"destructive\">\n          <AlertCircleIcon className=\"h-4 w-4\" />\n          <AlertTitle>Error</AlertTitle>\n          <AlertDescription>\n            {(error as Error).message}\n          </AlertDescription>\n        </Alert>\n      )}\n\n      {data != null && (\n        <Card className=\"max-w-sm w-full\">\n          <CardHeader>\n            <CardTitle>Response Data</CardTitle>\n          </CardHeader>\n          <CardContent>\n            <pre className=\"bg-zinc-950 p-4 rounded-md overflow-auto max-h-60\">\n              {JSON.stringify(data, null, 2)}\n            </pre>\n          </CardContent>\n        </Card>\n      )}\n    </div>\n  );\n} ",
+      "type": "registry:example",
+      "target": "components/example/use-ky-demo.tsx"
+    }
+  ]
+}

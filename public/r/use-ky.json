@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-ky",
+  "type": "registry:hook",
+  "title": "UseKy",
+  "description": "Lightweight wrapper for ky HTTP client with custom defaults.",
+  "files": [
+    {
+      "path": "registry/hooks/use-ky.tsx",
+      "content": "'use client';\n\nimport { useMemo, useCallback } from 'react';\nimport ky, { Options, HTTPError, TimeoutError } from 'ky';\n\nexport type UseKyOptions = Options;\n\nexport interface UseKyReturn {\n  instance: ReturnType<typeof ky.create>;\n  get: <T = unknown>(url: string, options?: Options) => Promise<T>;\n  post: <T = unknown>(url: string, options?: Options) => Promise<T>;\n  put: <T = unknown>(url: string, options?: Options) => Promise<T>;\n  delete: <T = unknown>(url: string, options?: Options) => Promise<T>;\n  patch: <T = unknown>(url: string, options?: Options) => Promise<T>;\n  extend: (options: Options) => ReturnType<typeof ky.create>;\n  HTTPError: typeof HTTPError;\n  TimeoutError: typeof TimeoutError;\n}\n\nexport function useKy(options?: UseKyOptions): UseKyReturn {\n  const instance = useMemo(() => ky.create(options), [options]);\n\n  const get = useCallback(\n    <T = unknown>(url: string, opts?: Options): Promise<T> => {\n      return instance.get(url, opts).json<T>();\n    },\n    [instance],\n  );\n\n  const post = useCallback(\n    <T = unknown>(url: string, opts?: Options): Promise<T> => {\n      return instance.post(url, opts).json<T>();\n    },\n    [instance],\n  );\n\n  const put = useCallback(\n    <T = unknown>(url: string, opts?: Options): Promise<T> => {\n      return instance.put(url, opts).json<T>();\n    },\n    [instance],\n  );\n\n  const del = useCallback(\n    <T = unknown>(url: string, opts?: Options): Promise<T> => {\n      return instance.delete(url, opts).json<T>();\n    },\n    [instance],\n  );\n\n  const patch = useCallback(\n    <T = unknown>(url: string, opts?: Options): Promise<T> => {\n      return instance.patch(url, opts).json<T>();\n    },\n    [instance],\n  );\n\n  const extend = useCallback(\n    (opts: Options) => {\n      return instance.extend(opts);\n    },\n    [instance],\n  );\n\n  return {\n    instance,\n    get,\n    post,\n    put,\n    delete: del,\n    patch,\n    extend,\n    HTTPError,\n    TimeoutError,\n  };\n} ",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-ky.tsx"
+    }
+  ],
+  "categories": ["utilities"]
+}
