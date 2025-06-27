@@ -73,7 +73,7 @@ export default async function DocsPage({ params }: PageProps) {
   return (
     <div className={cn('grid grid-cols-9 gap-32', 'my-8')}>
       <div id="docs-content" className={cn('col-span-7')}>
-        <hgroup className={cn('pb-4')}>
+        <hgroup className={cn('pb-12')}>
           <h1
             className={cn('scroll-m-20', 'text-4xl font-bold tracking-tight')}
           >
