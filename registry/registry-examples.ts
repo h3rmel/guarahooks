@@ -584,6 +584,28 @@ export const examples: Registry['items'] = [
     ],
   },
   {
+    name: 'use-ky-demo',
+    type: 'registry:example',
+    title: 'UseKyDemo',
+    description: "use-ky's hook in action.",
+    registryDependencies: [
+      'card',
+      'input',
+      'button',
+      'label',
+      'alert',
+      'lucide-react',
+      'https://guarahooks.com/r/use-ky.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-ky-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-ky-demo.tsx',
+      },
+    ],
+  },
+  {
     name: 'use-page-title-demo',
     type: 'registry:example',
     title: 'UsePageTitleDemo',
