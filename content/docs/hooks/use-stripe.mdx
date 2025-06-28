@@ -1,0 +1,83 @@
+---
+title: useStripe
+date: 2025-06-27
+description: Wrapper around Stripe.js for easier payments integration.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-stripe-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-stripe"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-stripe" />
+
+<Step>Install the required dependencies.</Step>
+
+```bash
+pnpm add @stripe/stripe-js
+```
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop             | Type                      | Default | Description                        |
+| ---------------- | ------------------------- | ------- | ---------------------------------- |
+| `publishableKey` | `string`                  | -       | Stripe publishable key             |
+| `stripeOptions`  | `Record<string, unknown>` | `{}`    | Options passed to `loadStripe`     |
+| `autoInit`       | `boolean`                 | `true`  | Load Stripe automatically on mount |
+
+## Data
+
+| Prop                 | Type                                                 | Description                    |
+| -------------------- | ---------------------------------------------------- | ------------------------------ |
+| `stripe`             | `Stripe \| null`                                     | Stripe instance                |
+| `loading`            | `boolean`                                            | Indicates if Stripe is loading |
+| `error`              | `Error \| null`                                      | Error loading the SDK          |
+| `init`               | `() => Promise<void>`                                | Manually initialize Stripe     |
+| `redirectToCheckout` | `(opts: any) => Promise<void>`                       | Redirect to checkout           |
+| `confirmCardPayment` | `(clientSecret: string, data?: any) => Promise<any>` | Confirm card payment           |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { redirectToCheckout } = useStripe({
+  publishableKey: 'pk_test_...',
+});
+
+return (
+  <Button onClick={() => redirectToCheckout({ sessionId: '123' })}>Pay</Button>
+);
+```
+
+## Related
+
+- [Stripe.js Documentation](https://stripe.com/docs/js)

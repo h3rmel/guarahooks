@@ -251,6 +251,187 @@ export const docsConfig: DashboardConfig = {
       ],
     },
     {
+      title: 'Payments',
+      icon: 'Tools',
+      items: [
+        {
+          title: 'use-stripe',
+          href: '/docs/hooks/use-stripe',
+          label: 'New',
+        },
+        {
+          title: 'use-mercadopago',
+          href: '/docs/hooks/use-mercadopago',
+          label: 'New',
+        },
+        {
+          title: 'use-abacate-pay',
+          href: '/docs/hooks/use-abacate-pay',
+          label: 'New',
+        },
+        {
+          title: 'use-lemon-squeezy',
+          href: '/docs/hooks/use-lemon-squeezy',
+          label: 'New',
+        },
+        {
+          title: 'use-paypal',
+          href: '/docs/hooks/use-paypal',
+          label: 'New',
+        },
+        {
+          title: 'use-wide-pay',
+          href: '/docs/hooks/use-wide-pay',
+          label: 'New',
+        },
+        {
+          title: 'use-vindi',
+          href: '/docs/hooks/use-vindi',
+          label: 'New',
+        },
+        {
+          title: 'use-apple-pay',
+          href: '/docs/hooks/use-apple-pay',
+          label: 'New',
+        },
+        {
+          title: 'use-amazon-pay',
+          href: '/docs/hooks/use-amazon-pay',
+          label: 'New',
+        },
+        {
+          title: 'use-ali-pay',
+          href: '/docs/hooks/use-ali-pay',
+          label: 'New',
+        },
+        {
+          title: 'use-two-checkout',
+          href: '/docs/hooks/use-two-checkout',
+          label: 'New',
+        },
+        {
+          title: 'use-stax-pay',
+          href: '/docs/hooks/use-stax-pay',
+          label: 'New',
+        },
+        {
+          title: 'use-square',
+          href: '/docs/hooks/use-square',
+          label: 'New',
+        },
+        {
+          title: 'use-payoneer',
+          href: '/docs/hooks/use-payoneer',
+          label: 'New',
+        },
+        {
+          title: 'use-pagseguro',
+          href: '/docs/hooks/use-pagseguro',
+          label: 'New',
+        },
+        {
+          title: 'use-pagbank',
+          href: '/docs/hooks/use-pagbank',
+          label: 'New',
+        },
+        {
+          title: 'use-iugu',
+          href: '/docs/hooks/use-iugu',
+          label: 'New',
+        },
+        {
+          title: 'use-pagarme',
+          href: '/docs/hooks/use-pagarme',
+          label: 'New',
+        },
+        {
+          title: 'use-transire',
+          href: '/docs/hooks/use-transire',
+          label: 'New',
+        },
+        {
+          title: 'use-pag-brasil',
+          href: '/docs/hooks/use-pag-brasil',
+          label: 'New',
+        },
+        {
+          title: 'use-stone',
+          href: '/docs/hooks/use-stone',
+          label: 'New',
+        },
+        {
+          title: 'use-superlogica',
+          href: '/docs/hooks/use-superlogica',
+          label: 'New',
+        },
+        {
+          title: 'use-yapay',
+          href: '/docs/hooks/use-yapay',
+          label: 'New',
+        },
+        {
+          title: 'use-zigpay',
+          href: '/docs/hooks/use-zigpay',
+          label: 'New',
+        },
+        {
+          title: 'use-boa-compra',
+          href: '/docs/hooks/use-boa-compra',
+          label: 'New',
+        },
+        {
+          title: 'use-celcoin',
+          href: '/docs/hooks/use-celcoin',
+          label: 'New',
+        },
+        {
+          title: 'use-acqio',
+          href: '/docs/hooks/use-acqio',
+          label: 'New',
+        },
+        {
+          title: 'use-cappta',
+          href: '/docs/hooks/use-cappta',
+          label: 'New',
+        },
+        {
+          title: 'use-ebanx',
+          href: '/docs/hooks/use-ebanx',
+          label: 'New',
+        },
+        {
+          title: 'use-gerenciament',
+          href: '/docs/hooks/use-gerenciament',
+          label: 'New',
+        },
+        {
+          title: 'use-juno',
+          href: '/docs/hooks/use-juno',
+          label: 'New',
+        },
+        {
+          title: 'use-koin',
+          href: '/docs/hooks/use-koin',
+          label: 'New',
+        },
+        {
+          title: 'use-mova',
+          href: '/docs/hooks/use-mova',
+          label: 'New',
+        },
+        {
+          title: 'use-cloud-walk',
+          href: '/docs/hooks/use-cloud-walk',
+          label: 'New',
+        },
+        {
+          title: 'use-efi-bank',
+          href: '/docs/hooks/use-efi-bank',
+          label: 'New',
+        },
+      ],
+    },
+    {
       title: 'Lifecycle',
       icon: 'Refresh',
       items: [

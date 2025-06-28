@@ -1,0 +1,71 @@
+---
+title: useAbacatePay
+date: 2025-06-27
+description: Generic hook for the fictional AbacatePay gateway.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-abacate-pay-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-abacate-pay"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-abacate-pay" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop        | Type      | Default                               | Description                        |
+| ----------- | --------- | ------------------------------------- | ---------------------------------- |
+| `publicKey` | `string`  | -                                     | AbacatePay public key              |
+| `scriptUrl` | `string`  | `'https://cdn.abacatepay.com/sdk.js'` | SDK script URL                     |
+| `autoInit`  | `boolean` | `true`                                | Load script automatically on mount |
+
+## Data
+
+| Prop           | Type                                  | Description                          |
+| -------------- | ------------------------------------- | ------------------------------------ |
+| `abacate`      | `any`                                 | AbacatePay instance                  |
+| `loading`      | `boolean`                             | Indicates if the SDK is loading      |
+| `error`        | `Error \| null`                       | Error loading the SDK                |
+| `init`         | `() => Promise<void>`                 | Manually initialize the SDK          |
+| `openCheckout` | `(sessionId: string) => void`         | Open checkout with the given session |
+| `getStatus`    | `(paymentId: string) => Promise<any>` | Fetch payment status                 |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { openCheckout } = useAbacatePay({
+  publicKey: 'test_public_key',
+});
+
+return <Button onClick={() => openCheckout('session_123')}>Pay</Button>;
+```

@@ -831,4 +831,940 @@ export const examples: Registry['items'] = [
       },
     ],
   },
+  {
+    name: 'use-stripe-demo',
+    type: 'registry:example',
+    title: 'UseStripe Demo',
+    description: 'use-stripe in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-stripe.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-stripe-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-stripe-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-mercadopago-demo',
+    type: 'registry:example',
+    title: 'UseMercadoPago Demo',
+    description: 'use-mercadopago in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-mercadopago.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-mercadopago-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-mercadopago-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-abacate-pay-demo',
+    type: 'registry:example',
+    title: 'UseAbacatePay Demo',
+    description: 'use-abacate-pay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-abacate-pay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-abacate-pay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-abacate-pay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-lemon-squeezy-demo',
+    type: 'registry:example',
+    title: 'UseLemonSqueezy Demo',
+    description: 'use-lemon-squeezy in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-lemon-squeezy.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-lemon-squeezy-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-lemon-squeezy-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-paypal-demo',
+    type: 'registry:example',
+    title: 'UsePayPal Demo',
+    description: 'use-paypal in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-paypal.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-paypal-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-paypal-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-wide-pay-demo',
+    type: 'registry:example',
+    title: 'UseWidePay Demo',
+    description: 'use-wide-pay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-wide-pay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-wide-pay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-wide-pay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-vindi-demo',
+    type: 'registry:example',
+    title: 'UseVindi Demo',
+    description: 'use-vindi in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-vindi.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-vindi-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-vindi-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-apple-pay-demo',
+    type: 'registry:example',
+    title: 'UseApplePay Demo',
+    description: 'use-apple-pay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-apple-pay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-apple-pay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-apple-pay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-amazon-pay-demo',
+    type: 'registry:example',
+    title: 'UseAmazonPay Demo',
+    description: 'use-amazon-pay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-amazon-pay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-amazon-pay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-amazon-pay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-ali-pay-demo',
+    type: 'registry:example',
+    title: 'UseAliPay Demo',
+    description: 'use-ali-pay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-ali-pay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-ali-pay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-ali-pay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-two-checkout-demo',
+    type: 'registry:example',
+    title: 'UseTwoCheckout Demo',
+    description: 'use-two-checkout in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-two-checkout.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-two-checkout-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-two-checkout-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-stax-pay-demo',
+    type: 'registry:example',
+    title: 'UseStaxPay Demo',
+    description: 'use-stax-pay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-stax-pay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-stax-pay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-stax-pay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-square-demo',
+    type: 'registry:example',
+    title: 'UseSquare Demo',
+    description: 'use-square in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-square.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-square-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-square-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-payoneer-demo',
+    type: 'registry:example',
+    title: 'UsePayoneer Demo',
+    description: 'use-payoneer in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-payoneer.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-payoneer-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-payoneer-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-pagseguro-demo',
+    type: 'registry:example',
+    title: 'UsePagSeguro Demo',
+    description: 'use-pagseguro in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-pagseguro.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-pagseguro-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-pagseguro-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-pagbank-demo',
+    type: 'registry:example',
+    title: 'UsePagBank Demo',
+    description: 'use-pagbank in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-pagbank.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-pagbank-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-pagbank-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-iugu-demo',
+    type: 'registry:example',
+    title: 'UseIugu Demo',
+    description: 'use-iugu in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-iugu.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-iugu-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-iugu-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-pagarme-demo',
+    type: 'registry:example',
+    title: 'UsePagarme Demo',
+    description: 'use-pagarme in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-pagarme.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-pagarme-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-pagarme-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-drip-demo',
+    type: 'registry:example',
+    title: 'UseDrip Demo',
+    description: 'use-drip in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-drip.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-drip-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-drip-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-clearsale-demo',
+    type: 'registry:example',
+    title: 'UseClearSale Demo',
+    description: 'use-clearsale in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-clearsale.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-clearsale-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-clearsale-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-zoop-demo',
+    type: 'registry:example',
+    title: 'UseZoop Demo',
+    description: 'use-zoop in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-zoop.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-zoop-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-zoop-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-picpay-demo',
+    type: 'registry:example',
+    title: 'UsePicPay Demo',
+    description: 'use-picpay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-picpay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-picpay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-picpay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-adyen-demo',
+    type: 'registry:example',
+    title: 'UseAdyen Demo',
+    description: 'use-adyen in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-adyen.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-adyen-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-adyen-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-barte-demo',
+    type: 'registry:example',
+    title: 'UseBarte Demo',
+    description: 'use-barte in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-barte.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-barte-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-barte-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-braintree-demo',
+    type: 'registry:example',
+    title: 'UseBraintree Demo',
+    description: 'use-braintree in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-braintree.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-braintree-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-braintree-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-braspag-demo',
+    type: 'registry:example',
+    title: 'UseBraspag Demo',
+    description: 'use-braspag in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-braspag.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-braspag-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-braspag-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-cielo-demo',
+    type: 'registry:example',
+    title: 'UseCielo Demo',
+    description: 'use-cielo in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-cielo.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-cielo-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-cielo-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-chargebee-demo',
+    type: 'registry:example',
+    title: 'UseChargebee Demo',
+    description: 'use-chargebee in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-chargebee.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-chargebee-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-chargebee-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-getnet-demo',
+    type: 'registry:example',
+    title: 'UseGetnet Demo',
+    description: 'use-getnet in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-getnet.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-getnet-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-getnet-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-equals-demo',
+    type: 'registry:example',
+    title: 'UseEquals Demo',
+    description: 'use-equals in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-equals.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-equals-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-equals-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-klap-demo',
+    type: 'registry:example',
+    title: 'UseKlap Demo',
+    description: 'use-klap in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-klap.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-klap-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-klap-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-nu-pay-demo',
+    type: 'registry:example',
+    title: 'UseNuPay Demo',
+    description: 'use-nu-pay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-nu-pay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-nu-pay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-nu-pay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-safrapay-demo',
+    type: 'registry:example',
+    title: 'UseSafraPay Demo',
+    description: 'use-safrapay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-safrapay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-safrapay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-safrapay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-vr-demo',
+    type: 'registry:example',
+    title: 'UseVRPay Demo',
+    description: 'use-vr in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-vr.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-vr-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-vr-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-worldpay-demo',
+    type: 'registry:example',
+    title: 'UseWorldPay Demo',
+    description: 'use-worldpay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-worldpay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-worldpay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-worldpay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-transire-demo',
+    type: 'registry:example',
+    title: 'UseTransire Demo',
+    description: 'use-transire in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-transire.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-transire-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-transire-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-pag-brasil-demo',
+    type: 'registry:example',
+    title: 'UsePagBrasil Demo',
+    description: 'use-pag-brasil in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-pag-brasil.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-pag-brasil-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-pag-brasil-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-stone-demo',
+    type: 'registry:example',
+    title: 'UseStone Demo',
+    description: 'use-stone in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-stone.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-stone-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-stone-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-superlogica-demo',
+    type: 'registry:example',
+    title: 'UseSuperlogica Demo',
+    description: 'use-superlogica in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-superlogica.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-superlogica-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-superlogica-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-yapay-demo',
+    type: 'registry:example',
+    title: 'UseYapay Demo',
+    description: 'use-yapay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-yapay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-yapay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-yapay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-zigpay-demo',
+    type: 'registry:example',
+    title: 'UseZigpay Demo',
+    description: 'use-zigpay in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-zigpay.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-zigpay-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-zigpay-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-boa-compra-demo',
+    type: 'registry:example',
+    title: 'UseBoaCompra Demo',
+    description: 'use-boa-compra in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-boa-compra.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-boa-compra-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-boa-compra-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-celcoin-demo',
+    type: 'registry:example',
+    title: 'UseCelcoin Demo',
+    description: 'use-celcoin in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-celcoin.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-celcoin-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-celcoin-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-acqio-demo',
+    type: 'registry:example',
+    title: 'UseAcqio Demo',
+    description: 'use-acqio in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-acqio.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-acqio-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-acqio-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-cappta-demo',
+    type: 'registry:example',
+    title: 'UseCappta Demo',
+    description: 'use-cappta in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-cappta.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-cappta-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-cappta-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-ebanx-demo',
+    type: 'registry:example',
+    title: 'UseEbanx Demo',
+    description: 'use-ebanx in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-ebanx.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-ebanx-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-ebanx-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-gerenciament-demo',
+    type: 'registry:example',
+    title: 'UseGerenciament Demo',
+    description: 'use-gerenciament in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-gerenciament.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-gerenciament-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-gerenciament-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-juno-demo',
+    type: 'registry:example',
+    title: 'UseJuno Demo',
+    description: 'use-juno in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-juno.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-juno-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-juno-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-koin-demo',
+    type: 'registry:example',
+    title: 'UseKoin Demo',
+    description: 'use-koin in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-koin.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-koin-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-koin-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-mova-demo',
+    type: 'registry:example',
+    title: 'UseMova Demo',
+    description: 'use-mova in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-mova.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-mova-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-mova-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-cloud-walk-demo',
+    type: 'registry:example',
+    title: 'UseCloudWalk Demo',
+    description: 'use-cloud-walk in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-cloud-walk.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-cloud-walk-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-cloud-walk-demo.tsx',
+      },
+    ],
+  },
+  {
+    name: 'use-efi-bank-demo',
+    type: 'registry:example',
+    title: 'UseEfiBank Demo',
+    description: 'use-efi-bank in action.',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-efi-bank.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-efi-bank-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-efi-bank-demo.tsx',
+      },
+    ],
+  },
 ];

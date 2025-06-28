@@ -1,0 +1,74 @@
+---
+title: useMercadoPago
+date: 2025-06-27
+description: Simple wrapper for MercadoPago Checkout.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-mercadopago-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-mercadopago"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-mercadopago" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop        | Type      | Default   | Description                        |
+| ----------- | --------- | --------- | ---------------------------------- |
+| `publicKey` | `string`  | -         | MercadoPago public key             |
+| `locale`    | `string`  | `'en-US'` | SDK locale                         |
+| `autoInit`  | `boolean` | `true`    | Load script automatically on mount |
+
+## Data
+
+| Prop             | Type                             | Description                             |
+| ---------------- | -------------------------------- | --------------------------------------- |
+| `mp`             | `any`                            | MercadoPago instance                    |
+| `loading`        | `boolean`                        | Indicates if the SDK is loading         |
+| `error`          | `Error \| null`                  | Error loading the SDK                   |
+| `init`           | `() => Promise<void>`            | Manually initialize the SDK             |
+| `createCheckout` | `(preferenceId: string) => void` | Open checkout with the given preference |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { createCheckout } = useMercadoPago({
+  publicKey: 'TEST-123',
+});
+
+return <Button onClick={() => createCheckout('pref_123')}>Pay</Button>;
+```
+
+## Related
+
+- [MercadoPago Checkout](https://www.mercadopago.com.br/developers/en/docs/checkout-pro)

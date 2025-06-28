@@ -1,0 +1,76 @@
+---
+title: usePayPal
+date: 2025-06-27
+description: Load the PayPal JS SDK and render buttons easily.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-paypal-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-paypal"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-paypal" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop        | Type                                     | Default                           | Description                        |
+| ----------- | ---------------------------------------- | --------------------------------- | ---------------------------------- |
+| `clientId`  | `string`                                 | -                                 | PayPal client ID                   |
+| `currency`  | `string`                                 | `'USD'`                           | Currency for transactions          |
+| `intent`    | `'capture' \| 'authorize' \| 'tokenize'` | `'capture'`                       | Payment intent                     |
+| `scriptUrl` | `string`                                 | `'https://www.paypal.com/sdk/js'` | SDK script base URL                |
+| `autoInit`  | `boolean`                                | `true`                            | Load script automatically on mount |
+
+## Data
+
+| Prop            | Type                            | Description                     |
+| --------------- | ------------------------------- | ------------------------------- | ---------------------------------------- |
+| `paypal`        | `any`                           | PayPal namespace                |
+| `loading`       | `boolean`                       | Indicates if the SDK is loading |
+| `error`         | `Error \| null`                 | Error loading the SDK           |
+| `init`          | `() => Promise<void>`           | Manually initialize the SDK     |
+| `renderButtons` | `(config: any, selector: string | HTMLElement) => void`           | Render PayPal buttons into the container |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { renderButtons } = usePayPal({ clientId: 'test123' });
+
+useEffect(() => {
+  renderButtons({}, '#paypal-container');
+}, [renderButtons]);
+```
+
+## Related
+
+- [PayPal JS SDK](https://developer.paypal.com/docs/business/javascript-sdk/)

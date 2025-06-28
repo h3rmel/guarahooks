@@ -1,0 +1,75 @@
+---
+title: useLemonSqueezy
+date: 2025-06-27
+description: Simplified integration with the LemonSqueezy checkout script.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-lemon-squeezy-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-lemon-squeezy"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-lemon-squeezy" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop        | Type      | Default                                      | Description                        |
+| ----------- | --------- | -------------------------------------------- | ---------------------------------- |
+| `scriptUrl` | `string`  | `'https://app.lemonsqueezy.com/js/lemon.js'` | SDK script URL                     |
+| `autoInit`  | `boolean` | `true`                                       | Load script automatically on mount |
+
+## Data
+
+| Prop           | Type                    | Description                        |
+| -------------- | ----------------------- | ---------------------------------- |
+| `lemon`        | `any`                   | LemonSqueezy instance              |
+| `loading`      | `boolean`               | Indicates if the SDK is loading    |
+| `error`        | `Error \| null`         | Error loading the SDK              |
+| `init`         | `() => Promise<void>`   | Manually initialize the SDK        |
+| `openCheckout` | `(url: string) => void` | Open checkout for the provided URL |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { openCheckout } = useLemonSqueezy();
+
+return (
+  <Button onClick={() => openCheckout('https://example.com/checkout')}>
+    Pay
+  </Button>
+);
+```
+
+## Related
+
+- [LemonSqueezy Docs](https://docs.lemonsqueezy.com/)
