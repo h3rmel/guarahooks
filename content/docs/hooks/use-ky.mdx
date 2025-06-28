@@ -1,0 +1,91 @@
+---
+title: useKy
+date: 2025-06-27
+description: A Hook to create a ky HTTP client instance with custom defaults.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-ky-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-ky"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-ky" />
+
+<Step>Install the required dependencies.</Step>
+
+```bash
+pnpm add ky
+```
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop       | Type      | Default | Description                                  |
+| ---------- | --------- | ------- | -------------------------------------------- |
+| `options?` | `Options` | `{}`    | Options for creating the ky client instance. |
+
+See [ky documentation](https://github.com/sindresorhus/ky#options) for more details about the options.
+
+## Returns
+
+A ky instance with the following methods:
+
+| Method         | Description                                    |
+| -------------- | ---------------------------------------------- |
+| `get`          | Perform a GET request and parse JSON response. |
+| `post`         | Perform a POST request with optional body.     |
+| `put`          | Perform a PUT request with optional body.      |
+| `delete`       | Perform a DELETE request.                      |
+| `patch`        | Perform a PATCH request with optional body.    |
+| `extend`       | Create a new ky instance with merged defaults. |
+| `HTTPError`    | Class for HTTP error handling.                 |
+| `TimeoutError` | Class for timeout error handling.              |
+
+## Examples
+
+### Basic GET Request
+
+```tsx
+const kyClient = useKy({ prefixUrl: 'https://api.example.com' });
+const data = await kyClient.get('items/1').json<{ id: number; name: string }>();
+```
+
+### POST Request
+
+```tsx
+const kyClient = useKy({ prefixUrl: 'https://api.example.com' });
+const response = await kyClient
+  .post('items', { json: { name: 'New Item' } })
+  .json();
+```
+
+## Related
+
+- [ky Documentation](https://github.com/sindresorhus/ky)

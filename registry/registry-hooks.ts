@@ -456,6 +456,20 @@ export const hooks: Registry['items'] = [
     categories: ['utilities'],
   },
   {
+    name: 'use-ky',
+    type: 'registry:hook',
+    title: 'UseKy',
+    description: 'Lightweight wrapper for ky HTTP client with custom defaults.',
+    files: [
+      {
+        path: 'registry/hooks/use-ky.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-ky.tsx',
+      },
+    ],
+    categories: ['utilities'],
+  },
+  {
     name: 'use-page-title',
     type: 'registry:hook',
     title: 'UsePageTitle',
