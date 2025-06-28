@@ -639,4 +639,19 @@ export const hooks: Registry['items'] = [
     ],
     categories: ['forms'],
   },
+  {
+    name: 'use-eye-dropper',
+    type: 'registry:hook',
+    title: 'UseEyeDropper',
+    description:
+      'Pick colors from anywhere on the screen using the EyeDropper API.',
+    files: [
+      {
+        path: 'registry/hooks/use-eye-dropper.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-eye-dropper.tsx',
+      },
+    ],
+    categories: ['ui-and-dom'],
+  },
 ];
