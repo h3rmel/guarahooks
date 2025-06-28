@@ -831,4 +831,22 @@ export const examples: Registry['items'] = [
       },
     ],
   },
+  {
+    name: 'use-eye-dropper-demo',
+    type: 'registry:example',
+    title: 'UseEyeDropperDemo',
+    description: "use-eye-dropper's hook in action.",
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-eye-dropper.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-eye-dropper-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-eye-dropper-demo.tsx',
+      },
+    ],
+  },
 ];

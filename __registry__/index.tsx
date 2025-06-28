@@ -1055,6 +1055,30 @@ export const Index: Record<string, RegistryItem> = {
     }),
     meta: undefined,
   },
+  'use-eye-dropper': {
+    name: 'use-eye-dropper',
+    description:
+      'Pick colors from anywhere on the screen using the EyeDropper API.',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-eye-dropper.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-eye-dropper.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-eye-dropper.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
   'use-window-size-demo': {
     name: 'use-window-size-demo',
     description: "use-window-size's hook in action.",
@@ -2307,6 +2331,33 @@ export const Index: Record<string, RegistryItem> = {
     ],
     component: React.lazy(async () => {
       const mod = await import('@/registry/example/use-better-auth-demo.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-eye-dropper-demo': {
+    name: 'use-eye-dropper-demo',
+    description: "use-eye-dropper's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'card',
+      'button',
+      'https://guarahooks.com/r/use-eye-dropper.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-eye-dropper-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-eye-dropper-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/example/use-eye-dropper-demo.tsx');
       const exportName =
         Object.keys(mod).find(
           (key) =>

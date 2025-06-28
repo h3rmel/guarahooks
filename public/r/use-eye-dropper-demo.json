@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-eye-dropper-demo",
+  "type": "registry:example",
+  "title": "UseEyeDropperDemo",
+  "description": "use-eye-dropper's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "https://guarahooks.com/r/use-eye-dropper.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-eye-dropper-demo.tsx",
+      "content": "import React from 'react'\nimport { useColorPicker } from '@/hooks/guarahooks/use-eye-dropper'\n\nexport function ColorPickerExample() {\n  const { color, error, isSupported, pickColor } = useColorPicker()\n\n  return (\n    <>\n      <div style={{ padding: 64, background: color }}>Selected color</div>\n\n      {isSupported() ? (\n        <button onClick={pickColor}>Pick color</button>\n      ) : (\n        <span>EyeDropper API not supported in this browser</span>\n      )}\n\n      {error && <div style={{ color: 'red' }}>{error.message}</div>}\n    </>\n  )\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-eye-dropper-demo.tsx"
+    }
+  ]
+}

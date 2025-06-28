@@ -216,6 +216,11 @@ export const docsConfig: DashboardConfig = {
           title: 'use-geolocation',
           href: '/docs/hooks/use-geolocation',
         },
+        {
+          title: 'use-eye-dropper',
+          href: '/docs/hooks/use-eye-dropper',
+          label: 'New',
+        },
       ],
     },
     {
