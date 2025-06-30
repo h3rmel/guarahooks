@@ -12,7 +12,7 @@ export function ColorPickerExample() {
   const { color, error, isSupported, pickColor } = useColorPicker();
 
   return (
-    <Card className="max-w-sm mx-auto mt-16 shadow-lg border-2 border-muted">
+    <Card className="max-w-sm mx-auto shadow-lg border-muted">
       <CardHeader>
         <CardTitle className="text-center text-2xl font-bold tracking-tight">
           Color Picker
