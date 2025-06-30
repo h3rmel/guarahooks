@@ -116,6 +116,11 @@ export const docsConfig: DashboardConfig = {
           title: 'use-scroll-lock',
           href: '/docs/hooks/use-scroll-lock',
         },
+        {
+          title: 'use-eye-dropper',
+          href: '/docs/hooks/use-eye-dropper',
+          label: 'New',
+        },
       ],
     },
     {

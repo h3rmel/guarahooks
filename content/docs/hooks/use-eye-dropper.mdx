@@ -1,0 +1,76 @@
+---
+title: useColorPicker
+date: 2025-06-28
+description: Use the EyeDropper API to pick colors from anywhere on the screen.
+author: ecsistem
+published: true
+---
+
+<HookPreview name="use-eye-dropper-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-eye-dropper"
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+<Steps>
+  <Step>Copy and paste the code below into your project.</Step>
+  <HookSource name="use-eye-dropper" />
+  <Step>Update the import paths according to your setup.</Step>
+</Steps>
+
+  </TabsContent>
+</Tabs>
+
+## Return
+
+| Property      | Type            | Description                                                                   |
+| ------------- | --------------- | ----------------------------------------------------------------------------- |
+| `color`       | `string`        | The selected color in HEX format.                                             |
+| `error`       | `Error \| null` | Error that occurred while trying to pick a color, if any.                     |
+| `isSupported` | `() => boolean` | Function that returns whether the EyeDropper API is supported in the browser. |
+| `pickColor`   | `() => void`    | Function to open the color picker.                                            |
+
+## Usage example
+
+```tsx
+'use client';
+import { useColorPicker } from '@/registry/hooks/use-eye-dropper';
+
+const { color, error, isSupported, pickColor } = useColorPicker();
+
+return (
+  <>
+    <div style={{ background: color, padding: 64 }}>Selected color</div>
+    {isSupported() ? (
+      <button onClick={pickColor}>Pick color</button>
+    ) : (
+      <span>EyeDropper API is not supported in this browser</span>
+    )}
+    {error && <div style={{ color: 'red' }}>{error.message}</div>}
+  </>
+);
+```
+
+## Notes
+
+- Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper) available in Chromium-based browsers.
+- Only works on the client side.
+- If the API is not supported, `isSupported()` returns `false` and `pickColor` does nothing.
+- User interaction (e.g., clicking a button) is required to open the color picker.
+
+## Tips
+
+- Ideal for design tools, image editors, or any app that needs to capture colors from the screen.
+- Handle errors to account for user cancellations or interruptions during color selection.
