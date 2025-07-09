@@ -411,7 +411,7 @@ export const hooks: Registry['items'] = [
         target: 'hooks/guarahooks/use-fetch.tsx',
       },
     ],
-    categories: ['utilities'],
+    categories: ['data-fetching'],
   },
   {
     name: 'use-pagination',
@@ -453,7 +453,7 @@ export const hooks: Registry['items'] = [
         target: 'hooks/guarahooks/use-axios.tsx',
       },
     ],
-    categories: ['utilities'],
+    categories: ['data-fetching'],
   },
   {
     name: 'use-page-title',

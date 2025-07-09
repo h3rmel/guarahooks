@@ -52,6 +52,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // UI and DOM
     {
       title: 'UI and DOM',
       icon: 'Pages',
@@ -123,6 +124,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // State Management
     {
       title: 'State Management',
       icon: 'Swap',
@@ -165,6 +167,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // Utilities
     {
       title: 'Utilities',
       icon: 'Tools',
@@ -188,14 +191,6 @@ export const docsConfig: DashboardConfig = {
         {
           title: 'use-page-leave',
           href: '/docs/hooks/use-page-leave',
-        },
-        {
-          title: 'use-fetch',
-          href: '/docs/hooks/use-fetch',
-        },
-        {
-          title: 'use-axios',
-          href: '/docs/hooks/use-axios',
         },
         {
           title: 'use-cookie',
@@ -223,6 +218,22 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // Data Fetching
+    {
+      title: 'Data Fetching',
+      icon: 'Download',
+      items: [
+        {
+          title: 'use-fetch',
+          href: '/docs/hooks/use-fetch',
+        },
+        {
+          title: 'use-axios',
+          href: '/docs/hooks/use-axios',
+        },
+      ],
+    },
+    // Form
     {
       title: 'Form',
       icon: 'Survey',
@@ -239,6 +250,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // Auth
     {
       title: 'Auth',
       icon: 'Lock',
@@ -255,6 +267,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // Lifecycle
     {
       title: 'Lifecycle',
       icon: 'Refresh',
