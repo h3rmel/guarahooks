@@ -406,7 +406,7 @@
           "target": "hooks/guarahooks/use-fetch.tsx"
         }
       ],
-      "categories": ["utilities"]
+      "categories": ["data-fetching"]
     },
     {
       "name": "use-pagination",
@@ -448,7 +448,7 @@
           "target": "hooks/guarahooks/use-axios.tsx"
         }
       ],
-      "categories": ["utilities"]
+      "categories": ["data-fetching"]
     },
     {
       "name": "use-page-title",
