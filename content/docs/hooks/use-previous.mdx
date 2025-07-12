@@ -1,0 +1,199 @@
+---
+title: usePrevious
+date: 2025-07-12
+description: A hook that provides a previous value of a state.
+author: https://github.com/brunubarbosa
+published: true
+---
+
+<HookPreview name="use-previous-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-previous"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-previous" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Parameters
+
+| Parameter | Type | Description                                   |
+| --------- | ---- | --------------------------------------------- |
+| `value`   | `T`  | The current value to track the previous state |
+
+## Return Value
+
+The hook returns the previous value of type `T | undefined`. On the first render, it returns `undefined` since there's no previous value.
+
+## Key Features & Details
+
+### Behavior
+
+- Returns the previous value of the provided parameter
+- On the first render, returns `undefined`
+- Updates the stored previous value after each render
+- Generic type support for any data type
+
+### Performance Considerations
+
+- Uses `useRef` to store the previous value without causing re-renders
+- `useEffect` runs after each render to update the stored value
+- Minimal memory footprint with single ref storage
+- No unnecessary re-renders when accessing previous values
+
+### Best Practices & Caveats
+
+1. **First render handling**: Always check if the previous value is `undefined` before using it
+2. **Type safety**: The hook is fully typed with generics for type safety
+3. **Comparison patterns**: Useful for detecting changes between renders
+4. **Cleanup**: No cleanup needed as it only stores a single value reference
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import { useState } from 'react';
+
+import { usePrevious } from '@/hooks/guarahooks/use-previous';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const previousCount = usePrevious(count);
+
+  return (
+    <div>
+      <p>Current count: {count}</p>
+      <p>Previous count: {previousCount ?? 'N/A'}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### Detecting Changes
+
+```tsx
+import { useEffect, useState } from 'react';
+
+import { usePrevious } from '@/hooks/guarahooks/use-previous';
+
+function UserProfile({ userId }: { userId: string }) {
+  const [user, setUser] = useState(null);
+  const previousUserId = usePrevious(userId);
+
+  useEffect(() => {
+    // Only fetch if userId actually changed
+    if (previousUserId !== userId) {
+      fetchUser(userId).then(setUser);
+    }
+  }, [userId, previousUserId]);
+
+  return <div>{user?.name}</div>;
+}
+```
+
+### With Complex Objects
+
+```tsx
+import { useState } from 'react';
+
+import { usePrevious } from '@/hooks/guarahooks/use-previous';
+
+interface FormData {
+  name: string;
+  email: string;
+}
+
+function FormExample() {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+  });
+  const previousFormData = usePrevious(formData);
+
+  const hasChanged =
+    previousFormData &&
+    JSON.stringify(previousFormData) !== JSON.stringify(formData);
+
+  return (
+    <div>
+      <input
+        value={formData.name}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        placeholder="Name"
+      />
+      <input
+        value={formData.email}
+        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        placeholder="Email"
+      />
+      {hasChanged && <p>Form has been modified</p>}
+    </div>
+  );
+}
+```
+
+### Tracking State Transitions
+
+```tsx
+import { useState } from 'react';
+
+import { usePrevious } from '@/hooks/guarahooks/use-previous';
+
+type Status = 'idle' | 'loading' | 'success' | 'error';
+
+function StatusTracker() {
+  const [status, setStatus] = useState<Status>('idle');
+  const previousStatus = usePrevious(status);
+
+  const getStatusMessage = () => {
+    if (previousStatus === 'loading' && status === 'success') {
+      return 'Loading completed successfully!';
+    }
+    if (previousStatus === 'loading' && status === 'error') {
+      return 'Loading failed!';
+    }
+    return `Status: ${status}`;
+  };
+
+  return (
+    <div>
+      <p>{getStatusMessage()}</p>
+      <button onClick={() => setStatus('loading')}>Start Loading</button>
+      <button onClick={() => setStatus('success')}>Set Success</button>
+      <button onClick={() => setStatus('error')}>Set Error</button>
+    </div>
+  );
+}
+```
+
+## Related
+
+- [useRef Hook](https://react.dev/reference/react/useRef)
+- [useEffect Hook](https://react.dev/reference/react/useEffect)
+- [React Hooks Documentation](https://react.dev/reference/react/hooks)

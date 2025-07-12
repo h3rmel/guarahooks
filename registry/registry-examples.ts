@@ -19,6 +19,20 @@ export const examples: Registry['items'] = [
     ],
   },
   {
+    name: 'use-previous-demo',
+    type: 'registry:example',
+    title: 'UsePreviousDemo',
+    description: "use-previous's hook in action.",
+    registryDependencies: ['card', 'button'],
+    files: [
+      {
+        path: 'registry/example/use-previous-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-previous-demo.tsx',
+      },
+    ],
+  },
+  {
     name: 'use-media-demo',
     type: 'registry:example',
     title: 'UseMediaDemo',

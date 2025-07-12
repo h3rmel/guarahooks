@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-previous-demo",
+  "type": "registry:example",
+  "title": "UsePreviousDemo",
+  "description": "use-previous's hook in action.",
+  "registryDependencies": ["card", "button"],
+  "files": [
+    {
+      "path": "registry/example/use-previous-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\n\nimport { usePrevious } from '@/hooks/guarahooks/use-previous';\n\nexport default function UsePreviousDemo() {\n  const [count, setCount] = useState(0);\n  const previousCount = usePrevious(count);\n\n  return (\n    <div className=\"flex flex-col items-center justify-center h-screen\">\n      <h1>Count: {count}</h1>\n      <p>Previous count: {previousCount}</p>\n      <Button onClick={() => setCount(count + 1)}>Increment</Button>\n    </div>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-previous-demo.tsx"
+    }
+  ]
+}

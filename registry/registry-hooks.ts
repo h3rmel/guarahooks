@@ -16,6 +16,20 @@ export const hooks: Registry['items'] = [
     categories: ['ui-and-dom'],
   },
   {
+    name: 'use-previous',
+    type: 'registry:hook',
+    title: 'UsePrevious',
+    description: 'Tracks the previous value of a state.',
+    files: [
+      {
+        path: 'registry/hooks/use-previous.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-previous.tsx',
+      },
+    ],
+    categories: ['ui-and-dom'],
+  },
+  {
     name: 'use-media',
     type: 'registry:hook',
     title: 'UseMedia',

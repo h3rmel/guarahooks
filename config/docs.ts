@@ -132,6 +132,10 @@ export const docsConfig: DashboardConfig = {
           href: '/docs/hooks/use-toggle',
         },
         {
+          title: 'use-previous',
+          href: '/docs/hooks/use-previous',
+        },
+        {
           title: 'use-disclosure',
           href: '/docs/hooks/use-disclosure',
         },
