@@ -1079,6 +1079,29 @@ export const Index: Record<string, RegistryItem> = {
     }),
     meta: undefined,
   },
+  'use-ky': {
+    name: 'use-ky',
+    description: 'A customizable hook for making HTTP requests using Ky',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-ky.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-ky.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-ky.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
   'use-window-size-demo': {
     name: 'use-window-size-demo',
     description: "use-window-size's hook in action.",
@@ -2358,6 +2381,37 @@ export const Index: Record<string, RegistryItem> = {
     ],
     component: React.lazy(async () => {
       const mod = await import('@/registry/example/use-eye-dropper-demo.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-ky-demo': {
+    name: 'use-ky-demo',
+    description: "use-ky's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'card',
+      'badge',
+      'button',
+      'input',
+      'label',
+      'tabs',
+      'https://guarahooks.com/r/use-ky.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-ky-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-ky-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/example/use-ky-demo.tsx');
       const exportName =
         Object.keys(mod).find(
           (key) =>

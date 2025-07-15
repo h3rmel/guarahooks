@@ -654,4 +654,18 @@ export const hooks: Registry['items'] = [
     ],
     categories: ['ui-and-dom'],
   },
+  {
+    name: 'use-ky',
+    type: 'registry:hook',
+    title: 'UseKy',
+    description: 'A customizable hook for making HTTP requests using Ky',
+    files: [
+      {
+        path: 'registry/hooks/use-ky.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-ky.tsx',
+      },
+    ],
+    categories: ['data-fetching'],
+  },
 ];

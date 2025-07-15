@@ -1,0 +1,297 @@
+---
+slug: use-ky
+title: useKy
+date: 2025-07-15
+description: A powerful React hook for HTTP requests using Ky, featuring global provider, retry logic, timeout, and abort control
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-ky-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-ky"
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+<Steps>
+  <Step>Copy and paste the following code into your project.</Step>
+  <HookSource name="use-ky" />
+  <Step>Install the required dependencies.</Step>
+
+```bash
+pnpm add ky
+```
+
+  <Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+<Steps>
+  <Step>Wrap your app with `KyProvider`</Step>
+
+```tsx
+import { KyProvider } from '@/hooks/use-ky';
+
+function App() {
+  return (
+    <KyProvider config={{ prefixUrl: 'https://api.example.com' }}>
+      <YourApp />
+    </KyProvider>
+  );
+}
+```
+
+<Step>Use the hook in your components</Step>
+
+```tsx
+import { useKyGet } from '@/hooks/use-ky';
+
+function UserProfile() {
+  const { data, loading, error } = useKyGet<User>('/users/me');
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return <div>{data?.name}</div>;
+}
+```
+
+</Steps>
+
+## API Reference
+
+### `KyProvider` Props
+
+| Prop       | Type        | Default | Description                                 |
+| ---------- | ----------- | ------- | ------------------------------------------- |
+| `config`   | `KyConfig`  | `{}`    | Global configuration for all Ky requests    |
+| `children` | `ReactNode` | —       | Child components that will use the provider |
+
+### `KyConfig` Interface
+
+| Property       | Type                    | Default     | Description                          |
+| -------------- | ----------------------- | ----------- | ------------------------------------ |
+| `prefixUrl`    | `string`                | `undefined` | Prefix URL for all relative requests |
+| `timeout`      | `number`                | `undefined` | Request timeout in milliseconds      |
+| `retries`      | `number`                | `0`         | Number of retry attempts on failure  |
+| `headers`      | `Record<string,string>` | `undefined` | Default headers for all requests     |
+| `method`       | `string`                | `'GET'`     | Default HTTP method                  |
+| `searchParams` | `Record<string,any>`    | `undefined` | URL search parameters                |
+
+### `useKy` Hook
+
+```tsx
+function useKy<T = any>(
+  url: string,
+  options?: KyOptions & { immediate?: boolean },
+): KyResult<T>;
+```
+
+#### Parameters
+
+| Parameter | Type                                  | Default | Description                       |
+| --------- | ------------------------------------- | ------- | --------------------------------- |
+| `url`     | `string`                              | —       | Endpoint URL to request data from |
+| `options` | `KyOptions & { immediate?: boolean }` | `{}`    | Ky options and hook configuration |
+
+#### `KyOptions` Interface
+
+| Property       | Type                 | Default | Description                        |
+| -------------- | -------------------- | ------- | ---------------------------------- |
+| `json`         | `any`                | —       | Request body serialized as JSON    |
+| `headers`      | `HeadersInit`        | —       | Request headers                    |
+| `timeout`      | `number`             | —       | Request timeout (overrides global) |
+| `retries`      | `number`             | —       | Retry attempts (overrides global)  |
+| `immediate`    | `boolean`            | `true`  | Execute request immediately        |
+| `method`       | `string`             | —       | HTTP method                        |
+| `searchParams` | `Record<string,any>` | —       | URL search parameters              |
+
+#### `KyResult<T>`
+
+| Property  | Type                                         | Description                           |
+| --------- | -------------------------------------------- | ------------------------------------- |
+| `data`    | `T  null`                                    | Fetched data or null on error/loading |
+| `error`   | `HTTPError \| TimeoutError \| Error \| null` | Error object if the request fails     |
+| `loading` | `boolean`                                    | Whether the request is in progress    |
+| `refetch` | `() => Promise<T \| null>`                   | Function to re-trigger the request    |
+| `abort`   | `() => void`                                 | Cancels the current in-flight request |
+| `aborted` | `boolean`                                    | Whether the request was aborted       |
+
+### Convenience Hooks
+
+#### `useKyGet`
+
+```tsx
+function useKyGet<T = any>(url: string, options?: KyOptions): KyResult<T>;
+```
+
+#### `useKyPost`
+
+```tsx
+function useKyPost<T = any>(
+  url: string,
+  data?: any,
+  options?: KyOptions,
+): KyResult<T>;
+```
+
+#### `useKyPut`
+
+```tsx
+function useKyPut<T = any>(
+  url: string,
+  data?: any,
+  options?: KyOptions,
+): KyResult<T>;
+```
+
+#### `useKyDelete`
+
+```tsx
+function useKyDelete<T = any>(url: string, options?: KyOptions): KyResult<T>;
+```
+
+#### `useKyPatch`
+
+```tsx
+function useKyPatch<T = any>(
+  url: string,
+  data?: any,
+  options?: KyOptions,
+): KyResult<T>;
+```
+
+### `useKyContext` Hook
+
+```tsx
+function useKyContext(): KyContextValue;
+```
+
+### `useKyInstance` Hook
+
+```tsx
+function useKyInstance(): {
+  instance: KyInstance;
+  request: (url: string, options?: Options) => Promise<KyResponse>;
+  get: <T>(url: string, options?: Options) => Promise<T>;
+  post: <T>(url: string, data?: any, options?: Options) => Promise<T>;
+  put: <T>(url: string, data?: any, options?: Options) => Promise<T>;
+  delete: <T>(url: string, options?: Options) => Promise<T>;
+  patch: <T>(url: string, data?: any, options?: Options) => Promise<T>;
+};
+```
+
+## Key Features
+
+### 🌐 Global Provider
+
+- Centralized configuration for all HTTP requests.
+- Shared settings like prefix URL, headers, timeout, and retries.
+- Dynamic configuration updates at runtime.
+
+### 🔄 Automatic Retry
+
+- Configurable retry attempts with intelligent logic.
+- Skips retries on client errors and cancellations.
+
+### ⏱️ Timeout Support
+
+- Request-level and global timeout settings.
+- Automatic request cancellation on timeout.
+
+### 🛑 Abort Control
+
+- Manual request cancellation via `abort()`.
+- Automatic cleanup on component unmount.
+
+### 🎯 Type Safety
+
+- Full TypeScript support with generics.
+- Typed request/response handling.
+
+### 🚀 Performance
+
+- Efficient memoization to prevent unnecessary re-renders.
+- Optimized for concurrent React features.
+
+## Examples
+
+### Basic GET Request
+
+```tsx
+const { data, loading, error } = useKyGet<Post[]>('/posts');
+```
+
+### POST Request
+
+```tsx
+const { data, loading, refetch } = useKyPost<Post>(
+  '/posts',
+  { title: 'New Post', body: 'Content', userId: 1 },
+  { immediate: false },
+);
+```
+
+### Manual Requests with `useKyInstance`
+
+```tsx
+const { get, post } = useKyInstance();
+
+async function fetchData() {
+  const users = await get<User[]>('/users');
+  console.log(users);
+}
+```
+
+### With Retry and Timeout
+
+```tsx
+const { data, loading } = useKyGet<Data>('/api/data', {
+  retries: 3,
+  timeout: 5000,
+});
+```
+
+### Abort Request
+
+```tsx
+const { abort } = useKyGet<Data>('/api/data');
+
+return <button onClick={abort}>Cancel Request</button>;
+```
+
+### Dynamic Configuration
+
+```tsx
+function AuthButton() {
+  const { updateConfig } = useKyContext();
+
+  const login = (token: string) => {
+    updateConfig({ headers: { Authorization: `Bearer ${token}` } });
+  };
+
+  return <button onClick={() => login('token')}>Login</button>;
+}
+```
+
+## Related
+
+- [Ky Documentation](https://github.com/sindresorhus/ky)
+- [Fetch API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [AbortController - MDN](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
