@@ -52,6 +52,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // UI and DOM
     {
       title: 'UI and DOM',
       icon: 'Pages',
@@ -123,6 +124,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // State Management
     {
       title: 'State Management',
       icon: 'Swap',
@@ -165,6 +167,7 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // Utilities
     {
       title: 'Utilities',
       icon: 'Tools',
@@ -188,14 +191,6 @@ export const docsConfig: DashboardConfig = {
         {
           title: 'use-page-leave',
           href: '/docs/hooks/use-page-leave',
-        },
-        {
-          title: 'use-fetch',
-          href: '/docs/hooks/use-fetch',
-        },
-        {
-          title: 'use-axios',
-          href: '/docs/hooks/use-axios',
         },
         {
           title: 'use-cookie',
@@ -223,6 +218,27 @@ export const docsConfig: DashboardConfig = {
         },
       ],
     },
+    // Data Fetching
+    {
+      title: 'Data Fetching',
+      icon: 'Download',
+      items: [
+        {
+          title: 'use-fetch',
+          href: '/docs/hooks/use-fetch',
+        },
+        {
+          title: 'use-axios',
+          href: '/docs/hooks/use-axios',
+        },
+        {
+          title: 'use-ky',
+          href: '/docs/hooks/use-ky',
+          label: 'New',
+        },
+      ],
+    },
+    // Form
     {
       title: 'Form',
       icon: 'Survey',
@@ -230,15 +246,14 @@ export const docsConfig: DashboardConfig = {
         {
           title: 'use-react-hook-form',
           href: '/docs/hooks/use-react-hook-form',
-          label: 'New',
         },
         {
           title: 'use-formik',
           href: '/docs/hooks/use-formik',
-          label: 'New',
         },
       ],
     },
+    // Auth
     {
       title: 'Auth',
       icon: 'Lock',
@@ -246,15 +261,14 @@ export const docsConfig: DashboardConfig = {
         {
           title: 'use-better-auth',
           href: '/docs/hooks/use-better-auth',
-          label: 'New',
         },
         {
           title: 'use-next-auth',
           href: '/docs/hooks/use-next-auth',
-          label: 'New',
         },
       ],
     },
+    // Lifecycle
     {
       title: 'Lifecycle',
       icon: 'Refresh',

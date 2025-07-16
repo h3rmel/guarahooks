@@ -406,7 +406,7 @@
           "target": "hooks/guarahooks/use-fetch.tsx"
         }
       ],
-      "categories": ["utilities"]
+      "categories": ["data-fetching"]
     },
     {
       "name": "use-pagination",
@@ -448,7 +448,7 @@
           "target": "hooks/guarahooks/use-axios.tsx"
         }
       ],
-      "categories": ["utilities"]
+      "categories": ["data-fetching"]
     },
     {
       "name": "use-page-title",
@@ -645,6 +645,20 @@
         }
       ],
       "categories": ["ui-and-dom"]
+    },
+    {
+      "name": "use-ky",
+      "type": "registry:hook",
+      "title": "UseKy",
+      "description": "A customizable hook for making HTTP requests using Ky",
+      "files": [
+        {
+          "path": "registry/hooks/use-ky.tsx",
+          "type": "registry:hook",
+          "target": "hooks/guarahooks/use-ky.tsx"
+        }
+      ],
+      "categories": ["data-fetching"]
     },
     {
       "name": "use-window-size-demo",
@@ -1494,6 +1508,28 @@
           "path": "registry/example/use-eye-dropper-demo.tsx",
           "type": "registry:example",
           "target": "components/example/use-eye-dropper-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-ky-demo",
+      "type": "registry:example",
+      "title": "UseKyDemo",
+      "description": "use-ky's hook in action.",
+      "registryDependencies": [
+        "card",
+        "badge",
+        "button",
+        "input",
+        "label",
+        "tabs",
+        "https://guarahooks.com/r/use-ky.json"
+      ],
+      "files": [
+        {
+          "path": "registry/example/use-ky-demo.tsx",
+          "type": "registry:example",
+          "target": "components/example/use-ky-demo.tsx"
         }
       ]
     }
