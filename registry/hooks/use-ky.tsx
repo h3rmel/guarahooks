@@ -54,6 +54,8 @@ export interface KyProviderProps {
 
 // #endregion
 
+// #region Context
+
 const KyContext = createContext<KyContextValue | null>(null);
 
 export function KyProvider({ config = {}, children }: KyProviderProps) {
@@ -99,6 +101,8 @@ export function useKyContext(): KyContextValue {
   }
   return context;
 }
+
+// #endregion
 
 // Main hook for single requests
 export function useKy<T = any>(
@@ -194,7 +198,8 @@ export function useKy<T = any>(
   };
 }
 
-// Convenience hooks for HTTP methods
+// #region Convenience hooks for HTTP methods
+
 export function useKyGet<T = any>(
   url: string,
   options: KyOptions = {},
@@ -232,6 +237,8 @@ export function useKyPatch<T = any>(
 ): KyResult<T> {
   return useKy<T>(url, { ...options, method: 'PATCH', json: data });
 }
+
+// #endregion
 
 // Hook for multiple requests without state management
 export function useKyInstance() {

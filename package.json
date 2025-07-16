@@ -102,7 +102,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
     "mdast-util-toc": "^7.1.0",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "rehype": "^13.0.2",
     "rehype-autolink-headings": "^7.1.0",
