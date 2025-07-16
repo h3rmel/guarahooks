@@ -49,7 +49,7 @@ interface PostResponse extends PostData {
 
 function GetDemo() {
   const { data, error, loading, refetch, abort, aborted } =
-    useKyGet<HttpBinResponse>('/delay/3');
+    useKyGet<HttpBinResponse>('delay/3');
 
   return (
     <Card>
@@ -96,7 +96,7 @@ function PostDemo() {
     loading,
     refetch: createPost,
   } = useKyPost<HttpBinResponse>(
-    '/post',
+    'post',
     { title, body, userId: 1 },
     { immediate: false },
   );
@@ -155,8 +155,8 @@ function MultipleRequestsDemo() {
     setError(null);
     try {
       const [userData, postData] = await Promise.all([
-        get<HttpBinResponse[]>('/delay/1'),
-        post<HttpBinResponse>('/post', { title: 'x', body: 'y', userId: 1 }),
+        get<HttpBinResponse[]>('delay/1'),
+        post<HttpBinResponse>('post', { title: 'x', body: 'y', userId: 1 }),
       ]);
       setUsers(userData);
       setPostResp(postData);
@@ -284,7 +284,7 @@ export default function UseKyDemo() {
       config={{
         prefixUrl: 'https://httpbin.org',
         timeout: 10000,
-        retries: 2,
+        retry: 2,
         headers: { 'User-Agent': 'useKy-Demo/1.0' },
       }}
     >

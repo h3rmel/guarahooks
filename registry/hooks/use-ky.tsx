@@ -58,7 +58,7 @@ const KyContext = createContext<KyContextValue | null>(null);
 
 export function KyProvider({ config = {}, children }: KyProviderProps) {
   const [currentConfig, setCurrentConfig] = useState<KyConfig>(config);
-  const instanceRef = useRef<KyInstance | null>(null);
+  const instanceRef = useRef<KyInstance | null>(ky.create(config));
 
   const updateConfig = useCallback((newConfig: Partial<KyConfig>) => {
     setCurrentConfig((prev) => ({ ...prev, ...newConfig }));

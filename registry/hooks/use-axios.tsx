@@ -57,7 +57,7 @@ const AxiosContext = createContext<AxiosContextValue | null>(null);
 
 export function AxiosProvider({ config = {}, children }: AxiosProviderProps) {
   const [currentConfig, setCurrentConfig] = useState<AxiosConfig>(config);
-  const instanceRef = useRef<AxiosInstance | null>(null);
+  const instanceRef = useRef<AxiosInstance | null>(axios.create(config));
 
   const updateConfig = useCallback((newConfig: Partial<AxiosConfig>) => {
     setCurrentConfig((prev) => ({ ...prev, ...newConfig }));
