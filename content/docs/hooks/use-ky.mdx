@@ -50,7 +50,13 @@ import { KyProvider } from '@/hooks/use-ky';
 
 function App() {
   return (
-    <KyProvider config={{ prefixUrl: 'https://api.example.com' }}>
+    <KyProvider
+      config={{
+        prefixUrl: 'https://api.example.com',
+        retries: 3,
+        timeout: 5000,
+      }}
+    >
       <YourApp />
     </KyProvider>
   );

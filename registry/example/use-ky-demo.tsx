@@ -49,7 +49,7 @@ interface PostResponse extends PostData {
 
 function GetDemo() {
   const { data, error, loading, refetch, abort, aborted } =
-    useKyGet<HttpBinResponse>('delay/3');
+    useKyGet<HttpBinResponse>('delay/3', { retries: 2, timeout: 5000 });
 
   return (
     <Card>
@@ -98,7 +98,7 @@ function PostDemo() {
   } = useKyPost<HttpBinResponse>(
     'post',
     { title, body, userId: 1 },
-    { immediate: false },
+    { immediate: false, retries: 2, timeout: 5000 },
   );
 
   const handleSubmit = async () => {

@@ -105,7 +105,7 @@ export function useKy<T = any>(
   url: string,
   options: KyOptions = {},
 ): KyResult<T> {
-  const { immediate = true, ...requestOptions } = options;
+  const { immediate = true, retries, timeout, ...requestOptions } = options;
   const { request: contextRequest } = useKyContext();
 
   const [data, setData] = useState<T | null>(null);
@@ -140,6 +140,8 @@ export function useKy<T = any>(
     try {
       const response = await contextRequest(url, {
         ...requestOptions,
+        retry: retries,
+        timeout,
         signal: controller.signal,
       });
 
@@ -167,7 +169,7 @@ export function useKy<T = any>(
         setLoading(false);
       }
     }
-  }, [url, JSON.stringify(requestOptions), contextRequest]);
+  }, [url, JSON.stringify(requestOptions), retries, timeout, contextRequest]);
 
   useEffect(() => {
     if (!immediate) return;
