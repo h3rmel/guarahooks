@@ -20,6 +20,12 @@ import ky, {
 
 // #region Types & Interfaces
 
+export interface KyPlugin {
+  beforeRequest?: (url: string, options: Options) => void | Promise<void>;
+  afterResponse?: (response: KyResponse) => void | Promise<void>;
+  onError?: (error: HTTPError | TimeoutError | Error) => void | Promise<void>;
+}
+
 export interface KyConfig extends Options {
   retries?: number;
   timeout?: number;
@@ -29,6 +35,7 @@ export interface KyOptions extends Options {
   retries?: number;
   timeout?: number;
   immediate?: boolean;
+  plugins?: KyPlugin[];
 }
 
 export interface KyResult<T> {
@@ -109,7 +116,13 @@ export function useKy<T = any>(
   url: string,
   options: KyOptions = {},
 ): KyResult<T> {
-  const { immediate = true, retries, timeout, ...requestOptions } = options;
+  const {
+    immediate = true,
+    retries,
+    timeout,
+    plugins = [],
+    ...requestOptions
+  } = options;
   const { request: contextRequest } = useKyContext();
 
   const [data, setData] = useState<T | null>(null);
@@ -141,15 +154,27 @@ export function useKy<T = any>(
     setError(null);
     setAborted(false);
 
+    const finalOptions = {
+      ...requestOptions,
+      retry: retries,
+      timeout,
+      signal: controller.signal,
+    };
+
+    // Run beforeRequest plugins
+    for (const plugin of plugins) {
+      if (plugin.beforeRequest) await plugin.beforeRequest(url, finalOptions);
+    }
+
     try {
-      const response = await contextRequest(url, {
-        ...requestOptions,
-        retry: retries,
-        timeout,
-        signal: controller.signal,
-      });
+      const response = await contextRequest(url, finalOptions);
 
       if (!isMounted.current) return null;
+
+      // Run afterResponse plugins
+      for (const plugin of plugins) {
+        if (plugin.afterResponse) await plugin.afterResponse(response);
+      }
 
       const result = await response.json<T>();
 
@@ -161,10 +186,17 @@ export function useKy<T = any>(
     } catch (err) {
       if (!isMounted.current) return null;
 
+      const error = err as HTTPError | TimeoutError | Error;
+
+      // Run onError plugins
+      for (const plugin of plugins) {
+        if (plugin.onError) await plugin.onError(error);
+      }
+
       if (err instanceof DOMException && err.name === 'AbortError') {
         setAborted(true);
       } else {
-        setError(err as HTTPError | TimeoutError | Error);
+        setError(error);
         setData(null);
       }
       return null;
