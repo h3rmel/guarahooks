@@ -17,6 +17,20 @@
       "categories": ["ui-and-dom"]
     },
     {
+      "name": "use-previous",
+      "type": "registry:hook",
+      "title": "UsePrevious",
+      "description": "Tracks the previous value of a state.",
+      "files": [
+        {
+          "path": "registry/hooks/use-previous.tsx",
+          "type": "registry:hook",
+          "target": "hooks/guarahooks/use-previous.tsx"
+        }
+      ],
+      "categories": ["ui-and-dom"]
+    },
+    {
       "name": "use-media",
       "type": "registry:hook",
       "title": "UseMedia",
@@ -674,6 +688,20 @@
           "path": "registry/example/use-window-size-demo.tsx",
           "type": "registry:example",
           "target": "components/example/use-window-size-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-previous-demo",
+      "type": "registry:example",
+      "title": "UsePreviousDemo",
+      "description": "use-previous's hook in action.",
+      "registryDependencies": ["card", "button"],
+      "files": [
+        {
+          "path": "registry/example/use-previous-demo.tsx",
+          "type": "registry:example",
+          "target": "components/example/use-previous-demo.tsx"
         }
       ]
     },

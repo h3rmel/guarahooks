@@ -31,6 +31,29 @@ export const Index: Record<string, RegistryItem> = {
     }),
     meta: undefined,
   },
+  'use-previous': {
+    name: 'use-previous',
+    description: 'Tracks the previous value of a state.',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-previous.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-previous.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-previous.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
   'use-media': {
     name: 'use-media',
     description: 'Checks if the current window matches a media query.',
@@ -1119,6 +1142,29 @@ export const Index: Record<string, RegistryItem> = {
     ],
     component: React.lazy(async () => {
       const mod = await import('@/registry/example/use-window-size-demo.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-previous-demo': {
+    name: 'use-previous-demo',
+    description: "use-previous's hook in action.",
+    type: 'registry:example',
+    registryDependencies: ['card', 'button'],
+    files: [
+      {
+        path: 'registry/example/use-previous-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-previous-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/example/use-previous-demo.tsx');
       const exportName =
         Object.keys(mod).find(
           (key) =>
