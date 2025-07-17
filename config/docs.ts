@@ -136,6 +136,7 @@ export const docsConfig: DashboardConfig = {
         {
           title: 'use-previous',
           href: '/docs/hooks/use-previous',
+          label: 'New',
         },
         {
           title: 'use-disclosure',

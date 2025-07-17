@@ -13,7 +13,7 @@ export function Banner() {
     <section
       className={cn(
         'relative top-0',
-        'bg-blue-600 text-foreground',
+        'bg-fuchsia-600 text-foreground',
         'group transition-all duration-300',
         'py-3 md:py-0',
       )}
@@ -31,8 +31,7 @@ export function Banner() {
           className="inline-flex text-xs leading-normal md:text-sm max-w-[36ch] md:max-w-full"
         >
           <span className="font-medium">
-            ✨ Introducing to you: new hooks 🐺 - Authentication and Forms made
-            easy.
+            Data fetching made easy. Check out the new category! 🚀
           </span>
           <Icons.Chevron.Right
             className={cn(
