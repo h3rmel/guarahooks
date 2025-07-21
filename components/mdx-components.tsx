@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { Event } from '@/lib/events';
+import type { Event } from '@/lib/events';
 import { cn } from '@/lib/utils';
 
 import { BlurFade } from './magicui/blur-fade';
@@ -328,7 +328,7 @@ export function Mdx({ code, className }: MDXProps) {
   const Component = useMDXComponent(code);
 
   return (
-    <article className={cn('mx-auto max-w-[120ch]', className)}>
+    <article className={cn(className)}>
       <Component components={components} />
     </article>
   );
