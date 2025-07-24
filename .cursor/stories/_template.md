@@ -1,186 +1,79 @@
 # [STORY-ID] Task Title
 
-**Creation Date**: YYYY-MM-DD  
+**Date**: YYYY-MM-DD  
 **Author**: [Author Name]  
-**Priority**: [High/Medium/Low]  
-**Estimate**: [Estimated time]
+**Priority**: [High/Medium/Low]
 
 ---
 
-## 📋 Context
+## 📋 Technical Context
 
-Describe the task context, the problem to be solved, or the functionality to be implemented.
-
-### Background
-
-- Why is this task necessary?
-- What problem does it solve?
-- How does it relate to other functionalities?
+Brief description of what needs to be implemented and why from a technical perspective.
 
 ---
 
-## 🎯 Objectives
+## 🎯 Implementation Requirements
 
-### Main Objective
+### What to implement
 
-Describe the main objective of the task clearly and concisely.
+- [ ] Feature/functionality 1
+- [ ] Feature/functionality 2
+- [ ] Feature/functionality 3
 
-### Secondary Objectives
+### Where to implement
 
-- [ ] Secondary objective 1
-- [ ] Secondary objective 2
-- [ ] Secondary objective 3
+- File/folder locations where changes will be made
+- New files that need to be created
 
----
-
-## 🔧 Technical Requirements
-
-### Mandatory Features
-
-1. **Feature 1**: Detailed description
-2. **Feature 2**: Detailed description
-3. **Feature 3**: Detailed description
-
-### Optional Features
-
-- Optional feature 1
-- Optional feature 2
-
-### Technical Constraints
-
-- Constraint 1
-- Constraint 2
-- Constraint 3
-
----
-
-## 🛠 Tools and Technologies
-
-### Languages
-
-- [ ] TypeScript
-- [ ] Other: _specify_
-
-### Frameworks/Libraries
-
-- [ ] React
-- [ ] Next.js
-- [ ] Express
-- [ ] Other: _specify_
-
-### Development Tools
-
-- [ ] Jest (testing)
-- [ ] ESLint (linting)
-- [ ] Prettier (formatting)
-- [ ] Other: _specify_
-
----
-
-## 📝 Detailed Specifications
-
-### Interface/API
+### How to implement
 
 ```typescript
-// Example interface or function signature
+// Code examples, interfaces, or technical specifications
 interface ExampleInterface {
-  // definitions here
+  // technical definitions
 }
 ```
 
-### Expected Behavior
+---
 
-1. **Scenario 1**: Behavior description
-2. **Scenario 2**: Behavior description
-3. **Scenario 3**: Behavior description
+## 🔧 Technical Specifications
 
-### Use Cases
+### Technologies
 
-- **Use Case 1**: Description
-- **Use Case 2**: Description
-- **Use Case 3**: Description
+- [ ] TypeScript
+- [ ] React
+- [ ] Other: _specify_
+
+### Dependencies (if any)
+
+- New packages needed
+- Version requirements
+
+### Code Structure
+
+- Naming conventions to follow
+- Architecture patterns to use
+- File organization
 
 ---
 
-## ✅ Acceptance Criteria
+## ✅ Validation Criteria
 
-### Functional
-
-- [ ] Functional criterion 1
-- [ ] Functional criterion 2
-- [ ] Functional criterion 3
-
-### Non-Functional
-
-- [ ] Performance: _specify requirements_
-- [ ] Usability: _specify requirements_
-- [ ] Maintainability: _specify requirements_
-
-### Testing
-
-- [ ] Unit tests implemented
-- [ ] Integration tests (if applicable)
-- [ ] Documentation updated
+- [ ] Implementation works as specified
+- [ ] Tests pass (if applicable)
+- [ ] Code follows project standards
+- [ ] No breaking changes (or documented if unavoidable)
 
 ---
 
-## 🧪 Test Scenarios
+## 🧪 Testing
 
-### Basic Tests
+### Test scenarios to verify
 
-1. **Test 1**: Description and expected result
-2. **Test 2**: Description and expected result
-
-### Edge Case Tests
-
-1. **Edge Case 1**: Description and expected handling
-2. **Edge Case 2**: Description and expected handling
+1. Basic functionality works
+2. Edge cases handled
+3. Error scenarios handled
 
 ---
 
-## 📚 References
-
-### Documentation
-
-- [Link to relevant documentation]
-- [Another relevant link]
-
-### Examples
-
-- [Link to code examples]
-- [Reference repositories]
-
-### Related Issues/PRs
-
-- [#123 - Related issue]
-- [PR #456 - Related pull request]
-
----
-
-## 🚨 Special Considerations
-
-### Impacts
-
-- **Breaking Changes**: Yes/No - Explanation
-- **Dependencies**: New dependencies required
-- **Compatibility**: Supported versions
-
-### Risks
-
-- Risk 1 and mitigation
-- Risk 2 and mitigation
-
-### Additional Notes
-
-Any additional information relevant to the implementation.
-
----
-
-## 📝 Implementation Notes
-
-_Space for annotations during development (optional)_
-
----
-
-**Status**: [Pending/In Progress/Completed/Cancelled]  
-**Last Update**: YYYY-MM-DD
+**Status**: [Pending/In Progress/Completed]

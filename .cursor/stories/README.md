@@ -1,61 +1,60 @@
-# 📖 Stories - Task Documentation
+# 📖 Stories - Technical Task Documentation
 
-This folder contains technical documents that describe the tasks to be executed by the AI.
+This folder contains technical specifications for tasks to be executed by the AI.
 
 ## 🎯 Purpose
 
-**Stories** are detailed documents that specify:
+**Stories** specify:
 
-- What needs to be implemented
-- How it should be implemented
-- Which technologies to use
-- Acceptance criteria
-- Test scenarios
+- What to implement technically
+- Where to implement (files/folders)
+- How to implement (code structure)
+- Technical validation criteria
 
 ## 📝 How to Create a Story
 
-1. **Copy the template**: Use `_template.md` as a base
-2. **Name appropriately**: Follow the pattern `YYYY-MM-DD-task-name.md`
-3. **Fill all sections**: Be specific and detailed
-4. **Review before submitting**: Make sure it's complete
+1. **Copy template**: Use `_template.md`
+2. **Name**: Follow `YYYY-MM-DD-task-name.md`
+3. **Fill sections**: Be technically specific
+4. **Review**: Ensure all technical details are clear
 
 ## 🔄 Workflow
 
 ```
-📝 Create Story → 🤖 AI Executes → 📊 Changelog Generated
+📝 Technical Story → 🤖 AI Implements → 📊 Technical Changelog
 ```
 
-## 📋 Checklist for Stories
+## 📋 Story Checklist
 
-Before finalizing a story, verify that:
+- [ ] Clear technical description
+- [ ] Specific file/folder locations
+- [ ] Code examples or interfaces
+- [ ] Dependencies specified
+- [ ] Validation criteria defined
 
-- [ ] Title is clear and descriptive
-- [ ] Context is well explained
-- [ ] Objectives are measurable
-- [ ] Technical requirements are specific
-- [ ] Acceptance criteria are testable
-- [ ] Necessary tools are listed
-- [ ] Code examples (if needed) are included
+## 🏷️ States
 
-## 🏷️ Story States
+- **Pending**: Ready for implementation
+- **In Progress**: Being implemented
+- **Completed**: Implementation done
 
-- **Pending**: Awaiting execution
-- **In Progress**: Being executed by AI
-- **Completed**: Implementation finished
-- **Cancelled**: Will no longer be executed
+## 💡 Technical Tips
 
-## 💡 Tips
+- **Be specific**: Exact file paths and code structure
+- **Show code**: Include interfaces, examples, patterns
+- **Define validation**: How to verify it works
+- **List dependencies**: Required packages/tools
 
-- **Be specific**: More details lead to better implementation
-- **Include examples**: Code examples help a lot
-- **Define priorities**: Use High/Medium/Low
-- **Think about tests**: Describe how to validate the implementation
-- **Consider impacts**: Mention breaking changes or dependencies
+## 📚 Template Structure
 
-## 📚 Examples
+Check `_template.md` for the simplified structure:
 
-Check the example files in this folder to better understand how to structure your stories.
+- Technical context
+- Implementation requirements (what/where/how)
+- Technical specifications
+- Validation criteria
+- Testing approach
 
 ---
 
-**Remember**: A well-written story results in higher quality implementation!
+**Focus**: Technical implementation details only.

@@ -1,130 +1,87 @@
-# 📊 Changelog - Implementation Records
+# 📊 Changelog - Technical Implementation Records
 
-This folder contains detailed records of all implementations performed by the AI.
+This folder contains technical records of AI implementations.
 
 ## 🎯 Purpose
 
 **Changelogs** document:
 
-- What was implemented
-- How it was implemented
-- Which files were changed
-- Technical decisions made
-- Tests performed
-- Results obtained
+- What was technically implemented
+- Files changed (created/modified/removed)
+- Code patterns and dependencies used
+- Testing performed
+- Usage examples
 
-## 🤖 Automatic Generation
+## 🤖 Auto-Generated
 
-Changelogs are **automatically generated** by the AI after each implementation, following the established template.
+Changelogs are automatically created by AI after each implementation using the simplified template.
 
 ## 📁 Organization
 
-### Naming
-
-- Format: `YYYY-MM-DD-task-name-CHANGELOG.md`
-- Corresponds directly to the related story
-
-### Structure
+**Naming**: `YYYY-MM-DD-task-name-CHANGELOG.md`
 
 ```
 changelog/
-├── README.md                                    # This file
-├── _template.md                                 # Base template
-├── 2024-01-15-implement-hook-CHANGELOG.md      # Example changelog
-└── 2024-01-16-create-component-CHANGELOG.md    # Another example
+├── README.md           # This file
+├── _template.md        # Simplified template
+└── *.CHANGELOG.md      # Implementation records
 ```
 
-## 🔍 What You'll Find
+## 🔍 What's Inside
 
 Each changelog contains:
 
-### 📋 Basic Information
+### 📋 Implementation Summary
 
-- Execution date and time
-- Related story
-- Time spent on implementation
-- Final implementation status
+- Brief technical description
+- Implementation status
+
+### 📁 File Changes
+
+- Files created/modified/removed
+- Specific changes made
 
 ### 🔧 Technical Details
 
-- Files created, modified, and removed
-- Main features implemented
-- Patterns and conventions used
-- Dependencies added
+- Features implemented with code locations
+- Patterns and dependencies used
 
-### 🧪 Tests and Validation
+### 🧪 Testing
 
-- Unit tests created
-- Scenarios tested
-- Coverage obtained
-- Manual validations performed
+- Tests implemented
+- Manual validation performed
 
-### 🔄 Decisions and Trade-offs
+### 💻 Usage
 
-- Main technical decisions
-- Alternatives considered
-- Reasons for choices made
-- Project impacts
-
-### 🚀 Usage Instructions
-
+- Basic code example
 - How to use the implementation
-- Code examples
-- Necessary configurations
 
-## 🔗 Traceability
+### 🚨 Technical Notes
 
-Each changelog is **directly linked** to its corresponding story, allowing:
+- Important decisions made
+- Known limitations
+- Future considerations
 
-- Track requirements → implementation
-- Understand technical decisions
-- Validate if objectives were achieved
-- Identify possible improvements
-
-## 📊 Metrics and Analysis
-
-Changelogs enable analysis of:
-
-- **Speed**: Average implementation time
-- **Quality**: Success rate of implementations
-- **Complexity**: Number of files changed
-- **Impact**: Changes in bundle size, performance, etc.
-
-## 🔍 How to Consult
-
-### By Date
+## 🔍 Quick Search
 
 ```bash
+# By date
 ls -la changelog/2024-01-*
+
+# By feature
+grep -r "useHook" changelog/
+
+# By file
+grep -r "src/hooks" changelog/
 ```
 
-### By Feature
+## 💡 Usage
 
-```bash
-grep -r "useLocalStorage" changelog/
-```
-
-### By Status
-
-```bash
-grep -r "✅ Success" changelog/
-```
-
-## 🎯 Benefits
-
-- **Complete History**: Detailed record of all changes
-- **Transparency**: Understand exactly what was done
-- **Learning**: See technical decisions and their results
-- **Debugging**: Facilitates identification of bug origins
-- **Onboarding**: New members understand project evolution
-
-## 💡 Usage Tips
-
-- **Read before new implementations**: Avoid rework
-- **Use for debugging**: Identify when something was introduced
-- **Consult technical decisions**: Understand the context of choices
-- **Validate implementations**: Compare with acceptance criteria
+- **Before implementing**: Check existing solutions
+- **For debugging**: Find when something was added
+- **For understanding**: See how features were built
+- **For validation**: Compare with technical requirements
 
 ---
 
-**Note**: Changelogs are automatically generated and should not be manually edited. They serve as a historical record of implementations.
+**Note**: Auto-generated technical records - do not edit manually.
