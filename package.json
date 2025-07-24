@@ -17,8 +17,8 @@
     "url": "https://github.com/h3rmel/guarahooks/issues"
   },
   "engines": {
-    "node": ">=18",
-    "pnpm": ">=9.15.3"
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   },
   "scripts": {
     "dev": "next dev --turbopack",
@@ -32,7 +32,7 @@
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\"",
     "prepare": "husky",
-    "preinstall": "node ./scripts/check-node.mjs && node ./scripts/check-pnpm.mjs && pnpm dlx only-allow pnpm"
+    "preinstall": "npx tsx ./scripts/check-node.mts && npx tsx ./scripts/check-pnpm.mts && pnpm dlx only-allow pnpm"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.7",

@@ -49,6 +49,7 @@ export function HooksList() {
             {category.hooks.map((hook) => (
               <Link
                 href={hook.href}
+                key={hook.href}
                 className={cn(
                   'text-lg font-medium text-muted-foreground',
                   'hover:underline',

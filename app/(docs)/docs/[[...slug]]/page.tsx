@@ -71,17 +71,23 @@ export default async function DocsPage({ params }: PageProps) {
   const toc = await getTableOfContents(doc.body.raw);
 
   return (
-    <div className={cn('grid grid-cols-9 gap-32', 'my-8')}>
-      <div id="docs-content" className={cn('col-span-7')}>
-        <hgroup className={cn('pb-12')}>
+    <div className={cn('flex gap-16 xl:gap-32', 'my-8 w-full')}>
+      <div id="docs-content" className={cn('min-w-0 w-full')}>
+        <hgroup className={cn('pb-12 ')}>
           <h1
-            className={cn('scroll-m-20', 'text-4xl font-bold tracking-tight')}
+            className={cn(
+              'scroll-m-20',
+              'text-4xl font-bold tracking-tight break-words',
+            )}
           >
             {doc.title}
           </h1>
           {doc.description && (
             <p
-              className={cn('text-base text-muted-foreground', 'max-w-[64ch]')}
+              className={cn(
+                'text-base text-muted-foreground break-words',
+                'max-w-[64ch]',
+              )}
             >
               {doc.description}
             </p>
@@ -93,7 +99,7 @@ export default async function DocsPage({ params }: PageProps) {
         id="docs-toc"
         className={cn(
           'sticky top-[96px] h-[calc(100vh-128px)]',
-          'hidden lg:block col-span-2',
+          'hidden lg:block min-w-fit p-2',
         )}
       >
         <TableOfContents toc={toc} />
