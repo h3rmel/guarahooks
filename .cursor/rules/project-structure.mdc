@@ -1,185 +1,130 @@
 ---
-description: 
-globs: 
-alwaysApply: false
+alwaysApply: true
+description: Project structure and organization conventions
 ---
+
+# guarahooks Project Structure
+
+This project is a custom React hooks library built with Next.js, including documentation and CLI.
+
 ## Main Structure
 
-```tree
+```
 .
-├── .cursor/
-│   └── rules/
-├── .git/
-├── .next/
-├── __registry__/
-├── .content-collections/
-├── .github/
-├── .husky/
-├── .vscode/
-├── app/
-│   ├── (docs)/
-│   │   └── docs/
-│   │       ├── layout.tsx
-│   │       └── [[...slug]]/
-│   ├── showcase/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   ├── not-found.tsx
-│   ├── robots.ts
-│   ├── sitemap.ts
-│   ├── apple-icon.png
-│   ├── favicon.ico
-│   ├── icon.png
-│   └── icon.svg
-├── assets/
-├── components/
-│   ├── ui/              # Shadcn UI components
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── dialog.tsx
-│   │   ├── input.tsx
-│   │   └── ... (other UI components)
-│   ├── layout/          # Layout components
-│   │   ├── header.tsx
-│   │   ├── footer.tsx
-│   │   ├── docs-sidebar.tsx
-│   │   ├── navigation-desktop.tsx
-│   │   ├── navigation-mobile.tsx
-│   │   └── ... (other layout components)
-│   ├── sections/        # Page sections
-│   │   ├── hero.tsx
-│   │   ├── hooks-demo.tsx
-│   │   └── showcase.tsx
-│   ├── theme/          # Theme components
-│   │   ├── theme-provider.tsx
-│   │   └── theme-toggle.tsx
-│   ├── magicui/        # Magic UI components
-│   ├── design/         # Design components
-│   ├── command-menu.tsx
-│   ├── icons.tsx
-│   ├── table-of-contents.tsx
-│   ├── code-block-wrapper.tsx
-│   ├── hook-preview.tsx
-│   ├── hook-wrapper.tsx
-│   ├── open-in-v0.tsx
-│   ├── mdx-components.tsx
-│   ├── contribute.tsx
-│   ├── repo-download.tsx
-│   ├── tech-stack.tsx
-│   ├── template-preview.tsx
-│   ├── callout.tsx
-│   ├── code-block-command.tsx
-│   ├── copy-button.tsx
-│   ├── hook-source.tsx
-│   ├── posthog-provider.tsx
-│   └── showcase-card.tsx
-├── config/
-│   ├── docs.ts          # Documentation config
-│   └── site.ts          # Site config
-├── content/
-│   ├── docs/           # Documentation content
-│   │   ├── hooks/
-│   │   ├── installation/
-│   │   ├── index.mdx
-│   │   ├── cli.mdx
-│   │   └── resources.mdx
-│   ├── pages/          # Static pages content
-│   └── showcases/      # Showcase content
-├── hooks/              # Custom React hooks
-│   ├── use-config.tsx
-│   └── use-mounted.tsx
-├── lib/                # Utility libraries
-│   ├── events.ts
-│   ├── github.ts
-│   ├── rehype-component.ts
-│   ├── rehype-npm-command.ts
-│   ├── toc.ts
-│   ├── hooks.ts
-│   └── utils.ts
-├── packages/           # Monorepo packages
-│   └── cli/           # CLI package (guara-cli)
-│       ├── src/
-│       ├── dist/
-│       ├── package.json
-│       └── tsconfig.json
-├── public/            # Static assets
-├── registry/          # Component registry
-│   ├── hooks/         # Hook registry files
-│   ├── example/       # Example files
-│   ├── registry-hooks.ts
-│   └── registry-examples.ts
-├── scripts/           # Build and dev scripts
-├── types/             # TypeScript type definitions
-│   ├── docs.d.ts
-│   ├── lucide-react.d.ts
-│   └── unist.d.ts
-├── node_modules/
-├── components.json    # Shadcn UI config
-├── content-collections.ts
-├── eslint.config.mjs
-├── next.config.ts
-├── package.json
-├── pnpm-lock.yaml
-├── postcss.config.mjs
-├── prettier.config.mjs
-├── tsconfig.json
-├── CONTRIBUTING.md
-├── LICENSE
-└── README.md
+├── app/                   # Next.js App Router
+│   ├── (docs)/            # Route group for docs
+│   ├── showcase/          # Showcase page
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   └── not-found.tsx      # 404 page
+├── assets/                # Styling, fonts and static content
+├── components/            # React components
+│   ├── ui/               # Shadcn UI components
+│   ├── layout/           # Layout components
+│   ├── sections/         # Page sections
+│   ├── theme/            # Theme components
+│   ├── magicui/          # Magic UI components
+│   ├── design/           # Design components
+│   └── *.tsx             # Other general components
+├── config/               # Project configurations
+│   ├── site.ts           # General site configuration
+│   └── docs.ts           # Documentation configuration
+├── content/              # MDX content
+│   ├── docs/             # Documentation
+│   ├── pages/            # Static pages
+│   └── showcases/        # Showcase examples
+├── hooks/                # Custom project hooks
+├── lib/                  # Utilities and helpers
+├── registry/             # Hook registration system
+│   ├── hooks/            # Registered hook files
+│   ├── example/          # Usage examples
+│   ├── registry-hooks.ts # Main hook registry
+│   └── registry-examples.ts # Example registry
+├── packages/             # Monorepo packages
+│   └── cli/              # guarahooks CLI
+├── public/               # Static assets
+├── scripts/              # Build and utility scripts
+├── types/                # TypeScript definitions
+└── ...                   # Other files (ESLint, Prettier, etc.)
 ```
 
-## File Naming and Organization
+## Naming Conventions
 
-- Use kebab case for route directories (e.g., `app/api/hello-world/route.ts`)
-- Use PascalCase for components (e.g. `components/Button.tsx`)
-- Use kebab-case for file names when appropriate (e.g. `use-mounted.tsx`)
+All files must be named using kebab-case (e.g.: `hello-world.tsx`)
 
-### Component Organization
+### Key Points
+- **Hooks**: Use `use-` prefix (e.g: `use-mounted.tsx`, `use-config.tsx`)
 
-- **Shadcn components**: `components/ui/` - UI primitives from Shadcn
-- **Layout components**: `components/layout/` - Header, footer, navigation
-- **Section components**: `components/sections/` - Page sections like hero, showcase
-- **Theme components**: `components/theme/` - Theme provider and toggle
-- **Magic UI**: `components/magicui/` - Magic UI components
-- **Design components**: `components/design/` - Design-specific components
-- **General components**: `components/` - All other reusable components
+## Component Organization
 
-### Content Organization
+### By Category
+- **`components/ui/`**: Shadcn UI primitive components
+- **`components/layout/`**: Header, footer, navigation, sidebar
+- **`components/sections/`**: Page sections (hero, showcase)
+- **`components/theme/`**: Theme provider and toggle
+- **`components/magicui/`**: Special UI components
+- **`components/design/`**: Design-specific components
+- **`components/`**: Other reusable components
 
-- **Documentation**: `content/docs/` - MDX files for documentation
-- **Pages**: `content/pages/` - Static page content
-- **Showcases**: `content/showcases/` - Showcase examples
+### Specific Components
+- **Hook Preview**: `hook-preview.tsx`, `hook-wrapper.tsx`, `hook-source.tsx`
+- **Code**: `code-block-wrapper.tsx`, `copy-button.tsx`
+- **Navigation**: `table-of-contents.tsx`, `command-menu.tsx`
+- **Contribution**: `contribute.tsx`, `repo-download.tsx`
 
-### Configuration
+## Content System
 
-- **Site config**: `config/site.ts` - General site configuration
-- **Docs config**: `config/docs.ts` - Documentation navigation and structure
+### Documentation
+- **Location**: `content/docs/`
+- **Format**: MDX files
+- **Route**: Rendered via `app/(docs)/docs/[[...slug]]/page.tsx`
+- **Configuration**: `config/docs.ts` for navigation
 
-## New Pages
+### Static Pages
+- **Location**: `content/pages/`
+- **Format**: MDX for structured content
 
-### Documentation Pages
-- Create new docs at: `content/docs/PAGE_NAME.mdx`
-- The docs are rendered through the catch-all route: `app/(docs)/docs/[[...slug]]/page.tsx`
+### Showcase
+- **Location**: `content/showcases/`
+- **Purpose**: Examples and demonstrations
 
-### Regular Pages
-- Create new pages at: `app/PAGE_NAME/page.tsx`
-- Pages are Server components for direct data loading
-- Components with `onClick` must be client components with `use client` directive
+## Hook System
 
-## Hooks
+### Project Hooks
+- **Location**: `hooks/`
+- **Example**: `use-config.tsx`, `use-mounted.tsx`
+- **Usage**: Internal project hooks
 
-- Custom hooks are in `hooks/` directory
-- Registry hooks are defined in `registry/registry-hooks.ts`
-- Hook files are stored in `registry/hooks/`
+### Registry Hooks
+- **Location**: `registry/hooks/`
+- **Registry**: `registry/registry-hooks.ts`
+- **Examples**: `registry/registry-examples.ts`
+- **Purpose**: Public library hooks
 
-## Utility Functions
+## Utilities and Configuration
 
-- Create utility functions in `lib/` folder for reusable logic
-- Use `lib/utils.ts` for general utilities
-- Specific utilities like GitHub integration go in dedicated files (e.g., `lib/github.ts`)
+### Lib
+- **`lib/utils.ts`**: General utilities
+- **`lib/github.ts`**: GitHub integration
+- **`lib/hooks.ts`**: Hook utilities
+- **`lib/events.ts`**: Event management
+- **`lib/toc.ts`**: Table of contents
+- **`lib/rehype-*.ts`**: MDX processing plugins
 
-## Monorepo Structure
+### Config
+- **`config/site.ts`**: General configuration (metadata, navigation)
+- **`config/docs.ts`**: Documentation structure
 
-- The project includes a CLI package in `packages/cli/`
-- Use pnpm workspaces for package management
-- Each package has its own `package.json` and build configuration
+## Development
+
+### Scripts
+- **`scripts/check-node.mjs`**: Node.js version verification
+- **`scripts/check-pnpm.mjs`**: PNPM version verification
+- **`scripts/build-registry.mts`**: Registry system build
+
+### Monorepo
+- **Manager**: pnpm with workspaces
+- **CLI**: `packages/cli/` - command line tool
+- **Each package**: Own `package.json` and configuration
+
+This structure ensures scalability, maintainability and a consistent development experience.

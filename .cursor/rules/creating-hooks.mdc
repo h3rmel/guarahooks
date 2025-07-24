@@ -1,52 +1,101 @@
 ---
-description: 
-globs: 
-alwaysApply: false
+description: Complete guide for creating hooks in the guarahooks project
 ---
-# Guide for Creating Hooks in guarahooks
+# Creating Hooks in guarahooks
 
-This guide provides a complete step-by-step process for creating new hooks following the project's pattern.
+This guide provides the complete process for creating new hooks following the project patterns.
 
-## File Structure
+## 🚀 Creation Flow
 
-### 1. Hook File
+### 1. Planning
+- [ ] Define the hook's purpose and functionality
+- [ ] Choose an appropriate category
+- [ ] Check if similar hook already exists
+- [ ] Define the API (parameters and return)
 
-Create in `@/registry/hooks/use-{name}.tsx`:
+### 2. Implementation
+- [ ] Create hook in `registry/hooks/`
+- [ ] Create example in `registry/example/`
+- [ ] Create documentation in `content/docs/hooks/`
+
+### 3. Registration
+- [ ] Register in `registry/registry-hooks.ts`
+- [ ] Register example in `registry/registry-examples.ts`
+- [ ] Add to navigation in `config/docs.ts`
+
+### 4. Verification
+- [ ] Run `pnpm build:registry`
+- [ ] Run `pnpm build:docs`
+- [ ] Test locally
+
+## 📁 File Structure
+
+### Main Hook
+**Location**: `registry/hooks/use-{name}.ts`
 
 ```typescript
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // Types
-interface Props {}
-interface Return {}
+interface UseHookOptions {
+  // Hook options
+}
 
-export function useHook(): Return {
-  // Implementation
+interface UseHookReturn {
+  // Hook return
+}
+
+/**
+ * Hook description
+ * @param options - Hook configuration
+ * @returns Object with properties and methods
+ */
+export function useHook(options: UseHookOptions = {}): UseHookReturn {
+  // Implementation here
+  
+  return {
+    // Return object
+  };
 }
 ```
 
-### 2. Example File
-
-Create in `@/registry/example/use-{name}-demo.tsx`:
+### Usage Example
+**Location**: `registry/example/use-{name}-demo.tsx`
 
 ```typescript
 "use client";
 
 import React from "react";
-import { ShadcnComponents } from "@/components/ui/...";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useHook } from "@/hooks/guarahooks/use-hook";
+
+export default function UseHookDemo() {
+  const { /* destructure return */ } = useHook();
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>Hook Demo</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Demo content */}
+      </CardContent>
+    </Card>
+  );
+}
 ```
 
-### 3. Documentation File
-
-Create in `@/content/docs/hooks/use-{name}.mdx`:
+### Documentation
+**Location**: `content/docs/hooks/use-{name}.mdx`
 
 ````markdown
 ---
 title: useHook
 date: YYYY-MM-DD
-description: Hook description
+description: Concise hook description
 author: h3rmel
 published: true
 ---
@@ -56,148 +105,162 @@ published: true
 ## Installation
 
 <Tabs defaultValue="cli">
-
 <TabsList>
   <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
+
 <TabsContent value="cli">
-
 ```bash
-npx shadcn@latest add "https://guarahooks.com/r/use-{name}"
+npx guarahooks@latest add use-{name}
 ```
-
 </TabsContent>
+
 <TabsContent value="manual">
-
 <Steps>
-
-<Step>Copy and paste the following code into your project.</Step>
+<Step>Copy and paste the code below into your project.</Step>
 
 <HookSource name="use-{name}" />
 
-<Step>Update the import paths to match your project setup.</Step>
-
+<Step>Update import paths according to your structure.</Step>
 </Steps>
-
 </TabsContent>
-
 </Tabs>
 
-## Props
-
-| Prop       | Type                   | Default   | Description                                 |
-| ---------- | ---------------------- | --------- | ------------------------------------------- |
-| `propName` | `Type`                 | `default` | Description of the prop                     |
-
-### Options
-
-If the hook has configuration options, document them here:
-
-| Prop       | Type                   | Default   | Description                                 |
-| ---------- | ---------------------- | --------- | ------------------------------------------- |
-| `option`   | `Type`                 | `default` | Description of the option                   |
-
-## Data
-
-The hook returns an object with the following properties:
-
-| Property   | Type       | Description                                  |
-| ---------- | ---------- | -------------------------------------------- |
-| `property` | `Type`     | Description of the returned property         |
-
-## Key Features & Details
-
-### Browser Support
-
-Document browser support if relevant:
-
-- Chrome: Support status
-- Firefox: Support status
-- Safari: Support status
-- Edge: Support status
-- Opera: Support status
-
-### Cross-Browser Compatibility
-
-- List of cross-browser considerations
-- How the hook handles different browsers
-- Any fallbacks or polyfills used
-
-### Performance Considerations
-
-- Performance implications
-- Memory usage
-- Cleanup requirements
-- Optimization tips
-
-### Best Practices & Caveats
-
-1. First best practice
-2. Second best practice
-3. Third best practice
-4. Fourth best practice
-5. Fifth best practice
-
-## Examples
-
-### Basic Usage
+## Basic Usage
 
 ```tsx
-// Basic usage example
+import { useHook } from "@/hooks/guarahooks/use-hook";
+
+function Component() {
+  const { /* return properties */ } = useHook();
+  
+  return (
+    // Component JSX
+  );
+}
 ```
+
+## API
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `param` | `Type` | `default` | Parameter description |
+
+### Return
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `property` | `Type` | Property description |
+
+## Examples
 
 ### Advanced Usage
 
 ```tsx
-// Advanced usage example
+// More complex example
 ```
 
-### With Options
+## Features
 
-```tsx
-// Example with options
-```
+- ✅ SSR Support
+- ✅ TypeScript
+- ✅ Performance optimized
+- ✅ React 18+ compatible
 
 ## Related
 
-- [Related Documentation Link](https:/example.com)
-- [Related API Documentation](https:/example.com)
+- [Related Hook](/docs/hooks/use-related)
 ````
 
-## Required Updates
+## 🏷️ Available Categories
 
-### 1. Hook Registry
+| Category | Description | Examples |
+|----------|-------------|----------|
+| `state-management` | State management | `use-local-storage`, `use-toggle` |
+| `ui-and-dom` | UI and DOM manipulation | `use-window-size`, `use-keypress` |
+| `utilities` | General utilities | `use-copy-to-clipboard`, `use-geolocation` |
+| `lifecycle` | Lifecycle | `use-on-mount`, `use-did-update` |
+| `data-fetching` | Requests and network | `use-fetch`, `use-axios` |
 
-Update `@/registry/hooks`:
+## 📝 Code Standards
+
+### Naming Conventions
+- **Hook**: `use-{name}` in kebab-case
+- **File**: `use-{name}.ts` 
+- **Function**: `useName` in camelCase
+- **Demo**: `use-{name}-demo.tsx`
+
+### Hook Structure
+```typescript
+// 1. Imports
+"use client";
+import { useCallback, useEffect, useState } from "react";
+
+// 2. Types
+interface Options {}
+interface Return {}
+
+// 3. Hook function with JSDoc
+/**
+ * Description
+ */
+export function useHook(): Return {
+  // 4. State
+  const [state, setState] = useState();
+  
+  // 5. Effects
+  useEffect(() => {}, []);
+  
+  // 6. Callbacks
+  const callback = useCallback(() => {}, []);
+  
+  // 7. Return
+  return { state, callback };
+}
+```
+
+### Best Practices
+- ✅ Use `"use client"` when necessary
+- ✅ Document with JSDoc
+- ✅ Use TypeScript rigorously
+- ✅ Optimize with `useCallback` and `useMemo`
+- ✅ Implement cleanup in `useEffect`
+- ✅ Handle edge cases
+- ✅ Maintain consistent API
+
+## 📋 Hook Registration
+
+### Hook Registry
+**File**: `registry/registry-hooks.ts`
 
 ```typescript
 {
   name: 'use-hook',
   type: 'registry:hook',
   title: 'UseHook',
-  description: 'Description',
+  description: 'Hook description',
   files: [{
-    path: 'registry/hooks/use-hook.tsx',
+    path: 'registry/hooks/use-hook.ts',
     type: 'registry:hook',
-    target: 'hooks/guarahooks/use-hook.tsx',
+    target: 'hooks/guarahooks/use-hook.ts',
   }],
-  categories: ['category'],
+  categories: ['utilities'],
 }
 ```
 
-### 2. Example Registry
-
-Update `@/registry/registry-examples.ts`:
+### Example Registry  
+**File**: `registry/registry-examples.ts`
 
 ```typescript
 {
   name: 'use-hook-demo',
   type: 'registry:example',
   title: 'UseHookDemo',
-  description: 'use-hook in action.',
+  description: 'use-hook demonstration.',
   registryDependencies: [
-    'used-components',
     'https://guarahooks.com/r/use-hook.json',
   ],
   files: [{
@@ -208,73 +271,47 @@ Update `@/registry/registry-examples.ts`:
 }
 ```
 
-### 3. Documentation Sidebar
-
-Update `@/config/docs.ts` adding to the appropriate category:
+### Documentation Navigation
+**File**: `config/docs.ts`
 
 ```typescript
+// Add to appropriate category
 {
   title: 'use-hook',
   href: '/docs/hooks/use-hook',
 }
 ```
 
-## Available Categories
+## 🔄 Build and Tests
 
-- `ui-and-dom`: Hooks related to UI and DOM manipulation
-- `state-management`: Hooks for state management
-- `utilities`: Utility hooks
-- `lifecycle`: Component lifecycle related hooks
-- `auth`: Authentication handlers
-- `form`: Form handlers
-
-## Implementation Checklist
-
-### Hook
-
-- [ ] Use 'use client'
-- [ ] Implement with TypeScript
-- [ ] Use useCallback for functions
-- [ ] Use useRef for callbacks
-- [ ] Ensure type-safety
-- [ ] Optimize performance
-- [ ] Follow React best practices
-- [ ] Follow Clean Code principles
-
-### Example
-
-- [ ] Use Shadcn/ui components
-- [ ] Use Tailwind CSS
-- [ ] Demonstrate all features
-- [ ] Use @/ imports
-- [ ] Add necessary comments
-
-### Documentation
-
-- [ ] Complete frontmatter
-- [ ] Hook preview
-- [ ] Installation instructions
-- [ ] Props table
-- [ ] Options table (if applicable)
-- [ ] Return value table
-- [ ] Key features and details
-- [ ] Browser support (if applicable)
-- [ ] Performance considerations
-- [ ] Best practices
-- [ ] Usage examples
-- [ ] Related resources
-
-## Build and Verification
-
-After all changes, run:
-
+### Build Commands
 ```bash
+# Registry build
 pnpm build:registry
+
+# Documentation build  
 pnpm build:docs
+
+# Development
+pnpm dev
 ```
 
-## Reference Examples
+### Verifications
+- [ ] Hook works correctly
+- [ ] Example renders without errors
+- [ ] Documentation is accessible
+- [ ] TypeScript types are correct
+- [ ] Build runs without errors
 
-- Hook: [use-notifications.tsx](registry/hooks/use-notifications.tsx)
-- Example: [use-notifications-demo.tsx](registry/example/use-notifications-demo.tsx)
-- Documentation: [use-notifications.mdx](content/docs/hooks/use-notifications.mdx)
+## 📖 References
+
+### Example Hooks
+- **Simple**: [use-mounted.ts](mdc:registry/hooks/use-mounted.ts)
+- **With State**: [use-toggle.ts](mdc:registry/hooks/use-toggle.ts)  
+- **With Effects**: [use-local-storage.ts](mdc:registry/hooks/use-local-storage.ts)
+
+### Example Demos
+- [use-mounted-demo.tsx](mdc:registry/example/use-mounted-demo.tsx)
+- [use-toggle-demo.tsx](mdc:registry/example/use-toggle-demo.tsx)
+
+This guide ensures consistency and quality in hook creation for the guarahooks project.
