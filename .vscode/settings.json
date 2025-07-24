@@ -3,7 +3,7 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .nvmrc, .npmrc",
     "next.config.ts": "next-env.d.ts, components.json",
     "eslint.config.mjs": "prettier.config.mjs, lint-staged.config.mjs, postcss.config.mjs, commitlint.config.mjs, .editorconfig",
     "README.md": "*.md",
