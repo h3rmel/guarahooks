@@ -16,7 +16,7 @@ Brief summary of what was technically implemented.
 
 ### Created
 
-```
+```tree
 ├── file1.ts          # Description
 ├── file2.tsx         # Description
 └── tests/
@@ -25,14 +25,14 @@ Brief summary of what was technically implemented.
 
 ### Modified
 
-```
+```tree
 📝 src/file.ts        # Changes made
 📝 package.json       # Dependencies added
 ```
 
 ### Removed
 
-```
+```tree
 🗑️ old-file.ts       # Reason for removal
 ```
 
