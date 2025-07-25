@@ -139,6 +139,11 @@ export const docsConfig: DashboardConfig = {
           label: 'New',
         },
         {
+          title: 'use-array-state',
+          href: '/docs/hooks/use-array-state',
+          label: 'New',
+        },
+        {
           title: 'use-disclosure',
           href: '/docs/hooks/use-disclosure',
         },

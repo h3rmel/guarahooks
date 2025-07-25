@@ -682,4 +682,19 @@ export const hooks: Registry['items'] = [
     ],
     categories: ['data-fetching'],
   },
+  {
+    name: 'use-array-state',
+    type: 'registry:hook',
+    title: 'UseArrayState',
+    description:
+      'Manages an array as a React state with built-in array manipulation methods.',
+    files: [
+      {
+        path: 'registry/hooks/use-array-state.ts',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-array-state.ts',
+      },
+    ],
+    categories: ['state-management'],
+  },
 ];
