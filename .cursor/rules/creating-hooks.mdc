@@ -8,22 +8,26 @@ This guide provides the complete process for creating new hooks following the pr
 ## 🚀 Creation Flow
 
 ### 1. Planning
+
 - [ ] Define the hook's purpose and functionality
 - [ ] Choose an appropriate category
 - [ ] Check if similar hook already exists
 - [ ] Define the API (parameters and return)
 
 ### 2. Implementation
+
 - [ ] Create hook in `registry/hooks/`
 - [ ] Create example in `registry/example/`
 - [ ] Create documentation in `content/docs/hooks/`
 
 ### 3. Registration
+
 - [ ] Register in `registry/registry-hooks.ts`
 - [ ] Register example in `registry/registry-examples.ts`
 - [ ] Add to navigation in `config/docs.ts`
 
 ### 4. Verification
+
 - [ ] Run `pnpm build:registry`
 - [ ] Run `pnpm build:docs`
 - [ ] Test locally
@@ -31,6 +35,7 @@ This guide provides the complete process for creating new hooks following the pr
 ## 📁 File Structure
 
 ### Main Hook
+
 **Location**: `registry/hooks/use-{name}.ts`
 
 ```typescript
@@ -62,6 +67,7 @@ export function useHook(options: UseHookOptions = {}): UseHookReturn {
 ```
 
 ### Usage Example
+
 **Location**: `registry/example/use-{name}-demo.tsx`
 
 ```typescript
@@ -89,6 +95,7 @@ export default function UseHookDemo() {
 ```
 
 ### Documentation
+
 **Location**: `content/docs/hooks/use-{name}.mdx`
 
 ````markdown
@@ -188,12 +195,14 @@ function Component() {
 ## 📝 Code Standards
 
 ### Naming Conventions
+
 - **Hook**: `use-{name}` in kebab-case
-- **File**: `use-{name}.ts` 
+- **File**: `use-{name}.ts`
 - **Function**: `useName` in camelCase
 - **Demo**: `use-{name}-demo.tsx`
 
 ### Hook Structure
+
 ```typescript
 // 1. Imports
 "use client";
@@ -223,6 +232,7 @@ export function useHook(): Return {
 ```
 
 ### Best Practices
+
 - ✅ Use `"use client"` when necessary
 - ✅ Document with JSDoc
 - ✅ Use TypeScript rigorously
@@ -234,6 +244,7 @@ export function useHook(): Return {
 ## 📋 Hook Registration
 
 ### Hook Registry
+
 **File**: `registry/registry-hooks.ts`
 
 ```typescript
@@ -252,6 +263,7 @@ export function useHook(): Return {
 ```
 
 ### Example Registry  
+
 **File**: `registry/registry-examples.ts`
 
 ```typescript
@@ -272,6 +284,7 @@ export function useHook(): Return {
 ```
 
 ### Documentation Navigation
+
 **File**: `config/docs.ts`
 
 ```typescript
@@ -285,6 +298,7 @@ export function useHook(): Return {
 ## 🔄 Build and Tests
 
 ### Build Commands
+
 ```bash
 # Registry build
 pnpm build:registry
@@ -297,6 +311,7 @@ pnpm dev
 ```
 
 ### Verifications
+
 - [ ] Hook works correctly
 - [ ] Example renders without errors
 - [ ] Documentation is accessible
@@ -306,11 +321,13 @@ pnpm dev
 ## 📖 References
 
 ### Example Hooks
+
 - **Simple**: [use-mounted.ts](mdc:registry/hooks/use-mounted.ts)
 - **With State**: [use-toggle.ts](mdc:registry/hooks/use-toggle.ts)  
 - **With Effects**: [use-local-storage.ts](mdc:registry/hooks/use-local-storage.ts)
 
 ### Example Demos
+
 - [use-mounted-demo.tsx](mdc:registry/example/use-mounted-demo.tsx)
 - [use-toggle-demo.tsx](mdc:registry/example/use-toggle-demo.tsx)
 

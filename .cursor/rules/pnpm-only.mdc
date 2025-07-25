@@ -12,11 +12,13 @@ This project **MANDATORILY** uses PNPM as package manager. Using `npm` or `yarn`
 The project has configurations that prevent the use of other managers:
 
 ### [.npmrc](mdc:.npmrc)
-```
+
+```txt
 engine-strict=true
 ```
 
 ### [package.json](mdc:package.json) - Engines
+
 ```json
 {
   "engines": {
@@ -27,6 +29,7 @@ engine-strict=true
 ```
 
 ### Verification Script
+
 ```json
 {
   "scripts": {
@@ -38,6 +41,7 @@ engine-strict=true
 ## Correct Commands
 
 ### ✅ Dependency Installation
+
 ```bash
 # Install all dependencies
 pnpm install
@@ -53,6 +57,7 @@ pnpm add -g package-name
 ```
 
 ### ✅ Run Scripts
+
 ```bash
 # Development mode
 pnpm dev
@@ -70,6 +75,7 @@ pnpm format:check
 ```
 
 ### ✅ Workspace (Monorepo)
+
 ```bash
 # Install dependency in specific workspace
 pnpm add package-name --filter @guarahooks/cli
@@ -84,6 +90,7 @@ pnpm -r build
 ## ❌ FORBIDDEN Commands
 
 ### DO NOT use npm
+
 ```bash
 # ❌ NEVER DO THIS
 npm install
@@ -92,6 +99,7 @@ npm add package-name
 ```
 
 ### DO NOT use yarn
+
 ```bash
 # ❌ NEVER DO THIS  
 yarn install
@@ -116,7 +124,8 @@ The project has automatic scripts that verify:
 
 ## Troubleshooting
 
-### If you get npm/yarn errors:
+### If you get npm/yarn errors
+
 ```bash
 # Clean node_modules and old lockfiles
 rm -rf node_modules package-lock.json yarn.lock
@@ -125,7 +134,8 @@ rm -rf node_modules package-lock.json yarn.lock
 pnpm install
 ```
 
-### If you don't have pnpm installed:
+### If you don't have pnpm installed
+
 ```bash
 # Install pnpm globally
 npm install -g pnpm@latest
