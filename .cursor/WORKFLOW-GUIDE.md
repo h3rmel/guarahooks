@@ -269,7 +269,7 @@ function useToggle(
 ```
 ````
 
-````md
+`````md
 ### Complex Hook Story Template
 
 ````markdown
@@ -304,8 +304,6 @@ function useAsync<T>(
   execute: () => Promise<void>;
 };
 ```
-````
-````
 
 ### Performance Considerations
 
@@ -330,3 +328,5 @@ function useAsync<T>(
 
 **🚀 Next Step**: Create your first hook story using the template and experience the GuaraHooks development workflow!
 ```
+````
+`````

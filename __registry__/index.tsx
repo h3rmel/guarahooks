@@ -1125,6 +1125,30 @@ export const Index: Record<string, RegistryItem> = {
     }),
     meta: undefined,
   },
+  'use-array-state': {
+    name: 'use-array-state',
+    description:
+      'Manages an array as a React state with built-in array manipulation methods.',
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-array-state.ts',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-array-state.ts',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-array-state.ts');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
   'use-window-size-demo': {
     name: 'use-window-size-demo',
     description: "use-window-size's hook in action.",
@@ -2458,6 +2482,35 @@ export const Index: Record<string, RegistryItem> = {
     ],
     component: React.lazy(async () => {
       const mod = await import('@/registry/example/use-ky-demo.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-array-state-demo': {
+    name: 'use-array-state-demo',
+    description: "use-array-state's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'button',
+      'card',
+      'input',
+      'badge',
+      'https://guarahooks.com/r/use-array-state.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-array-state-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-array-state-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/example/use-array-state-demo.tsx');
       const exportName =
         Object.keys(mod).find(
           (key) =>

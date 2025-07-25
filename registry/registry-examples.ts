@@ -885,4 +885,24 @@ export const examples: Registry['items'] = [
       },
     ],
   },
+  {
+    name: 'use-array-state-demo',
+    type: 'registry:example',
+    title: 'UseArrayStateDemo',
+    description: "use-array-state's hook in action.",
+    registryDependencies: [
+      'button',
+      'card',
+      'input',
+      'badge',
+      'https://guarahooks.com/r/use-array-state.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-array-state-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-array-state-demo.tsx',
+      },
+    ],
+  },
 ];

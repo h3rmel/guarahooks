@@ -20,7 +20,7 @@ Changelogs are automatically created by AI after each implementation using the s
 
 **Naming**: `YYYY-MM-DD-task-name-CHANGELOG.md`
 
-```
+```tree
 changelog/
 ├── README.md           # This file
 ├── _template.md        # Simplified template

@@ -20,7 +20,7 @@ This folder contains technical specifications for tasks to be executed by the AI
 
 ## 🔄 Workflow
 
-```
+```tsx
 📝 Technical Story → 🤖 AI Implements → 📊 Technical Changelog
 ```
 
