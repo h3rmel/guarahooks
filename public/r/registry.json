@@ -311,6 +311,20 @@
       "categories": ["utilities"]
     },
     {
+      "name": "use-is-touch-device",
+      "type": "registry:hook",
+      "title": "UseIsTouchDevice",
+      "description": "Hook to detect if the user's device has touch screen functionality.",
+      "files": [
+        {
+          "path": "registry/hooks/use-is-touch-device.tsx",
+          "type": "registry:hook",
+          "target": "hooks/guarahooks/use-is-touch-device.tsx"
+        }
+      ],
+      "categories": ["utilities"]
+    },
+    {
       "name": "use-fullscreen",
       "type": "registry:hook",
       "title": "UseFullscreen",
@@ -1058,6 +1072,24 @@
           "path": "registry/example/use-idle-demo.tsx",
           "type": "registry:example",
           "target": "components/example/use-idle-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-is-touch-device-demo",
+      "type": "registry:example",
+      "title": "UseIsTouchDeviceDemo",
+      "description": "use-is-touch-device's hook in action.",
+      "registryDependencies": [
+        "card",
+        "badge",
+        "https://guarahooks.com/r/use-is-touch-device.json"
+      ],
+      "files": [
+        {
+          "path": "registry/example/use-is-touch-device-demo.tsx",
+          "type": "registry:example",
+          "target": "components/example/use-is-touch-device-demo.tsx"
         }
       ]
     },

@@ -519,6 +519,30 @@ export const Index: Record<string, RegistryItem> = {
     }),
     meta: undefined,
   },
+  'use-is-touch-device': {
+    name: 'use-is-touch-device',
+    description:
+      "Hook to detect if the user's device has touch screen functionality.",
+    type: 'registry:hook',
+    registryDependencies: undefined,
+    files: [
+      {
+        path: 'registry/hooks/use-is-touch-device.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-is-touch-device.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import('@/registry/hooks/use-is-touch-device.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
   'use-fullscreen': {
     name: 'use-fullscreen',
     description: 'Enters and exits fullscreen mode.',
@@ -1707,6 +1731,35 @@ export const Index: Record<string, RegistryItem> = {
     ],
     component: React.lazy(async () => {
       const mod = await import('@/registry/example/use-idle-demo.tsx');
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === 'function' || typeof mod[key] === 'object',
+        ) || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    meta: undefined,
+  },
+  'use-is-touch-device-demo': {
+    name: 'use-is-touch-device-demo',
+    description: "use-is-touch-device's hook in action.",
+    type: 'registry:example',
+    registryDependencies: [
+      'card',
+      'badge',
+      'https://guarahooks.com/r/use-is-touch-device.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-is-touch-device-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-is-touch-device-demo.tsx',
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import(
+        '@/registry/example/use-is-touch-device-demo.tsx'
+      );
       const exportName =
         Object.keys(mod).find(
           (key) =>

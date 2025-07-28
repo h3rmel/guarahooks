@@ -1,0 +1,129 @@
+---
+title: useIsTouchDevice
+date: 2025-07-28
+description: Hook to detect if the user's device has touch screen functionality
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-is-touch-device-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+  ```bash npx guarahooks@latest add use-is-touch-device ```
+</TabsContent>
+
+<TabsContent value="manual">
+<Steps>
+<Step>Copy and paste the code below into your project.</Step>
+
+<HookSource name="use-is-touch-device" />
+
+<Step>Update import paths according to your structure.</Step>
+</Steps>
+</TabsContent>
+</Tabs>
+
+## Basic Usage
+
+```tsx
+import { useIsTouchDevice } from '@/hooks/guarahooks/use-is-touch-device';
+
+function Component() {
+  const { isTouchable } = useIsTouchDevice();
+
+  return (
+    <div>
+      {isTouchable ? (
+        <p>This device supports touch input</p>
+      ) : (
+        <p>This device does not support touch input</p>
+      )}
+    </div>
+  );
+}
+```
+
+## API
+
+### Parameters
+
+This hook takes no parameters.
+
+### Return
+
+| Property      | Type      | Description                             |
+| ------------- | --------- | --------------------------------------- |
+| `isTouchable` | `boolean` | Whether the device supports touch input |
+
+## Examples
+
+### Conditional Rendering Based on Touch Support
+
+```tsx
+import { useIsTouchDevice } from '@/hooks/guarahooks/use-is-touch-device';
+
+function ResponsiveInterface() {
+  const { isTouchable } = useIsTouchDevice();
+
+  return (
+    <div>
+      {isTouchable ? (
+        <button className="touch-button">Tap me</button>
+      ) : (
+        <button className="hover-button">Click me</button>
+      )}
+    </div>
+  );
+}
+```
+
+### Touch-Optimized Styling
+
+```tsx
+import { useIsTouchDevice } from '@/hooks/guarahooks/use-is-touch-device';
+
+function InteractiveElement() {
+  const { isTouchable } = useIsTouchDevice();
+
+  return (
+    <div
+      className={`
+        interactive-element 
+        ${isTouchable ? 'touch-optimized' : 'hover-optimized'}
+      `}
+    >
+      Content
+    </div>
+  );
+}
+```
+
+## Features
+
+- ✅ SSR Support
+- ✅ TypeScript
+- ✅ Performance optimized
+- ✅ React 18+ compatible
+- ✅ Cross-browser compatibility
+
+## Implementation Details
+
+The hook uses multiple detection methods for better compatibility:
+
+- `'ontouchstart' in window` - Standard touch event detection
+- `navigator.maxTouchPoints > 0` - Modern touch point detection
+- `navigator.msMaxTouchPoints > 0` - Legacy IE/Edge support
+
+## Related
+
+- [useMedia](/docs/hooks/use-media) - Media query matching
+- [useOS](/docs/hooks/use-os) - Operating system detection
+- [useOrientation](/docs/hooks/use-orientation) - Device orientation
