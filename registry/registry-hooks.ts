@@ -313,6 +313,21 @@ export const hooks: Registry['items'] = [
     categories: ['utilities'],
   },
   {
+    name: 'use-is-touch-device',
+    type: 'registry:hook',
+    title: 'UseIsTouchDevice',
+    description:
+      "Hook to detect if the user's device has touch screen functionality.",
+    files: [
+      {
+        path: 'registry/hooks/use-is-touch-device.tsx',
+        type: 'registry:hook',
+        target: 'hooks/guarahooks/use-is-touch-device.tsx',
+      },
+    ],
+    categories: ['utilities'],
+  },
+  {
     name: 'use-fullscreen',
     type: 'registry:hook',
     title: 'UseFullscreen',

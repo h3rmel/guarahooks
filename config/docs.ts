@@ -199,6 +199,11 @@ export const docsConfig: DashboardConfig = {
           href: '/docs/hooks/use-idle',
         },
         {
+          title: 'use-is-touch-device',
+          href: '/docs/hooks/use-is-touch-device',
+          label: 'New',
+        },
+        {
           title: 'use-page-leave',
           href: '/docs/hooks/use-page-leave',
         },

@@ -372,6 +372,24 @@ export const examples: Registry['items'] = [
     ],
   },
   {
+    name: 'use-is-touch-device-demo',
+    type: 'registry:example',
+    title: 'UseIsTouchDeviceDemo',
+    description: "use-is-touch-device's hook in action.",
+    registryDependencies: [
+      'card',
+      'badge',
+      'https://guarahooks.com/r/use-is-touch-device.json',
+    ],
+    files: [
+      {
+        path: 'registry/example/use-is-touch-device-demo.tsx',
+        type: 'registry:example',
+        target: 'components/example/use-is-touch-device-demo.tsx',
+      },
+    ],
+  },
+  {
     name: 'use-fullscreen-demo',
     type: 'registry:example',
     title: 'UseFullscreenDemo',
