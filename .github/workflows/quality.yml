@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build docs (build:docs)
+        run: pnpm build:docs
+
+      - name: Build registry (build:registry)
+        run: pnpm build:registry
+
       - name: TypeScript (typecheck)
         run: pnpm typecheck
 
