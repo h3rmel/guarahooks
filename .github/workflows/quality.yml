@@ -39,7 +39,7 @@ jobs:
         run: pnpm lint
 
       - name: Prettier (format:check)
-        run: pnpm format:check
+        run: pnpm format:check \"**/*.{ts,tsx}\"
 
   success:
     name: All checks passed
