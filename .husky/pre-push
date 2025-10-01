@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd -- "$(git rev-parse --show-toplevel)" || exit 1
+
+echo "Running lint and typecheck before push..."
+
+if ! command -v pnpm >/dev/null 2>&1; then
+  echo "pnpm is required. Please install pnpm and try again."
+  exit 1
+fi
+
+set -e
+pnpm lint
+pnpm typecheck
+
+echo "OK: lint and typecheck passed."
+

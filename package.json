@@ -29,8 +29,10 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check:quality": "pnpm typecheck && pnpm lint && pnpm format:check",
+    "format:write": "prettier --write \"**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx}\"",
     "prepare": "husky",
     "preinstall": "npx tsx ./scripts/check-node.mts && npx tsx ./scripts/check-pnpm.mts && pnpm dlx only-allow pnpm"
   },

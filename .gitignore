@@ -44,3 +44,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 v8-compile-cache*
+
+# others
+.vscode
