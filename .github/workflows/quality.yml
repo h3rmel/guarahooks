@@ -12,16 +12,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4
-      # Use pnpm version from packageManager in package.json to avoid mismatch
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+      # Use pnpm version from packageManager in package.json to avoid mismatch
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
