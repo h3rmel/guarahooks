@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-did-update",
+  "type": "registry:hook",
+  "title": "UseDidUpdate",
+  "description": "Executes a function when the component is updated, but not when it is mounted.",
+  "files": [
+    {
+      "path": "registry/hooks/use-did-update.tsx",
+      "content": "'use client';\n\nimport { DependencyList, EffectCallback, useEffect, useRef } from 'react';\n\nexport function useDidUpdate(effect: EffectCallback, deps?: DependencyList) {\n  const mounted = useRef(false);\n\n  useEffect(\n    () => () => {\n      mounted.current = false;\n    },\n    [],\n  );\n\n  useEffect(() => {\n    if (mounted.current) {\n      return effect();\n    }\n\n    mounted.current = true;\n    return undefined;\n  }, deps);\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-did-update.tsx"
+    }
+  ],
+  "categories": ["lifecycle"]
+}

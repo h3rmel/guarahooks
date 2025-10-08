@@ -1,0 +1,130 @@
+---
+title: useMap
+date: 2025-04-22
+description: Controls a Map state with declarative methods.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-map-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-map"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-map" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Prop
+
+| Prop         | Type               | Default     | Description                     |
+| ------------ | ------------------ | ----------- | ------------------------------- |
+| `initialMap` | `Iterable<[K, V]>` | `new Map()` | The initial entries for the Map |
+
+## Data
+
+| Prop       | Type                          | Description                               |
+| ---------- | ----------------------------- | ----------------------------------------- |
+| `map`      | `Map<K, V>`                   | The Map instance                          |
+| `set`      | `(key: K, value: V) => void`  | Adds or updates a key/value pair          |
+| `delete`   | `(key: K) => void`            | Deletes a key/value pair                  |
+| `has`      | `(key: K) => boolean`         | Checks if the key exists                  |
+| `clear`    | `() => void`                  | Clears all entries                        |
+| `reset`    | `() => void`                  | Resets the Map to the initial entries     |
+| `setValue` | `(newMap: Map<K, V>) => void` | Replaces the Map with a new Map instance  |
+| `get`      | `(key: K) => V \| undefined`  | Retrieves the value for a given key       |
+| `getAll`   | `() => [K, V][]`              | Returns all entries as an array of tuples |
+
+## Key Features & Details
+
+### Flexible Initial Value
+
+- The `initialMap` can be any iterable of `[key, value]` pairs (e.g., `Map`, `Array`, etc.).
+- The initial entries are only used on the first render or when the hook is reset.
+
+### Method Behaviors
+
+- `set(key, value)`: Adds or updates a key/value pair. No-op if the key exists with the same value.
+- `delete(key)`: Removes the entry for the given key. No-op if the key does not exist.
+- `has(key)`: Returns `true` if the key exists in the Map.
+- `clear()`: Removes all entries from the Map.
+- `reset()`: Resets the Map to the initial entries.
+- `setValue(newMap)`: Replaces the Map with a new Map (accepts any `Map<K, V>`).
+- `get(key)`: Returns the value for the key, or `undefined` if not present.
+- `getAll()`: Returns an array of all `[key, value]` pairs (order is insertion order).
+
+### Immutability & State Updates
+
+- The hook always returns a new `Map` instance when the state changes, ensuring immutability.
+- State updates are optimized: if an operation would not change the Map, the state is not updated.
+
+### Best Practices & Caveats
+
+- The hook is designed for managing unique key/value pairs.
+- When using objects as keys, ensure you understand how reference equality works in JavaScript.
+- For best performance, avoid creating a new `initialMap` on every render (use `useMemo` if needed).
+- The hook is client-side only.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const {
+  map,
+  set,
+  delete: remove,
+  get,
+  getAll,
+} = useMap([
+  ['apple', '🍎'],
+  ['banana', '🍌'],
+]);
+
+set('cherry', '🍒');
+remove('apple');
+console.log(getAll()); // [['banana', '🍌'], ['cherry', '🍒']]
+```
+
+### With Objects as Keys
+
+```tsx
+const obj1 = { id: 1 };
+const obj2 = { id: 2 };
+const { has, set } = useMap([[obj1, 'first']]);
+set(obj2, 'second');
+console.log(has(obj1)); // true
+```
+
+### Resetting the Map
+
+```tsx
+const { set, reset, getAll } = useMap([['a', 'A']]);
+set('b', 'B');
+reset();
+console.log(getAll()); // [['a', 'A']]
+```

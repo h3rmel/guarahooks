@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-resize-observer",
+  "type": "registry:hook",
+  "title": "UseResizeObserver",
+  "description": "Observes size changes of an element using the Resize Observer API",
+  "files": [
+    {
+      "path": "registry/hooks/use-resize-observer.tsx",
+      "content": "'use client';\n\nimport { useCallback, useEffect, useRef } from 'react';\n\n// Types\ninterface UseResizeObserverProps<T extends Element = Element> {\n  target: React.RefObject<T | null>;\n  options?: ResizeObserverOptions;\n  callback: (entries: ResizeObserverEntry[], observer: ResizeObserver) => void;\n}\n\nexport function useResizeObserver<T extends Element = Element>({\n  target,\n  options,\n  callback,\n}: UseResizeObserverProps<T>) {\n  const observerRef = useRef<ResizeObserver | null>(null);\n  const prevTargetRef = useRef<T | null>(null);\n\n  const disconnect = useCallback(() => {\n    if (observerRef.current) {\n      observerRef.current.disconnect();\n      observerRef.current = null;\n    }\n  }, []);\n\n  useEffect(() => {\n    const node = target.current;\n    if (!node) return;\n\n    if (prevTargetRef.current !== node) {\n      disconnect();\n      prevTargetRef.current = node;\n    }\n\n    observerRef.current = new ResizeObserver((entries, obs) => {\n      callback(entries, obs);\n    });\n\n    observerRef.current.observe(node, options);\n\n    return () => {\n      disconnect();\n    };\n  }, [target, options, callback, disconnect]);\n\n  return {\n    disconnect,\n  };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-resize-observer.tsx"
+    }
+  ],
+  "categories": ["ui-and-dom"]
+}

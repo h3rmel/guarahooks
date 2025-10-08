@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-did-update-demo",
+  "type": "registry:example",
+  "title": "UseDidUpdateDemo",
+  "description": "use-did-update's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "https://guarahooks.com/r/use-did-update.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-did-update-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { useDidUpdate } from '@/hooks/guarahooks/use-did-update';\n\nexport default function UseDidUpdateDemo() {\n  const [count, setCount] = useState(0);\n  const [message, setMessage] = useState('');\n\n  useDidUpdate(() => {\n    setMessage(`The count was updated to ${count}`);\n  }, [count]);\n\n  return (\n    <Card className=\"relative max-w-md w-full\">\n      <CardHeader>\n        <CardTitle>useDidUpdate</CardTitle>\n        <CardDescription>\n          This example uses the <code>useDidUpdate</code> hook to execute a\n          function when the count state is updated.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <div className=\"flex flex-col items-center gap-4\">\n          <p className=\"text-2xl font-bold\">{count}</p>\n          <Button onClick={() => setCount((c) => c + 1)}>Increment</Button>\n          <p className=\"text-sm text-muted-foreground mt-2\">{message}</p>\n        </div>\n      </CardContent>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-did-update-demo.tsx"
+    }
+  ]
+}

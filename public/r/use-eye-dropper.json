@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-eye-dropper",
+  "type": "registry:hook",
+  "title": "UseEyeDropper",
+  "description": "Pick colors from anywhere on the screen using the EyeDropper API.",
+  "files": [
+    {
+      "path": "registry/hooks/use-eye-dropper.tsx",
+      "content": "'use client';\n\nimport { useCallback, useState } from 'react';\n\nimport useEyeDropper from 'use-eye-dropper';\n\ntype UseColorPickerReturn = {\n  color: string;\n  error: Error | null;\n  isSupported: () => boolean;\n  pickColor: () => void;\n};\n\nexport function useColorPicker(): UseColorPickerReturn {\n  const { open, close, isSupported } = useEyeDropper();\n  const [color, setColor] = useState('#fff');\n  const [error, setError] = useState<Error | null>(null);\n\n  const pickColor = useCallback(() => {\n    const openPicker = async () => {\n      try {\n        const pickedColor = await open();\n        setColor(pickedColor.sRGBHex);\n        setError(null);\n      } catch (e: any) {\n        console.log(e);\n        if (!e.canceled) setError(e);\n      }\n    };\n    openPicker();\n  }, [open]);\n\n  return {\n    color,\n    error,\n    isSupported,\n    pickColor,\n  };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-eye-dropper.tsx"
+    }
+  ],
+  "categories": ["ui-and-dom"]
+}

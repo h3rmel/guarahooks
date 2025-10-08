@@ -1,0 +1,163 @@
+---
+title: useEventListener
+date: 2023-11-05
+description: A React hook for managing DOM event listeners with proper cleanup.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-event-listener-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-event-listener"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-event-listener" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop        | Type                                    | Default     | Description                           |
+| ----------- | --------------------------------------- | ----------- | ------------------------------------- |
+| `eventName` | `keyof WindowEventMap`                  | Required    | The DOM event name to listen for      |
+| `handler`   | `(event: Event) => void`                | Required    | The callback function for the event   |
+| `element`   | `RefObject<HTMLElement> \| EventTarget` | `window`    | The element to attach the listener to |
+| `options`   | `boolean \| AddEventListenerOptions`    | `undefined` | Options for addEventListener          |
+
+## Data
+
+The hook does not return any data.
+
+## Key Features & Details
+
+`useEventListener` provides a clean, type-safe way to manage DOM event listeners in React components with these benefits:
+
+- Automatically handles cleanup on unmount to prevent memory leaks
+- Preserves handler reference between renders with a ref
+- Type-safe event names and handler parameters
+- Works with window, document, or specific DOM elements
+- Supports all AddEventListener options
+
+### Browser Support
+
+This hook relies on the standard DOM addEventListener API, which is supported in all modern browsers:
+
+- Chrome: Full support
+- Firefox: Full support
+- Safari: Full support
+- Edge: Full support
+- Opera: Full support
+
+### Performance Considerations
+
+- Uses `useRef` to avoid recreating event listeners on each render
+- Minimizes re-renders by not returning state
+- Automatic cleanup prevents memory leaks
+- Minimal overhead compared to direct event listeners
+
+### Best Practices & Caveats
+
+1. Always provide a stable handler or use useCallback for the event handler
+2. For element refs, ensure the element is mounted before the hook runs
+3. For high-frequency events like mousemove or scroll, consider debouncing or throttling
+4. TypeScript users benefit from complete type safety for events
+5. Be cautious with passive events on touch devices for performance
+
+## Examples
+
+### Basic Usage with Window
+
+```tsx
+import { useEventListener } from '@/hooks/use-event-listener';
+
+function WindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEventListener({
+    eventName: 'resize',
+    handler: () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    },
+  });
+
+  return (
+    <div>
+      Window Size: {windowSize.width} x {windowSize.height}
+    </div>
+  );
+}
+```
+
+### Using with Element Refs
+
+```tsx
+import { useRef } from 'react';
+
+import { useEventListener } from '@/hooks/use-event-listener';
+
+function ClickCounter() {
+  const [count, setCount] = useState(0);
+  const buttonRef = useRef(null);
+
+  useEventListener({
+    eventName: 'click',
+    handler: () => setCount((prev) => prev + 1),
+    element: buttonRef,
+  });
+
+  return <button ref={buttonRef}>Clicked {count} times</button>;
+}
+```
+
+### With Event Options
+
+```tsx
+import { useEventListener } from '@/hooks/use-event-listener';
+
+function ScrollHandler() {
+  useEventListener({
+    eventName: 'scroll',
+    handler: (e) => {
+      console.log('Scroll event with passive option');
+    },
+    options: { passive: true },
+  });
+
+  return <div>Scroll the page</div>;
+}
+```
+
+## Related
+
+- [MDN Web Docs: addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+- [React Hooks API Reference](https://reactjs.org/docs/hooks-reference.html)

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-previous-demo",
+  "type": "registry:example",
+  "title": "UsePreviousDemo",
+  "description": "use-previous's hook in action.",
+  "registryDependencies": ["card", "button"],
+  "files": [
+    {
+      "path": "registry/example/use-previous-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { usePrevious } from '@/hooks/guarahooks/use-previous';\n\nexport default function UsePreviousDemo() {\n  const [count, setCount] = useState(0);\n  const previousCount = usePrevious(count);\n\n  return (\n    <Card className=\"relative max-w-md w-full\">\n      <CardHeader>\n        <CardTitle>Previous Count</CardTitle>\n        <CardDescription>\n          This is a demo of the usePrevious hook.\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <p>Count: {count}</p>\n        <p>Previous Count: {previousCount}</p>\n      </CardContent>\n      <CardFooter>\n        <Button onClick={() => setCount(count + 1)}>Increment</Button>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-previous-demo.tsx"
+    }
+  ]
+}

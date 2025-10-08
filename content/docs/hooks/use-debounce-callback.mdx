@@ -1,0 +1,98 @@
+---
+title: useDebounceCallback
+date: 2025-04-23
+description: Debounce the call of a function.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-debounce-callback-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-debounce-callback"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-debounce-callback" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop       | Type        | Default     | Description                                                |
+| ---------- | ----------- | ----------- | ---------------------------------------------------------- |
+| `delay`    | `number`    | `500`       | The delay in milliseconds before the function is executed. |
+| `callback` | `generic T` | `undefined` | The function to be executed after the delay.               |
+
+## Key Features & Details
+
+### Callback & Delay Handling
+
+- The hook always uses the latest version of the callback, even if it changes between renders.
+- The `delay` can be changed dynamically; the new delay will be used for subsequent calls.
+
+### Returned Debounced Function
+
+- The returned function accepts the same arguments as the original callback.
+- If called repeatedly, only the last call within the delay period will trigger the callback.
+- The debounced function is stable (does not change identity unless `delay` changes).
+
+### Cleanup
+
+- Any pending timeout is cleared when the component unmounts, preventing memory leaks or unexpected calls.
+
+### Best Practices & Caveats
+
+- The hook is client-side only.
+- For best performance, memoize the callback if it depends on other values.
+- If you need to cancel a pending debounce manually, you must manage that outside the hook.
+- The hook does not guarantee the callback will run if the component unmounts before the delay.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const debouncedLog = useDebounceCallback((val) => {
+  console.log('Debounced:', val);
+}, 300);
+
+debouncedLog('hello');
+```
+
+### With Changing Delay
+
+```tsx
+const [delay, setDelay] = useState(500);
+const debouncedSave = useDebounceCallback(saveFn, delay);
+```
+
+### With Dynamic Callback
+
+```tsx
+const debounced = useDebounceCallback((...args) => {
+  // Do something with args
+}, 200);
+```

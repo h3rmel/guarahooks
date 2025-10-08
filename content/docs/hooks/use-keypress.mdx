@@ -1,0 +1,134 @@
+---
+title: useKeypress
+date: 2025-04-22
+description: Tracks the user's keyboard combinations and key presses.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-keypress-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-keypress"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-keypress" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop             | Type          | Default | Description                                                      |
+| ---------------- | ------------- | ------- | ---------------------------------------------------------------- |
+| `combo`          | `string`      | `null`  | The combination of keys to listen for                            |
+| `callback`       | `function`    | `null`  | The callback to be called when the key or combination is pressed |
+| `preventDefault` | `boolean`     | `false` | If true, the event will be prevented from propagating            |
+| `target`         | `HTMLElement` | `null`  | The target element to listen for the key or combination          |
+
+## Key Features & Details
+
+### Combo Normalization & Modifiers
+
+- The `combo` string is **case-insensitive** and **order-insensitive** for modifiers.
+- Supported modifiers: `ctrl`, `alt`, `shift`, `meta` (for Command on Mac, Windows key on Windows).
+- Example: `"Ctrl+Shift+S"`, `"shift+ctrl+s"`, and `"CTRL+s+SHIFT"` are all equivalent.
+- Only one non-modifier key is supported per combo (e.g., `"ctrl+s"` is valid, `"ctrl+s+d"` is not).
+
+### Multiple Combos
+
+- The `combo` prop can be a string or an array of strings. If an array, the callback fires for any matching combo.
+- Example: `combo: ['ctrl+s', 'meta+s']` will trigger for either combination.
+
+### Target Element
+
+- By default, the hook listens on `window`, but you can specify a target `HTMLElement` (e.g., an input or div).
+- For best performance, use a stable reference (e.g., from `useRef`) for the target. Changing the target frequently will cause listeners to be re-attached.
+
+### Performance Notes
+
+- The hook memoizes normalized combos and the event handler for efficiency.
+- Listeners are automatically cleaned up when the component unmounts or the target changes.
+
+### Event Handling
+
+- The hook listens for the `keydown` event.
+- If `preventDefault` is true, the default browser action is prevented for the matching combo.
+- The callback receives the original `KeyboardEvent`.
+
+### Caveats & Best Practices
+
+- Only one non-modifier key is supported per combo.
+- Modifier order does not matter, but all specified modifiers must be pressed.
+- The hook is designed for keyboard shortcuts, not for general key tracking (e.g., holding multiple non-modifier keys).
+
+## Examples
+
+### Basic Usage
+
+```tsx
+useKeypress({
+  combo: 'ctrl+s',
+  callback: (e) => {
+    // Save action
+  },
+});
+```
+
+### Multiple Combos
+
+```tsx
+useKeypress({
+  combo: ['ctrl+s', 'meta+s'],
+  callback: (e) => {
+    // Save action for Windows/Linux (Ctrl+S) and Mac (Cmd+S)
+  },
+});
+```
+
+### Custom Target
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+useKeypress({
+  combo: 'enter',
+  callback: (e) => {
+    // Submit action
+  },
+  target: inputRef.current,
+});
+```
+
+### Prevent Default
+
+```tsx
+useKeypress({
+  combo: 'ctrl+p',
+  callback: (e) => {
+    // Custom print dialog
+  },
+  preventDefault: true,
+});
+```

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-media",
+  "type": "registry:hook",
+  "title": "UseMedia",
+  "description": "Checks if the current window matches a media query.",
+  "files": [
+    {
+      "path": "registry/hooks/use-media.tsx",
+      "content": "'use client';\n\nimport { useEffect, useState } from 'react';\n\nconst getInitialState = (query: string, defaultState?: boolean): boolean => {\n  const isBrowser = typeof window !== 'undefined';\n\n  if (!query || typeof query !== 'string') {\n    throw new Error('useMedia: query should be a non-empty string.');\n  }\n\n  if (defaultState !== undefined) {\n    return defaultState;\n  }\n\n  if (isBrowser) {\n    return window.matchMedia(query).matches;\n  }\n\n  if (process.env.NODE_ENV !== 'production') {\n    console.warn(\n      '`useMedia` When server side rendering, defaultState should be defined to prevent a hydration mismatches.',\n    );\n  }\n\n  return false;\n};\n\nexport function useMedia(query: string, defaultState?: boolean): boolean {\n  const [state, setState] = useState<boolean>(() =>\n    getInitialState(query, defaultState),\n  );\n\n  useEffect(() => {\n    if (!query || typeof query !== 'string') {\n      throw new Error('useMedia: query should be a non-empty string.');\n    }\n\n    let mounted = true;\n    const mql = window.matchMedia(query);\n\n    const onChange = () => {\n      if (!mounted) {\n        return;\n      }\n      setState(!!mql.matches);\n    };\n\n    mql.addEventListener('change', onChange);\n    setState(mql.matches);\n\n    return () => {\n      mounted = false;\n      mql.removeEventListener('change', onChange);\n    };\n  }, [query]);\n\n  return state;\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-media.tsx"
+    }
+  ],
+  "categories": ["ui-and-dom"]
+}

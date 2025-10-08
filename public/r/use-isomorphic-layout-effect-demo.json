@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-isomorphic-layout-effect-demo",
+  "type": "registry:example",
+  "title": "UseIsomorphicLayoutEffectDemo",
+  "description": "use-isomorphic-layout-effect's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "https://guarahooks.com/r/use-isomorphic-layout-effect.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-isomorphic-layout-effect-demo.tsx",
+      "content": "'use client';\n\nimport React, { useRef, useState } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { useIsomorphicLayoutEffect } from '@/hooks/guarahooks/use-isomorphic-layout-effect';\n\nexport default function UseIsomorphicLayoutEffectDemo() {\n  const boxRef = useRef<HTMLDivElement | null>(null);\n  const [boxWidth, setBoxWidth] = useState(0);\n\n  useIsomorphicLayoutEffect(() => {\n    if (boxRef.current) {\n      setBoxWidth(Math.round(boxRef.current.getBoundingClientRect().width));\n    }\n  }, []);\n\n  return (\n    <Card className=\"relative max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useIsomorphicLayoutEffect</CardTitle>\n        <CardDescription>\n          This component measures its own width using an isomorphic layout\n          effect (no SSR warning).\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <div ref={boxRef} className=\"border border-border rounded-md p-4\">\n          <p>Resize or hydrate to measure this box.</p>\n        </div>\n        <p className=\"mt-2\">Box width: {boxWidth}px</p>\n      </CardContent>\n      <CardFooter>\n        <Button onClick={() => setBoxWidth(0)}>Reset</Button>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-isomorphic-layout-effect-demo.tsx"
+    }
+  ]
+}

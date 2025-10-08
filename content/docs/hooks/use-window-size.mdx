@@ -1,0 +1,113 @@
+---
+title: useWindowSize
+date: 2025-04-22
+description: Tracks the current window's dimensions.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-window-size-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-window-size"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-window-size" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop             | Type                                      | Default     | Description                                                                        |
+| ---------------- | ----------------------------------------- | ----------- | ---------------------------------------------------------------------------------- |
+| `initialWidth?`  | `number`                                  | `undefined` | The initial width of the window. (optional)                                        |
+| `initialHeight?` | `number`                                  | `undefined` | The initial height of the window. (optional)                                       |
+| `onChange?`      | `(width: number, height: number) => void` | `undefined` | A callback function that is called when the window's dimensions change. (optional) |
+
+## Data
+
+| Prop     | Type     | Description                      |
+| -------- | -------- | -------------------------------- |
+| `width`  | `number` | The current width of the window  |
+| `height` | `number` | The current height of the window |
+
+## Key Features & Details
+
+### SSR & Initial Values
+
+- The hook detects if it is running in a browser. If not, it uses `0` for initial width/height unless `initialWidth`/`initialHeight` are provided.
+- On the client, the initial values default to the current window size unless overridden by props.
+
+### onChange Callback
+
+- The `onChange` callback is called every time the window is resized, after the state is updated.
+- The callback receives the new width and height as arguments.
+
+### Immediate Update on Mount
+
+- The hook immediately updates the state and calls `onChange` on mount to ensure the values are up-to-date with the actual window size.
+
+### Cleanup
+
+- The resize event listener is removed automatically when the component unmounts.
+
+### Caveats & Best Practices
+
+- The hook is intended for use in the browser; on the server, it will always return the initial values.
+- If you need to debounce or throttle resize events, wrap the hook or the callback accordingly.
+- The hook returns an object with `width` and `height`.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { width, height } = useWindowSize();
+return (
+  <div>
+    Window size: {width} x {height}
+  </div>
+);
+```
+
+### With Initial Values (SSR-safe)
+
+```tsx
+const { width, height } = useWindowSize({
+  initialWidth: 1024,
+  initialHeight: 768,
+});
+```
+
+### With onChange Callback
+
+```tsx
+useWindowSize({
+  onChange: (width, height) => {
+    console.log('Window resized:', width, height);
+  },
+});
+```

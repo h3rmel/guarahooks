@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-orientation",
+  "type": "registry:hook",
+  "title": "UseOrientation",
+  "description": "Tracks the current orientation of the device.",
+  "files": [
+    {
+      "path": "registry/hooks/use-orientation.tsx",
+      "content": "'use client';\n\nimport { useEffect, useState } from 'react';\n\nexport type Orientation = 'portrait' | 'landscape';\n\nfunction getOrientation(win?: typeof window): Orientation {\n  if (!win) return 'portrait'; // Default for SSR\n  return win.matchMedia('(orientation: portrait)').matches\n    ? 'portrait'\n    : 'landscape';\n}\n\nexport function useOrientation(): Orientation {\n  const [orientation, setOrientation] = useState<Orientation>(() =>\n    getOrientation(typeof window !== 'undefined' ? window : undefined),\n  );\n\n  useEffect(() => {\n    if (typeof window === 'undefined') return;\n    const mql = window.matchMedia('(orientation: portrait)');\n\n    // Handler for orientation changes\n    const handler = () => setOrientation(getOrientation(window));\n\n    // Prefer addEventListener, fallback to addListener for older browsers\n    if (typeof mql.addEventListener === 'function') {\n      mql.addEventListener('change', handler);\n    } else {\n      mql.addListener(handler);\n    }\n\n    return () => {\n      if (typeof mql.removeEventListener === 'function') {\n        mql.removeEventListener('change', handler);\n      } else {\n        mql.removeListener(handler);\n      }\n    };\n  }, []);\n\n  return orientation;\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-orientation.tsx"
+    }
+  ],
+  "categories": ["ui-and-dom"]
+}

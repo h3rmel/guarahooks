@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-resize-observer-demo",
+  "type": "registry:example",
+  "title": "UseResizeObserverDemo",
+  "description": "use-resize-observer's hook in action.",
+  "registryDependencies": [
+    "button",
+    "card",
+    "https://guarahooks.com/r/use-resize-observer.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-resize-observer-demo.tsx",
+      "content": "'use client';\n\nimport React, { useRef, useState } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { useResizeObserver } from '@/hooks/guarahooks/use-resize-observer';\n\nexport function UseResizeObserverDemo() {\n  const targetRef = useRef<HTMLDivElement | null>(null);\n  const [size, setSize] = useState({ width: 0, height: 0 });\n  const [observing, setObserving] = useState(true);\n\n  const { disconnect } = useResizeObserver<HTMLDivElement>({\n    target: targetRef,\n    callback: (entries) => {\n      const entry = entries[0];\n      const { width, height } = entry.contentRect;\n      setSize({ width: Math.round(width), height: Math.round(height) });\n    },\n  });\n\n  const toggleObserving = () => {\n    if (observing) {\n      disconnect();\n    }\n    setObserving((prev) => !prev);\n  };\n\n  return (\n    <Card className=\"max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>Resize Observer Demo</CardTitle>\n        <CardDescription>\n          Observe size changes of the container in real time.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <div\n          ref={targetRef}\n          className=\"resize border rounded-lg p-4 max-w-full overflow-auto\"\n          style={{ resize: 'both' }}\n        >\n          <p>Drag to resize this box</p>\n        </div>\n        <div>\n          <p>Width: {size.width}px</p>\n          <p>Height: {size.height}px</p>\n        </div>\n      </CardContent>\n      <CardFooter>\n        <Button variant=\"outline\" onClick={toggleObserving}>\n          {observing ? 'Disconnect' : 'Observe'}\n        </Button>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-resize-observer-demo.tsx"
+    }
+  ]
+}

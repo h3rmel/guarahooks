@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-scroll-lock-demo",
+  "type": "registry:example",
+  "title": "UseScrollLockDemo",
+  "description": "Demonstrates useScrollLock hook",
+  "registryDependencies": [
+    "card",
+    "button",
+    "https://guarahooks.com/r/use-scroll-lock.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-scroll-lock-demo.tsx",
+      "content": "'use client';\n\nimport React, { useRef } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { useScrollLock } from '@/hooks/guarahooks/use-scroll-lock';\n\nexport default function UseScrollLockDemo() {\n  const containerRef = useRef<HTMLDivElement>(null);\n\n  const {\n    isLocked: isContainerLocked,\n    lock: lockContainer,\n    unlock: unlockContainer,\n    toggle: toggleContainer,\n  } = useScrollLock<HTMLDivElement>(containerRef);\n\n  const {\n    isLocked: isPageLocked,\n    lock: lockPage,\n    unlock: unlockPage,\n    toggle: togglePage,\n  } = useScrollLock();\n\n  return (\n    <Card className=\"relative max-w-md w-full space-y-4\">\n      <CardHeader>\n        <CardTitle>useScrollLock</CardTitle>\n        <CardDescription>\n          This component demonstrates locking and unlocking scroll on an element\n          or the page.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-6\">\n        <div className=\"space-y-2\">\n          <p>\n            Container scroll locked:{' '}\n            <strong>{isContainerLocked ? 'Yes' : 'No'}</strong>\n          </p>\n          <div\n            ref={containerRef}\n            className=\"h-40 overflow-y-auto border p-2 space-y-2\"\n          >\n            {Array.from({ length: 20 }).map((_, i) => (\n              <p key={i}>Content line {i + 1}</p>\n            ))}\n          </div>\n          <div className=\"flex flex-wrap gap-2\">\n            <Button onClick={lockContainer}>Lock Container</Button>\n            <Button variant=\"outline\" onClick={unlockContainer}>\n              Unlock Container\n            </Button>\n            <Button variant=\"secondary\" onClick={toggleContainer}>\n              Toggle Container\n            </Button>\n          </div>\n        </div>\n        <div className=\"space-y-2\">\n          <p>\n            Page scroll locked: <strong>{isPageLocked ? 'Yes' : 'No'}</strong>\n          </p>\n          <div className=\"flex gap-2\">\n            <Button onClick={lockPage}>Lock Page</Button>\n            <Button variant=\"outline\" onClick={unlockPage}>\n              Unlock Page\n            </Button>\n            <Button variant=\"secondary\" onClick={togglePage}>\n              Toggle Page\n            </Button>\n          </div>\n        </div>\n      </CardContent>\n      <CardFooter>\n        <p className=\"text-sm text-muted-foreground\">\n          Try scrolling this container or the page and use the buttons above.\n        </p>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-scroll-lock-demo.tsx"
+    }
+  ]
+}

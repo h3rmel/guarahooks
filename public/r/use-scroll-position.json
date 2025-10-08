@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-scroll-position",
+  "type": "registry:hook",
+  "title": "UseScrollPosition",
+  "description": "Tracks the current scroll position of the page.",
+  "files": [
+    {
+      "path": "registry/hooks/use-scroll-position.tsx",
+      "content": "'use client';\n\nimport { useCallback, useEffect, useState } from 'react';\n\nexport type ScrollPosition = {\n  x: number;\n  y: number;\n};\n\nexport type UseScrollPositionOptions = {\n  onChange?: (x: number, y: number) => void;\n};\n\nexport function useScrollPosition(\n  options: UseScrollPositionOptions = {},\n): ScrollPosition {\n  const isBrowser = typeof window !== 'undefined';\n  const { onChange } = options;\n\n  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({\n    x: isBrowser ? window.scrollX : 0,\n    y: isBrowser ? window.scrollY : 0,\n  });\n\n  const handleScroll = useCallback(() => {\n    const x = window.scrollX;\n    const y = window.scrollY;\n    setScrollPosition({ x, y });\n    if (onChange) {\n      onChange(x, y);\n    }\n  }, [onChange]);\n\n  useEffect(() => {\n    if (!isBrowser) {\n      return;\n    }\n    window.addEventListener('scroll', handleScroll, { passive: true });\n    // Initialize position on mount\n    handleScroll();\n    return () => {\n      window.removeEventListener('scroll', handleScroll);\n    };\n  }, [handleScroll, isBrowser]);\n\n  return scrollPosition;\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-scroll-position.tsx"
+    }
+  ],
+  "categories": ["ui-and-dom"]
+}

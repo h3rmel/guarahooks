@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-abort-controller",
+  "type": "registry:hook",
+  "title": "UseAbortController",
+  "description": "Provides AbortController functionality for canceling asynchronous operations.",
+  "files": [
+    {
+      "path": "registry/hooks/use-abort-controller.tsx",
+      "content": "'use client';\n\nimport { useCallback, useEffect, useRef } from 'react';\n\ninterface UseAbortControllerOptions {\n  abortOnUnmount?: boolean;\n}\n\ninterface UseAbortControllerReturn {\n  controller: AbortController;\n  signal: AbortSignal;\n  aborted: boolean;\n  abort: (reason?: string) => void;\n  reset: () => void;\n  fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;\n}\n\nexport function useAbortController(\n  options: UseAbortControllerOptions = {},\n): UseAbortControllerReturn {\n  const { abortOnUnmount = true } = options;\n\n  const controllerRef = useRef<AbortController>(new AbortController());\n\n  const abort = useCallback((reason?: string) => {\n    if (!controllerRef.current.signal.aborted) {\n      controllerRef.current.abort(reason);\n    }\n  }, []);\n\n  const reset = useCallback(() => {\n    if (!controllerRef.current.signal.aborted) {\n      controllerRef.current.abort('Reset');\n    }\n    controllerRef.current = new AbortController();\n  }, []);\n\n  const abortableFetch = useCallback(\n    (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {\n      return fetch(input, {\n        ...init,\n        signal: controllerRef.current.signal,\n      });\n    },\n    [],\n  );\n\n  // Abort on unmount if option is enabled\n  useEffect(() => {\n    const currentController = controllerRef.current;\n\n    return () => {\n      if (abortOnUnmount && !currentController.signal.aborted) {\n        currentController.abort('Component unmounted');\n      }\n    };\n  }, [abortOnUnmount]);\n\n  return {\n    controller: controllerRef.current,\n    signal: controllerRef.current.signal,\n    aborted: controllerRef.current.signal.aborted,\n    abort,\n    reset,\n    fetch: abortableFetch,\n  };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-abort-controller.tsx"
+    }
+  ],
+  "categories": ["utilities"]
+}

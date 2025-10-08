@@ -1,0 +1,128 @@
+---
+title: useConfirm
+date: 2025-04-28
+description: Manages user confirmation states for actions.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-confirm-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-confirm"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-confirm" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Data
+
+| Prop      | Type                 | Description                              |
+| --------- | -------------------- | ---------------------------------------- |
+| `status`  | `ConfirmationStatus` | The current confirmation status          |
+| `confirm` | `function`           | Function to confirm the action           |
+| `cancel`  | `function`           | Function to cancel the action            |
+| `reset`   | `function`           | Function to reset the confirmation state |
+
+## Types
+
+```ts
+type ConfirmationStatus = 'idle' | 'confirming' | 'confirmed' | 'cancelled';
+```
+
+## Key Features & Details
+
+### Status Management
+
+- `idle`: Initial state, waiting for user action
+- `confirming`: User is being asked to confirm the action
+- `confirmed`: User has confirmed the action
+- `cancelled`: User has cancelled the action
+
+### Returned Values
+
+- The hook returns an object with the current status and control functions
+- `status`: Current confirmation state
+- `confirm`: Sets status to 'confirmed'
+- `cancel`: Sets status to 'cancelled'
+- `reset`: Resets status to 'idle'
+
+### Best Practices & Caveats
+
+- Use this hook for actions that require user confirmation
+- Always provide clear UI feedback for each state
+- Consider using this with modal dialogs or confirmation prompts
+- The hook is client-side only
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { status, confirm, cancel, reset } = useConfirm();
+
+return (
+  <div>
+    {status === 'idle' && <button onClick={confirm}>Delete Item</button>}
+    {status === 'confirming' && (
+      <>
+        <button onClick={confirm}>Yes, Delete</button>
+        <button onClick={cancel}>Cancel</button>
+      </>
+    )}
+    {(status === 'confirmed' || status === 'cancelled') && (
+      <button onClick={reset}>Reset</button>
+    )}
+  </div>
+);
+```
+
+### With Status Messages
+
+```tsx
+const { status, confirm, cancel } = useConfirm();
+
+const getStatusMessage = (status: ConfirmationStatus) => {
+  switch (status) {
+    case 'idle':
+      return 'Ready';
+    case 'confirming':
+      return 'Are you sure?';
+    case 'confirmed':
+      return 'Confirmed!';
+    case 'cancelled':
+      return 'Cancelled!';
+  }
+};
+
+return (
+  <div>
+    <p>Status: {getStatusMessage(status)}</p>
+    {/* ... buttons ... */}
+  </div>
+);
+```

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-copy-to-clipboard-demo",
+  "type": "registry:example",
+  "title": "UseCopyToClipboardDemo",
+  "description": "use-copy-to-clipboard's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "input",
+    "https://guarahooks.com/r/use-copy-to-clipboard.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-copy-to-clipboard-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\n\nimport { useCopyToClipboard } from '@/hooks/guarahooks/use-copy-to-clipboard';\n\nexport function UseCopyToClipboardDemo() {\n  const [text, setText] = useState('');\n  const { copied, copy } = useCopyToClipboard();\n\n  return (\n    <Card className=\"relative max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useCopyToClipboard</CardTitle>\n        <CardDescription>\n          This component uses the <code>useCopyToClipboard</code> hook to copy\n          text to the clipboard.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <Input\n          value={text}\n          onChange={(e) => setText(e.target.value)}\n          placeholder=\"Type something to copy...\"\n        />\n        <div className=\"flex items-center gap-2\">\n          <Button onClick={() => copy(text)} disabled={!text}>\n            Copiar\n          </Button>\n          {copied && (\n            <span className=\"text-green-500 bg-green-500/20 px-2 py-0.5 rounded-md\">\n              Copied!\n            </span>\n          )}\n        </div>\n      </CardContent>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-copy-to-clipboard-demo.tsx"
+    }
+  ]
+}

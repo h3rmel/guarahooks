@@ -1,0 +1,98 @@
+---
+title: usePagination
+date: 2024-06-28
+description: Hook for controlling list pagination.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-pagination-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-pagination"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-pagination" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop              | Type     | Default | Description                       |
+| ----------------- | -------- | ------- | --------------------------------- |
+| `totalItems`      | `number` | -       | Total number of items to paginate |
+| `initialPage`     | `number` | `1`     | Initial page                      |
+| `initialPageSize` | `number` | `10`    | Number of items per page          |
+
+## Data
+
+| Property      | Type                     | Description                         |
+| ------------- | ------------------------ | ----------------------------------- |
+| `page`        | `number`                 | Current page                        |
+| `pageSize`    | `number`                 | Number of items per page            |
+| `totalPages`  | `number`                 | Total number of pages               |
+| `setPage`     | `(page: number) => void` | Define the current page             |
+| `nextPage`    | `() => void`             | Go to the next page                 |
+| `prevPage`    | `() => void`             | Go to the previous page             |
+| `setPageSize` | `(size: number) => void` | Define the number of items per page |
+
+## Key Features & Details
+
+- Manages page and pageSize state.
+- Automatically calculates the total number of pages.
+- Ensures the current page stays within valid bounds.
+- Supports dynamic changes to `pageSize`.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { page, pageSize, totalPages, setPage, nextPage, prevPage, setPageSize } =
+  usePagination(100);
+
+return (
+  <div>
+    <p>
+      Page {page} of {totalPages}
+    </p>
+    <button onClick={prevPage} disabled={page <= 1}>
+      Previous
+    </button>
+    <button onClick={nextPage} disabled={page >= totalPages}>
+      Next
+    </button>
+  </div>
+);
+```
+
+### Custom Page Size
+
+```tsx
+const { page, pageSize, setPageSize } = usePagination(200, {
+  initialPageSize: 20,
+});
+```

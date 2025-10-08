@@ -1,0 +1,341 @@
+---
+title: useFetch
+date: 2024-07-05
+description: A powerful React hook for HTTP requests with global provider, retry logic, timeout, and abort control
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-fetch-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-fetch"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-fetch" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+<Steps>
+
+<Step>Wrap your app with FetchProvider</Step>
+
+```tsx
+import { FetchProvider } from '@/hooks/use-fetch';
+
+function App() {
+  return (
+    <FetchProvider config={{ baseURL: 'https://api.example.com' }}>
+      <YourApp />
+    </FetchProvider>
+  );
+}
+```
+
+<Step>Use the hook in your components</Step>
+
+```tsx
+import { useFetch } from '@/hooks/use-fetch';
+
+function UserProfile() {
+  const { data, loading, error } = useFetch<User>('/users/me');
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return <div>{data?.name}</div>;
+}
+```
+
+</Steps>
+
+## API Reference
+
+### FetchProvider Props
+
+| Prop       | Type          | Default     | Description                                 |
+| ---------- | ------------- | ----------- | ------------------------------------------- |
+| `config`   | `FetchConfig` | `{}`        | Global configuration for all fetch requests |
+| `children` | `ReactNode`   | `undefined` | Child components that will use the provider |
+
+### FetchConfig Interface
+
+| Property      | Type                 | Default     | Description                         |
+| ------------- | -------------------- | ----------- | ----------------------------------- |
+| `baseURL`     | `string`             | `undefined` | Base URL for all relative requests  |
+| `timeout`     | `number`             | `undefined` | Request timeout in milliseconds     |
+| `retries`     | `number`             | `0`         | Number of retry attempts on failure |
+| `retryDelay`  | `number`             | `1000`      | Delay between retry attempts (ms)   |
+| `headers`     | `HeadersInit`        | `undefined` | Default headers for all requests    |
+| `method`      | `string`             | `'GET'`     | Default HTTP method                 |
+| `mode`        | `RequestMode`        | `undefined` | CORS mode                           |
+| `credentials` | `RequestCredentials` | `undefined` | Credentials mode                    |
+| `cache`       | `RequestCache`       | `undefined` | Cache mode                          |
+
+### useFetch Hook
+
+```tsx
+function useFetch<T, TBody>(
+  url: string,
+  options?: FetchOptions<TBody> & { immediate?: boolean },
+): FetchResult<T>;
+```
+
+#### Parameters
+
+| Parameter | Type                                            | Default     | Description                          |
+| --------- | ----------------------------------------------- | ----------- | ------------------------------------ |
+| `url`     | `string`                                        | `undefined` | The endpoint URL to fetch data from  |
+| `options` | `FetchOptions<TBody> & { immediate?: boolean }` | `{}`        | Fetch options and hook configuration |
+
+#### FetchOptions Interface
+
+| Property     | Type                                   | Default     | Description                            |
+| ------------ | -------------------------------------- | ----------- | -------------------------------------- |
+| `body`       | `TBody`                                | `undefined` | Request body                           |
+| `timeout`    | `number`                               | `undefined` | Request timeout (overrides global)     |
+| `retries`    | `number`                               | `undefined` | Retry attempts (overrides global)      |
+| `retryDelay` | `number`                               | `undefined` | Retry delay (overrides global)         |
+| `parse`      | `(response: Response) => Promise<any>` | `undefined` | Custom response parser                 |
+| `immediate`  | `boolean`                              | `true`      | Whether to execute request immediately |
+| `headers`    | `HeadersInit`                          | `undefined` | Request headers                        |
+| `method`     | `string`                               | `undefined` | HTTP method                            |
+| `signal`     | `AbortSignal`                          | `undefined` | Abort signal                           |
+
+#### Return Value (FetchResult)
+
+| Property  | Type                       | Description                               |
+| --------- | -------------------------- | ----------------------------------------- |
+| `data`    | `T \| null`                | The fetched data or null on error/loading |
+| `error`   | `Error \| null`            | Error object if the request fails         |
+| `loading` | `boolean`                  | Whether the request is in progress        |
+| `refetch` | `() => Promise<T \| null>` | Function to re-trigger the fetch request  |
+| `abort`   | `() => void`               | Cancels the current in-flight request     |
+| `aborted` | `boolean`                  | Whether the request was aborted           |
+
+### useFetchContext Hook
+
+```tsx
+function useFetchContext(): FetchContextValue;
+```
+
+Access the global fetch configuration and update it dynamically.
+
+#### Return Value
+
+| Property       | Type                                                         | Description                             |
+| -------------- | ------------------------------------------------------------ | --------------------------------------- |
+| `config`       | `FetchConfig`                                                | Current global configuration            |
+| `updateConfig` | `(config: Partial<FetchConfig>) => void`                     | Function to update global configuration |
+| `fetch`        | `(url: string, options?: FetchOptions) => Promise<Response>` | Enhanced fetch function                 |
+
+## Key Features
+
+### 🌐 Global Provider
+
+- Centralized configuration for all HTTP requests
+- Shared settings like base URL, headers, timeouts
+- Dynamic configuration updates at runtime
+
+### 🔄 Automatic Retry
+
+- Configurable retry attempts with exponential backoff
+- Intelligent retry logic (skips client errors)
+- Per-request or global retry configuration
+
+### ⏱️ Timeout Support
+
+- Request-level and global timeout settings
+- Automatic request cancellation on timeout
+- Prevents hanging requests
+
+### 🛑 Abort Control
+
+- Manual request cancellation
+- Automatic cleanup on component unmount
+- Prevents memory leaks and race conditions
+
+### 🎯 Type Safety
+
+- Full TypeScript support with generics
+- Type-safe request/response handling
+- Intellisense for all configuration options
+
+### 🚀 Performance
+
+- Efficient memoization to prevent unnecessary re-renders
+- Automatic request deduplication
+- Optimized for React concurrent features
+
+## Examples
+
+### Basic GET Request
+
+```tsx
+const { data, loading, error } = useFetch<Post[]>('/posts');
+
+if (loading) return <div>Loading...</div>;
+if (error) return <div>Error: {error.message}</div>;
+
+return (
+  <div>
+    {data?.map((post) => (
+      <div key={post.id}>{post.title}</div>
+    ))}
+  </div>
+);
+```
+
+### POST Request
+
+```tsx
+const {
+  data,
+  loading,
+  refetch: createPost,
+} = useFetch<Post>('/posts', {
+  method: 'POST',
+  body: JSON.stringify({ title: 'New Post' }),
+  immediate: false,
+});
+
+return (
+  <button onClick={createPost} disabled={loading}>
+    {loading ? 'Creating...' : 'Create Post'}
+  </button>
+);
+```
+
+### Custom Parser
+
+```tsx
+const { data } = useFetch<{ count: number }>('/stats', {
+  parse: (response) =>
+    response.text().then((text) => ({ count: parseInt(text) })),
+});
+```
+
+### With Retry and Timeout
+
+```tsx
+const { data, loading } = useFetch<Data>('/api/data', {
+  retries: 3,
+  timeout: 5000,
+});
+```
+
+### Abort Request
+
+```tsx
+const { data, loading, abort } = useFetch<Data>('/api/data');
+
+return (
+  <div>
+    {loading && <button onClick={abort}>Cancel</button>}
+    {data && <div>{JSON.stringify(data)}</div>}
+  </div>
+);
+```
+
+### Dynamic Configuration
+
+```tsx
+function AuthButton() {
+  const { updateConfig } = useFetchContext();
+
+  const handleLogin = (token: string) => {
+    updateConfig({
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+
+  return <button onClick={() => handleLogin('token')}>Login</button>;
+}
+```
+
+## Error Handling
+
+```tsx
+const { data, error, refetch } = useFetch<Data>('/api/data');
+
+if (error) {
+  return (
+    <div>
+      Error: {error.message}
+      <button onClick={refetch}>Retry</button>
+    </div>
+  );
+}
+```
+
+## Best Practices
+
+### Provider Configuration
+
+```tsx
+<FetchProvider
+  config={{
+    baseURL: process.env.REACT_APP_API_URL,
+    timeout: 30000,
+    retries: 3,
+    headers: { 'Content-Type': 'application/json' },
+  }}
+>
+```
+
+### Loading States
+
+```tsx
+const { data, loading, error } = useFetch<Data>('/api/data');
+
+if (loading) return <div>Loading...</div>;
+if (error) return <div>Error: {error.message}</div>;
+
+return <div>{data?.content}</div>;
+```
+
+### Stable Options
+
+```tsx
+const options = useMemo(
+  () => ({
+    method: 'POST',
+    body: JSON.stringify(formData),
+  }),
+  [formData],
+);
+
+const { data, loading } = useFetch<Response>('/api/submit', options);
+```
+
+## Related
+
+- [Fetch API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [Using Fetch - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+- [AbortController - MDN](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
+- [React Context API](https://react.dev/reference/react/createContext)

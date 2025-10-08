@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-session-storage-demo",
+  "type": "registry:example",
+  "title": "UseSessionStorageDemo",
+  "description": "use-session-storage's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "input",
+    "label",
+    "https://guarahooks.com/r/use-session-storage.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-session-storage-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\n\nimport { Label } from '@radix-ui/react-label';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\n\nimport useSessionStorage from '@/hooks/guarahooks/use-session-storage';\n\n// Custom serializer/deserializer for an object\nconst userSerializer = (user: { name: string; age: number }) =>\n  JSON.stringify(user);\nconst userDeserializer = (str: string) => {\n  try {\n    return JSON.parse(str) as { name: string; age: number };\n  } catch {\n    return { name: '', age: 0 };\n  }\n};\n\nexport default function UseSessionStorageDemo() {\n  // Object example with custom serializer/deserializer\n  const [user, setUser] = useSessionStorage<{ name: string; age: number }>(\n    'demo-user',\n    { name: '', age: 0 },\n    { serialize: userSerializer, deserialize: userDeserializer },\n  );\n\n  const [ageInput, setAgeInput] = useState('');\n\n  return (\n    <Card className=\"relative max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useSessionStorage</CardTitle>\n        <CardDescription>\n          This component uses the <code>useSessionStorage</code> hook to manage\n          a session storage item.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <div className=\"flex flex-col gap-2\">\n          <Label>User (object):</Label>\n          <Input\n            type=\"text\"\n            value={user.name}\n            onChange={(e) => setUser({ ...user, name: e.target.value })}\n            placeholder=\"User name...\"\n          />\n          <Input\n            type=\"number\"\n            value={ageInput}\n            onChange={(e) => setAgeInput(e.target.value)}\n            placeholder=\"User age...\"\n          />\n        </div>\n        <div className=\"flex gap-2\">\n          <Button\n            onClick={() => {\n              const age = parseInt(ageInput, 10);\n              if (!isNaN(age)) setUser({ ...user, age });\n            }}\n            size=\"sm\"\n          >\n            Set Age\n          </Button>\n          <Button onClick={() => setUser({ name: '', age: 0 })} size=\"sm\">\n            Clear User\n          </Button>\n        </div>\n        <pre className=\"text-sm text-muted-foreground bg-accent w-fit px-1 py-0.5 rounded-xs\">\n          {JSON.stringify(user)}\n        </pre>\n      </CardContent>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-session-storage-demo.tsx"
+    }
+  ]
+}

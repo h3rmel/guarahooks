@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-disclosure-demo",
+  "type": "registry:example",
+  "title": "UseDisclosureDemo",
+  "description": "use-disclosure's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "dialog",
+    "https://guarahooks.com/r/use-disclosure.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-disclosure-demo.tsx",
+      "content": "'use client';\n\nimport React from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from '@/components/ui/dialog';\n\nimport { useDisclosure } from '@/hooks/guarahooks/use-disclosure';\n\nexport default function UseDisclosureDemo() {\n  const [isOpen, { close, toggle }] = useDisclosure(false, {\n    onOpen: () => console.log('Dialog opened'),\n    onClose: () => console.log('Dialog closed'),\n  });\n\n  return (\n    <Card className=\"relative max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useDisclosure</CardTitle>\n        <CardDescription>\n          This component uses the <code>useDisclosure</code> hook to manage the\n          state of a dialog component.\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <p>\n          Dialog is: <strong>{isOpen ? 'Open' : 'Closed'}</strong>\n        </p>\n      </CardContent>\n      <CardFooter className=\"flex gap-2\">\n        <Dialog open={isOpen} onOpenChange={toggle}>\n          <DialogTrigger asChild>\n            <Button>Open Dialog</Button>\n          </DialogTrigger>\n          <DialogContent>\n            <DialogHeader>\n              <DialogTitle>Example Dialog</DialogTitle>\n              <DialogDescription>\n                This is an example dialog controlled by the useDisclosure hook.\n              </DialogDescription>\n            </DialogHeader>\n            <DialogFooter>\n              <Button variant=\"outline\" onClick={close}>\n                Close\n              </Button>\n              <Button onClick={close}>Confirm</Button>\n            </DialogFooter>\n          </DialogContent>\n        </Dialog>\n        <Button variant=\"outline\" onClick={toggle}>\n          Toggle Dialog\n        </Button>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-disclosure-demo.tsx"
+    }
+  ]
+}

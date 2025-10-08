@@ -1,0 +1,200 @@
+---
+title: useAbortController
+date: 2024-12-22
+description: A hook that provides AbortController functionality for canceling asynchronous operations.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-abort-controller-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-abort-controller"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-abort-controller" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Options
+
+| Prop             | Type      | Default | Description                                            |
+| ---------------- | --------- | ------- | ------------------------------------------------------ |
+| `abortOnUnmount` | `boolean` | `true`  | Whether to automatically abort when component unmounts |
+
+## Data
+
+The hook returns an object with the following properties:
+
+| Property     | Type                                                                   | Description                                         |
+| ------------ | ---------------------------------------------------------------------- | --------------------------------------------------- |
+| `controller` | `AbortController`                                                      | The AbortController instance                        |
+| `signal`     | `AbortSignal`                                                          | The AbortSignal for passing to abortable operations |
+| `aborted`    | `boolean`                                                              | Whether the controller has been aborted             |
+| `abort`      | `(reason?: string) => void`                                            | Function to abort the current controller            |
+| `reset`      | `() => void`                                                           | Function to create a new controller (reset)         |
+| `fetch`      | `(input: RequestInfo \| URL, init?: RequestInit) => Promise<Response>` | Convenience function for fetch with abort signal    |
+
+## Key Features & Details
+
+### Browser Support
+
+- **Chrome**: Full support (66+)
+- **Firefox**: Full support (57+)
+- **Safari**: Full support (11.1+)
+- **Edge**: Full support (79+)
+- **Opera**: Full support (53+)
+
+### Cross-Browser Compatibility
+
+- Native AbortController support in all modern browsers
+- Automatically handles signal.aborted checks
+- Graceful error handling for AbortError
+- Works with any API that accepts AbortSignal
+
+### Performance Considerations
+
+- Uses `useRef` to maintain controller instance across re-renders
+- `useCallback` optimizations for stable function references
+- Automatic cleanup on component unmount
+- Minimal memory footprint with proper controller disposal
+- No unnecessary re-renders when aborting operations
+
+### Best Practices & Caveats
+
+1. **Always handle AbortError**: Check `error.name === 'AbortError'` in catch blocks to distinguish between cancellation and actual errors
+2. **Use reset() for new operations**: Call `reset()` when starting a new operation to ensure a fresh controller
+3. **Leverage the fetch wrapper**: Use the provided `fetch` function for automatic signal attachment
+4. **Component unmount handling**: The hook automatically aborts operations when the component unmounts (configurable)
+5. **Timeout patterns**: Combine with `setTimeout` and `clearTimeout` for implementing request timeouts
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import { useAbortController } from '@/hooks/guarahooks/use-abort-controller';
+
+function MyComponent() {
+  const { signal, abort, fetch } = useAbortController();
+
+  const handleFetch = async () => {
+    try {
+      const response = await fetch('/api/data');
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        console.log('Request was cancelled');
+      } else {
+        console.error('Request failed:', error);
+      }
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={handleFetch}>Fetch Data</button>
+      <button onClick={() => abort()}>Cancel</button>
+    </div>
+  );
+}
+```
+
+### Advanced Usage with Timeout
+
+```tsx
+import { useEffect } from 'react';
+
+import { useAbortController } from '@/hooks/guarahooks/use-abort-controller';
+
+function MyComponent() {
+  const { signal, abort, reset } = useAbortController();
+
+  const fetchWithTimeout = async (url: string, timeout = 5000) => {
+    // Reset controller for new request
+    reset();
+
+    // Set up timeout
+    const timeoutId = setTimeout(() => {
+      abort('Request timeout');
+    }, timeout);
+
+    try {
+      const response = await fetch(url, { signal });
+      clearTimeout(timeoutId);
+      return await response.json();
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
+    }
+  };
+
+  return (
+    <button onClick={() => fetchWithTimeout('/api/slow-endpoint')}>
+      Fetch with 5s timeout
+    </button>
+  );
+}
+```
+
+### With Options
+
+```tsx
+import { useAbortController } from '@/hooks/guarahooks/use-abort-controller';
+
+function MyComponent() {
+  // Disable auto-abort on unmount
+  const { signal, abort } = useAbortController({
+    abortOnUnmount: false,
+  });
+
+  const handleLongRunningOperation = async () => {
+    try {
+      // This won't be automatically cancelled when component unmounts
+      const response = await fetch('/api/long-process', { signal });
+      return await response.json();
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        console.log('Operation was manually cancelled');
+      }
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={handleLongRunningOperation}>Start Operation</button>
+      <button onClick={() => abort('User cancelled')}>Cancel</button>
+    </div>
+  );
+}
+```
+
+## Related
+
+- [AbortController MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
+- [AbortSignal MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)
+- [Fetch API with AbortSignal](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#aborting_a_fetch)

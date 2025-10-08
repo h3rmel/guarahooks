@@ -1,0 +1,163 @@
+---
+title: useReactHookForm
+date: 2025-06-24
+description: Simplifies React Hook Form setup and usage.
+author: matbrgz
+published: true
+---
+
+<HookPreview name="use-react-hook-form-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-react-hook-form"
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+  <Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-react-hook-form" />
+
+  <Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</Tabs>
+
+## Props
+
+| Prop       | Type              | Default     | Description                                   |
+| ---------- | ----------------- | ----------- | --------------------------------------------- |
+| `options?` | `UseFormProps<T>` | `undefined` | Options passed to React Hook Form's `useForm` |
+
+See [useForm](https://react-hook-form.com/docs/useform) for more details about the options.
+
+## Data
+
+| Property     | Type                                             | Description                                               |
+| ------------ | ------------------------------------------------ | --------------------------------------------------------- |
+| `onSubmit`   | `(onValid, onInvalid?) => (e?) => Promise<void>` | Simplified and memoized submit handler                    |
+| `...methods` | `UseFormReturn<T>`                               | All methods returned by `useForm` (register, reset, etc.) |
+
+## Key Features & Details
+
+- Built on React Hook Form – see [React Hook Form Docs](https://react-hook-form.com/docs/overview) for full API.
+- Simplified `onSubmit` signature wraps React Hook Form's `handleSubmit`.
+- Memoized handler with `useCallback` to prevent unnecessary re-renders.
+- Exposes all `useForm` methods (`register`, `reset`, `formState`, etc.).
+- Optional debug logging of `formState` changes in development mode.
+
+## Common Use Cases
+
+- Single-field forms with basic validation (e.g., login, search).
+- Multi-field forms with default values and complex submissions.
+- Handling submission and validation separately with `onInvalid`.
+- Resetting or clearing forms after submission.
+- Rapid prototyping of form-driven UIs.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const {
+  register,
+  onSubmit,
+  formState: { errors },
+} = useReactHookForm<{ firstName: string }>({
+  defaultValues: { firstName: '' },
+});
+
+return (
+  <form onSubmit={onSubmit((data) => alert(`Hello, ${data.firstName}!`))}>
+    <div>
+      <label htmlFor="firstName">First Name</label>
+      <input
+        id="firstName"
+        {...register('firstName', { required: 'First name is required' })}
+      />
+      {errors.firstName && <span>{errors.firstName.message}</span>}
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+);
+```
+
+### Handling Validation Errors
+
+```tsx
+const {
+  register,
+  onSubmit,
+  formState: { errors },
+} = useReactHookForm<{ email: string }>({
+  defaultValues: { email: '' },
+});
+
+const handleValid = (data) => {
+  console.log('Valid Data:', data);
+};
+
+const handleInvalid = (err) => {
+  console.log('Validation Errors:', err);
+};
+
+return (
+  <form onSubmit={onSubmit(handleValid, handleInvalid)}>
+    <div>
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        {...register('email', { required: 'Email is required' })}
+      />
+      {errors.email && <span>{errors.email.message}</span>}
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+);
+```
+
+### Resetting the Form
+
+```tsx
+const { register, onSubmit, reset } = useReactHookForm<{ firstName: string }>({
+  defaultValues: { firstName: 'John' },
+});
+
+const handleValid = (data) => {
+  console.log('Submitted:', data);
+  reset({ firstName: '' });
+};
+
+return (
+  <form onSubmit={onSubmit(handleValid)}>
+    <div>
+      <label htmlFor="firstName">First Name</label>
+      <input id="firstName" {...register('firstName')} />
+    </div>
+    <button type="submit">Submit</button>
+    <button type="button" onClick={() => reset()}>
+      Reset
+    </button>
+  </form>
+);
+```
+
+## Related
+
+- [React Hook Form Get Started](https://react-hook-form.com/get-started)
+- [React Hook Form API Documentation](https://react-hook-form.com/docs)

@@ -1,0 +1,147 @@
+---
+title: usePageTitle
+date: 2023-11-25
+description: Hook to modify the page title dynamically
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-page-title-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-page-title"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-page-title" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop      | Type               | Default     | Description                       |
+| --------- | ------------------ | ----------- | --------------------------------- |
+| `options` | `PageTitleOptions` | `undefined` | Optional configurations for title |
+
+### Options
+
+| Prop        | Type     | Default | Description                            |
+| ----------- | -------- | ------- | -------------------------------------- |
+| `suffix`    | `string` | `""`    | Suffix to be added to the title        |
+| `separator` | `string` | `" - "` | Separator between the title and suffix |
+
+## Data
+
+The hook returns an object with the following properties:
+
+| Property     | Type                      | Description                      |
+| ------------ | ------------------------- | -------------------------------- |
+| `setTitle`   | `(title: string) => void` | Sets the page title              |
+| `resetTitle` | `() => void`              | Restores the original page title |
+
+## Key Features & Details
+
+- Modifies the page title (document.title) dynamically
+- Support for adding suffix to the title (e.g., "Page - My Site")
+- Automatically restores the original title when the component is unmounted
+- Safe for SSR (Server-Side Rendering)
+
+### Browser Support
+
+This hook works in all modern browsers that support JavaScript:
+
+- Chrome: Supported
+- Firefox: Supported
+- Safari: Supported
+- Edge: Supported
+- Opera: Supported
+
+### Performance Considerations
+
+- The hook uses `useCallback` to avoid unnecessary renders
+- The effect cleanup ensures the title is restored when the component is unmounted
+- Existence checks for the `document` object for SSR compatibility
+
+### Best Practices & Caveats
+
+1. Always use the hook within client-side components
+2. For Next.js applications, also consider using the `<Head>` component for SEO
+3. Prefer short and descriptive titles for better user experience
+4. Use the suffix to include the site or application name
+5. Make sure to call `resetTitle` if you want to manually restore the title
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import { usePageTitle } from '@/hooks/use-page-title';
+
+function MyComponent() {
+  const { setTitle } = usePageTitle();
+
+  return (
+    <button onClick={() => setTitle('New Page Title')}>Change Title</button>
+  );
+}
+```
+
+### With Suffix
+
+```tsx
+import { usePageTitle } from '@/hooks/use-page-title';
+
+function MyComponent() {
+  const { setTitle } = usePageTitle({
+    suffix: 'My Website',
+    separator: ' - ',
+  });
+
+  // Will set the title to "Dashboard - My Website"
+  return <button onClick={() => setTitle('Dashboard')}>Go to Dashboard</button>;
+}
+```
+
+### With Reset Functionality
+
+```tsx
+import { usePageTitle } from '@/hooks/use-page-title';
+
+function MyComponent() {
+  const { setTitle, resetTitle } = usePageTitle();
+
+  return (
+    <div>
+      <button onClick={() => setTitle('New Title')}>Change Title</button>
+      <button onClick={resetTitle}>Reset Title</button>
+    </div>
+  );
+}
+```
+
+## Related
+
+- [React Helmet](https://github.com/nfl/react-helmet)
+- [Next.js Head Component](https://nextjs.org/docs/api-reference/next/head)

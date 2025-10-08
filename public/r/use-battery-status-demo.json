@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-battery-status-demo",
+  "type": "registry:example",
+  "title": "UseBatteryStatusDemo",
+  "description": "use-battery-status's hook in action.",
+  "registryDependencies": [
+    "card",
+    "badge",
+    "https://guarahooks.com/r/use-battery-status.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-battery-status-demo.tsx",
+      "content": "'use client';\n\nimport React from 'react';\n\nimport { Badge } from '@/components/ui/badge';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { cn } from '@/lib/utils';\n\nimport { useBatteryStatus } from '@/hooks/guarahooks/use-battery-status';\n\nexport default function UseBatteryStatusDemo() {\n  const { supported, level, charging, chargingTime, dischargingTime } =\n    useBatteryStatus();\n\n  if (!supported) {\n    return (\n      <Card className=\"max-w-sm w-full\">\n        <CardHeader>\n          <CardTitle>useBatteryStatus</CardTitle>\n          <CardDescription>\n            Battery Status API is not supported in this browser.\n          </CardDescription>\n        </CardHeader>\n      </Card>\n    );\n  }\n\n  const percentage = Math.round(level * 100);\n\n  return (\n    <Card className=\"max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useBatteryStatus</CardTitle>\n        <CardDescription>\n          Live system battery status using the Battery Status API.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <div>\n          <span className=\"font-medium\">Level:</span>{' '}\n          <span className=\"text-lg font-semibold\">{percentage}%</span>\n        </div>\n        <div className=\"w-full\">\n          <progress\n            className=\"w-full h-2 rounded bg-gray-200\"\n            value={percentage}\n            max={100}\n          />\n        </div>\n        <Badge\n          variant=\"secondary\"\n          className={cn(\n            'w-fit',\n            charging\n              ? 'bg-green-500/30 border-green-500 text-green-300'\n              : 'bg-red-500/30 border-red-500 text-red-300',\n          )}\n        >\n          {charging ? 'Charging' : 'Discharging'}\n        </Badge>\n        <CardFooter>\n          <p className=\"text-sm text-muted-foreground\">\n            Charging Time: {chargingTime}s, Discharging Time: {dischargingTime}s\n          </p>\n        </CardFooter>\n      </CardContent>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-battery-status-demo.tsx"
+    }
+  ]
+}

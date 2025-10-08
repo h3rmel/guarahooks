@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-copy-to-clipboard",
+  "type": "registry:hook",
+  "title": "UseCopyToClipboard",
+  "description": "Copies text to the clipboard.",
+  "files": [
+    {
+      "path": "registry/hooks/use-copy-to-clipboard.tsx",
+      "content": "'use client';\n\nimport { useCallback, useEffect, useRef, useState } from 'react';\n\ntype UseCopyToClipboardReturn = {\n  copied: boolean;\n  copy: (text: string) => Promise<boolean>;\n};\n\n// Fallback to old browsers\nfunction fallbackCopy(str: string): boolean {\n  const textarea = document.createElement('textarea');\n  let success = false;\n\n  textarea.value = str;\n  textarea.setAttribute('readonly', '');\n\n  textarea.style.position = 'absolute';\n  textarea.style.left = '-9999px';\n\n  document.body.appendChild(textarea);\n\n  textarea.select();\n\n  try {\n    success = document.execCommand('copy');\n  } catch {\n    success = false;\n  } finally {\n    document.body.removeChild(textarea);\n  }\n\n  return success;\n}\n\nexport function useCopyToClipboard(\n  duration: number = 1500,\n): UseCopyToClipboardReturn {\n  const [copied, setCopied] = useState<boolean>(false);\n  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);\n\n  const copy = useCallback(\n    async (text: string): Promise<boolean> => {\n      try {\n        let success = false;\n\n        if (navigator.clipboard && navigator.clipboard.writeText) {\n          await navigator.clipboard.writeText(text);\n          success = true;\n        } else {\n          success = fallbackCopy(text);\n        }\n\n        if (success) {\n          setCopied(true);\n          if (timeoutRef.current) clearTimeout(timeoutRef.current);\n          timeoutRef.current = setTimeout(() => setCopied(false), duration);\n          return true;\n        } else {\n          throw new Error('Copy command failed');\n        }\n      } catch (err: unknown) {\n        console.error('Failed to copy text: ', err);\n        return false;\n      }\n    },\n    [duration],\n  );\n\n  useEffect(() => {\n    return () => {\n      if (timeoutRef.current) {\n        clearTimeout(timeoutRef.current);\n      }\n    };\n  }, []);\n\n  return {\n    copied,\n    copy,\n  };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-copy-to-clipboard.tsx"
+    }
+  ],
+  "categories": ["utilities"]
+}

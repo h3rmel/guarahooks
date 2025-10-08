@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-confirm",
+  "type": "registry:hook",
+  "title": "UseConfirm",
+  "description": "Manages a confirmation dialog.",
+  "files": [
+    {
+      "path": "registry/hooks/use-confirm.tsx",
+      "content": "'use client';\n\nimport { useCallback, useState } from 'react';\n\nexport type ConfirmationStatus =\n  | 'idle'\n  | 'confirming'\n  | 'confirmed'\n  | 'cancelled';\n\ninterface UseConfirmReturn {\n  status: ConfirmationStatus;\n  confirm: () => void;\n  cancel: () => void;\n  reset: () => void;\n}\n\nexport function useConfirm(): UseConfirmReturn {\n  const [status, setStatus] = useState<ConfirmationStatus>('idle');\n\n  const confirm = useCallback(() => {\n    setStatus('confirmed');\n  }, []);\n\n  const cancel = useCallback(() => {\n    setStatus('cancelled');\n  }, []);\n\n  const reset = useCallback(() => {\n    setStatus('idle');\n  }, []);\n\n  return {\n    status,\n    confirm,\n    cancel,\n    reset,\n  };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-confirm.tsx"
+    }
+  ],
+  "categories": ["ui-and-dom"]
+}

@@ -1,0 +1,50 @@
+---
+title: Installation
+description: How to install dependencies and use the library
+---
+
+## Requirements
+
+Use **Node.js 18** or later and install dependencies with pnpm. A `.nvmrc` file is included to match the expected Node version, and the install script checks that you have pnpm **9.15.3** or newer. If Node 18 isn’t installed, run `nvm install` and then `nvm use`.
+
+Installation works just like [shadcn/ui](https://ui.shadcn.com/docs/installation/). Here's how to get started:
+
+<Steps>
+
+### Create project
+
+Run the `init` command to create a new Next.js project or to set up an existing one:
+
+```bash
+npx shadcn@latest init
+```
+
+### Add components
+
+You can now start adding components to your project.
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-window-size.json"
+```
+
+### Import hook
+
+The command above will add the `useWindowSize` hook to your project. Then you can import and use it like this:
+
+```tsx {1,4,9,10} showLineNumbers
+import { useWindowSize } from '@/hooks/guarahooks/use-window-size';
+
+export default function Home() {
+  const { width, height } = useWindowSize();
+
+  return (
+    <div>
+      <h1>Window size</h1>
+      <p>Width: {width}</p>
+      <p>Height: {height}</p>
+    </div>
+  );
+}
+```
+
+</Steps>

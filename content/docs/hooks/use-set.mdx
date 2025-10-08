@@ -1,0 +1,126 @@
+---
+title: useSet
+date: 2025-04-22
+description: Controls a Set state with declarative methods.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-set-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-set"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-set" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Prop
+
+| Prop         | Type     | Default     | Description                  |
+| ------------ | -------- | ----------- | ---------------------------- |
+| `initialSet` | `Set<T>` | `new Set()` | The initial value of the Set |
+
+## Data
+
+| Prop       | Type                       | Description                         |
+| ---------- | -------------------------- | ----------------------------------- |
+| `set`      | `Set<T>`                   | The Set instance                    |
+| `add`      | `(item: T) => void`        | Adds an item to the Set             |
+| `delete`   | `(item: T) => void`        | Deletes an item from the Set        |
+| `has`      | `(item: T) => boolean`     | Checks if an item is in the Set     |
+| `clear`    | `() => void`               | Clears the Set                      |
+| `reset`    | `() => void`               | Resets the Set to the initial value |
+| `setValue` | `(newSet: Set<T>) => void` | Sets the Set to a new value         |
+| `getAll`   | `() => T[]`                | Returns all items in the Set        |
+
+## Key Features & Details
+
+### Flexible Initial Value
+
+- The `initialSet` can be any iterable (e.g., `Set`, `Array`, etc.), not just a `Set`.
+- The initial value is only used on the first render or when the hook is reset.
+
+### Method Behaviors
+
+- `add(item)`: Adds an item to the set. No-op if the item already exists.
+- `delete(item)`: Removes an item from the set. No-op if the item does not exist.
+- `has(item)`: Returns `true` if the item is in the set.
+- `clear()`: Removes all items from the set.
+- `reset()`: Resets the set to its initial value.
+- `setValue(newSet)`: Replaces the set with a new set (accepts any `Set<T>`).
+- `getAll()`: Returns an array of all items in the set (order is not guaranteed).
+
+### Immutability & State Updates
+
+- The hook always returns a new `Set` instance when the state changes, ensuring immutability.
+- State updates are optimized: if an operation would not change the set, the state is not updated.
+
+### Best Practices & Caveats
+
+- The hook is designed for managing unique collections of primitive values or objects (reference equality applies).
+- When using objects as set items, ensure you understand how reference equality works in JavaScript.
+- For best performance, avoid creating a new `initialSet` on every render (use `useMemo` if needed).
+- The hook is client-side only.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const {
+  set,
+  add,
+  delete: remove,
+  has,
+  clear,
+  reset,
+  getAll,
+} = useSet([1, 2, 3]);
+add(4);
+remove(2);
+console.log(getAll()); // [1, 3, 4]
+```
+
+### With Objects
+
+```tsx
+const obj1 = { id: 1 };
+const obj2 = { id: 2 };
+const { set, add, has } = useSet([obj1]);
+add(obj2);
+console.log(has(obj1)); // true
+```
+
+### Resetting the Set
+
+```tsx
+const { add, reset, getAll } = useSet(['a', 'b']);
+add('c');
+reset();
+console.log(getAll()); // ['a', 'b']
+```

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-map",
+  "type": "registry:hook",
+  "title": "UseMap",
+  "description": "Manages a Map of key/value pairs with ease.",
+  "files": [
+    {
+      "path": "registry/hooks/use-map.tsx",
+      "content": "'use client';\n\nimport { useCallback, useMemo, useState } from 'react';\n\nexport type UseMapResult<K, V> = {\n  map: Map<K, V>;\n  set: (key: K, value: V) => void;\n  delete: (key: K) => void;\n  has: (key: K) => boolean;\n  clear: () => void;\n  reset: () => void;\n  setValue: (newMap: Map<K, V>) => void;\n  get: (key: K) => V | undefined;\n  getAll: () => [K, V][];\n};\n\nexport function useMap<K, V>(\n  initialMap: Iterable<[K, V]> = [],\n): UseMapResult<K, V> {\n  const [map, setMap] = useState<Map<K, V>>(() => new Map(initialMap));\n  const initial = useMemo(() => new Map(initialMap), [initialMap]);\n\n  const setEntry = useCallback((key: K, value: V) => {\n    setMap((prev) => {\n      const current = prev.get(key);\n      if (prev.has(key) && current === value) return prev;\n      const next = new Map(prev);\n      next.set(key, value);\n      return next;\n    });\n  }, []);\n\n  const deleteEntry = useCallback((key: K) => {\n    setMap((prev) => {\n      if (!prev.has(key)) return prev;\n      const next = new Map(prev);\n      next.delete(key);\n      return next;\n    });\n  }, []);\n\n  const hasKey = useCallback((key: K) => map.has(key), [map]);\n\n  const clear = useCallback(() => {\n    setMap(new Map());\n  }, []);\n\n  const reset = useCallback(() => {\n    setMap(new Map(initial));\n  }, [initial]);\n\n  const setValue = useCallback((newMap: Map<K, V>) => {\n    setMap(new Map(newMap));\n  }, []);\n\n  const get = useCallback((key: K) => map.get(key), [map]);\n\n  const getAll = useCallback(() => Array.from(map.entries()), [map]);\n\n  return {\n    map,\n    set: setEntry,\n    delete: deleteEntry,\n    has: hasKey,\n    clear,\n    reset,\n    setValue,\n    get,\n    getAll,\n  };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-map.tsx"
+    }
+  ],
+  "categories": ["state-management"]
+}

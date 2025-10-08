@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-debounce-demo",
+  "type": "registry:example",
+  "title": "UseDebounceDemo",
+  "description": "use-debounce's hook in action.",
+  "registryDependencies": [
+    "card",
+    "input",
+    "https://guarahooks.com/r/use-debounce.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-debounce-demo.tsx",
+      "content": "'use client';\n\nimport React, { useCallback, useState } from 'react';\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\n\nimport { useDebounce } from '@/hooks/guarahooks/use-debounce';\n\nexport function UseDebounceDemo() {\n  const [inputValue, setInputValue] = useState('');\n  const [debouncedValue, setDebouncedValue] = useState('');\n\n  const updateDebouncedValue = useCallback((value: string) => {\n    setDebouncedValue(value);\n  }, []);\n\n  const debouncedUpdate = useDebounce(updateDebouncedValue, 500);\n\n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    const value = e.target.value;\n    setInputValue(value);\n    debouncedUpdate(value);\n  };\n\n  return (\n    <Card className=\"max-w-md w-full relative\">\n      <CardHeader>\n        <CardTitle>useDebounce</CardTitle>\n        <CardDescription>\n          This component uses the <code>useDebounce</code> hook to debounce the\n          input value.\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <Input\n          type=\"text\"\n          value={inputValue}\n          onChange={handleChange}\n          placeholder=\"Type something...\"\n          className=\"w-full\"\n        />\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-2\">\n        <p className=\"text-sm text-muted-foreground\">\n          <strong>Immediate value:</strong> {inputValue}\n        </p>\n        <p className=\"text-sm text-muted-foreground\">\n          <strong>Debounced value:</strong> {debouncedValue}\n        </p>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-debounce-demo.tsx"
+    }
+  ]
+}

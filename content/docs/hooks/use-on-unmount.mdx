@@ -1,0 +1,92 @@
+---
+title: useOnUnmount
+date: 2025-04-23
+description: Execute a function only once when the component is unmounted.
+author: h3rmel
+published: true
+---
+
+<Callout>
+  **Important:** In development with React Strict Mode enabled, this hook may
+  invoke its callback twice. This is intentional to flush side effects and will
+  not occur in production builds, outside Strict Mode or in React 19 or above.
+</Callout>
+
+<HookPreview name="use-on-unmount-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-on-unmount"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-on-unmount" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop       | Type            | Default    | Description                                              |
+| ---------- | --------------- | ---------- | -------------------------------------------------------- |
+| `callback` | `void function` | `() => {}` | The function to execute when the component is unmounted. |
+
+## Key Features & Details
+
+### Execution Timing
+
+- The callback is executed only once, immediately before the component is unmounted (on the client).
+- The callback will not run on re-renders or updates, only on unmount.
+
+### Callback Stability
+
+- The callback is not re-invoked if it changes between renders; only the initial callback is used.
+- For best results, use a stable callback (e.g., from `useCallback`) if it depends on props or state.
+
+### SSR & Client-Only
+
+- The hook is client-side only; on the server, the callback is never called.
+
+### Best Practices & Caveats
+
+- Use for cleanup logic, analytics, or side effects that should only run once on unmount.
+- Avoid side effects that depend on up-to-date props or state unless the callback is stable.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+useOnUnmount(() => {
+  console.log('Component will unmount!');
+});
+```
+
+### With Stable Callback
+
+```tsx
+const onUnmount = useCallback(() => {
+  // Cleanup logic
+}, []);
+useOnUnmount(onUnmount);
+```

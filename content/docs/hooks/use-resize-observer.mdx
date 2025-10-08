@@ -1,0 +1,182 @@
+---
+title: useResizeObserver
+date: 2024-06-14
+description: A React hook for observing size changes of an element using the Resize Observer API
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-resize-observer-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-resize-observer"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-resize-observer" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop       | Type                                                                 | Default | Description                                    |
+| ---------- | -------------------------------------------------------------------- | ------- | ---------------------------------------------- |
+| `target`   | `React.RefObject<T \| null>`                                         | -       | The DOM element to observe                     |
+| `options`  | `ResizeObserverOptions`                                              | `{}`    | Configuration for the resize observer          |
+| `callback` | `(entries: ResizeObserverEntry[], observer: ResizeObserver) => void` | -       | Function called when size changes are observed |
+
+### Options
+
+| Prop  | Type                            | Default         | Description                                      |
+| ----- | ------------------------------- | --------------- | ------------------------------------------------ |
+| `box` | `'content-box' \| 'border-box'` | `'content-box'` | Box model to observe (content-box or border-box) |
+
+## Data
+
+| Property     | Type         | Description                             |
+| ------------ | ------------ | --------------------------------------- |
+| `disconnect` | `() => void` | Function to stop observing size changes |
+
+## Key Features & Details
+
+### Browser Support
+
+The Resize Observer API is well-supported across modern browsers:
+
+- Chrome: Full support (v64+)
+- Firefox: Full support (v69+)
+- Safari: Partial support (v13+)
+- Edge: Full support (v79+)
+- Opera: Full support (v51+)
+
+### Cross-Browser Compatibility
+
+- The hook provides consistent behavior across different browsers
+- Gracefully handles cases where the API is not supported
+
+### Performance Considerations
+
+- Automatically disconnects observers when components unmount
+- Provides a `disconnect` function for manual cleanup
+- Supports configurable options to optimize observation
+- Observes only the target element to minimize overhead
+
+### Best Practices & Caveats
+
+1. Always provide a target element
+2. Use the `disconnect` function when observation is no longer needed
+3. Avoid observing large or complex elements without throttling
+4. Consider using the appropriate `box` option based on layout requirements
+5. Clean up observers when components unmount
+6. Polyfill or check for API support in older browsers
+7. Handle multiple entries in the callback if observing multiple targets
+8. Throttle or debounce callbacks to improve performance in high-frequency changes
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const ref = useRef<HTMLDivElement | null>(null);
+const [size, setSize] = useState({ width: 0, height: 0 });
+
+useResizeObserver<HTMLDivElement>({
+  target: ref,
+  callback: (entries) => {
+    const { width, height } = entries[0].contentRect;
+    setSize({ width: Math.round(width), height: Math.round(height) });
+  },
+});
+
+return (
+  <div ref={ref}>
+    Width: {size.width}, Height: {size.height}
+  </div>
+);
+```
+
+### With Custom Options
+
+```tsx
+useResizeObserver<HTMLDivElement>({
+  target: ref,
+  callback: (entries) => {
+    // Handle size changes
+  },
+  options: { box: 'border-box' },
+});
+```
+
+### With Disconnect
+
+```tsx
+const { disconnect } = useResizeObserver<HTMLDivElement>({
+  target: ref,
+  callback: (entries) => {
+    // Handle size changes
+  },
+});
+
+// Later, to stop observing
+disconnect();
+```
+
+## Usage
+
+```tsx
+import { useResizeObserver } from '@/hooks/use-resize-observer';
+
+function MyComponent() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  useResizeObserver<HTMLDivElement>({
+    target: ref,
+    callback: (entries) => {
+      const { width, height } = entries[0].contentRect;
+      setSize({ width, height });
+    },
+  });
+
+  return (
+    <div ref={ref}>
+      Width: {size.width}, Height: {size.height}
+    </div>
+  );
+}
+```
+
+## Common Use Cases
+
+1. Responsive components handling dynamic sizing
+2. Detecting element size changes (e.g., for charts or canvases)
+3. Adjusting layouts based on container size
+4. Monitoring size changes for custom scrollbars or resizable panels
+5. Detecting text reflows or content changes impacting size
+
+## Related
+
+- [MDN Resize Observer Documentation](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
+- [React useRef Hook](https://react.dev/reference/react/useRef)

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-page-leave",
+  "type": "registry:hook",
+  "title": "UsePageLeave",
+  "description": "Detects when the user tries to leave the page.",
+  "files": [
+    {
+      "path": "registry/hooks/use-page-leave.tsx",
+      "content": "'use client';\n\nimport { useCallback, useEffect, useRef, useState } from 'react';\n\ntype PageLeaveOptions = {\n  confirmationMessage?: string;\n  showConfirmation?: boolean;\n};\n\ntype PageLeaveResult = {\n  isPageLeft: boolean;\n  onPageLeave: (callback: () => void) => void;\n};\n\nexport function usePageLeave(options: PageLeaveOptions = {}): PageLeaveResult {\n  const { confirmationMessage, showConfirmation = false } = options;\n\n  // Track if user left the page (switched tabs)\n  const [isPageLeft, setIsPageLeft] = useState(false);\n\n  // Store the callback to execute when user leaves\n  const callbackRef = useRef<(() => void) | null>(null);\n\n  // Method to set the callback\n  const onPageLeave = useCallback((callback: () => void) => {\n    callbackRef.current = callback;\n  }, []);\n\n  // Handle beforeunload event (page close, refresh, navigate away)\n  const handleBeforeUnload = useCallback(\n    (event: BeforeUnloadEvent) => {\n      if (callbackRef.current) {\n        callbackRef.current();\n      }\n\n      if (showConfirmation) {\n        event.preventDefault();\n        // Custom message (may be ignored by modern browsers)\n        event.returnValue = confirmationMessage || '';\n        return confirmationMessage || '';\n      }\n      return undefined;\n    },\n    [showConfirmation, confirmationMessage],\n  );\n\n  // Handle visibility change (tab switch)\n  const handleVisibilityChange = useCallback(() => {\n    if (document.visibilityState === 'hidden') {\n      setIsPageLeft(true);\n      if (callbackRef.current) {\n        callbackRef.current();\n      }\n    } else if (document.visibilityState === 'visible') {\n      setIsPageLeft(false);\n    }\n  }, []);\n\n  useEffect(() => {\n    // Skip in non-browser environments to support SSR\n    if (typeof window === 'undefined') return undefined;\n\n    // Add beforeunload event for page close/refresh\n    window.addEventListener('beforeunload', handleBeforeUnload);\n\n    // Add visibilitychange for tab switching\n    document.addEventListener('visibilitychange', handleVisibilityChange);\n\n    return () => {\n      window.removeEventListener('beforeunload', handleBeforeUnload);\n      document.removeEventListener('visibilitychange', handleVisibilityChange);\n    };\n  }, [handleBeforeUnload, handleVisibilityChange]);\n\n  return { isPageLeft, onPageLeave };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/guarahooks/use-page-leave.tsx"
+    }
+  ],
+  "categories": ["utilities"]
+}

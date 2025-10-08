@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-local-storage-demo",
+  "type": "registry:example",
+  "title": "UseLocalStorageDemo",
+  "description": "use-local-storage's hook in action.",
+  "registryDependencies": [
+    "card",
+    "input",
+    "label",
+    "https://guarahooks.com/r/use-local-storage.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-local-storage-demo.tsx",
+      "content": "'use client';\n\nimport React from 'react';\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\nimport { Label } from '@/components/ui/label';\n\nimport { useLocalStorage } from '@/hooks/guarahooks/use-local-storage';\n\nexport default function UseLocalStorageDemo() {\n  // Example with a string\n  const [name, setName] = useLocalStorage<string>('demo-name', '');\n\n  return (\n    <Card className=\"relative max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useLocalStorage</CardTitle>\n        <CardDescription>\n          This component uses the <code>useLocalStorage</code> hook to manage a\n          local storage item.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-6\">\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"name\">Name</Label>\n          <Input\n            id=\"name\"\n            value={name}\n            onChange={(e) => setName(e.target.value)}\n            placeholder=\"Enter your name\"\n          />\n        </div>\n        <div className=\"flex items-end gap-2\">\n          <p>Name:</p>\n          <pre className=\"text-sm text-muted-foreground bg-accent w-fit px-1 py-0.5 rounded-xs\">\n            {name}\n          </pre>\n        </div>\n      </CardContent>\n      <CardFooter>\n        <p className=\"text-muted-foreground text-sm\">\n          Looks in the local storage for the key <code>demo-name</code>.\n        </p>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-local-storage-demo.tsx"
+    }
+  ]
+}

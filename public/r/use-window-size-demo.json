@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-window-size-demo",
+  "type": "registry:example",
+  "title": "UseWindowSizeDemo",
+  "description": "use-window-size's hook in action.",
+  "registryDependencies": [
+    "card",
+    "https://guarahooks.com/r/use-window-size.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-window-size-demo.tsx",
+      "content": "'use client';\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { useWindowSize } from '@/hooks/guarahooks/use-window-size';\n\nexport default function UseWindowSizeDemo() {\n  const { width, height } = useWindowSize({\n    initialWidth: 1024,\n    initialHeight: 768,\n  });\n\n  return (\n    <Card className=\"relative max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useWindowSize</CardTitle>\n        <CardDescription>\n          This component uses the <code>useWindowSize</code> hook to get the\n          current window size.\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <p>Width: {width}</p>\n        <p>Height: {height}</p>\n      </CardContent>\n      <CardFooter>\n        <p className=\"text-sm text-muted-foreground\">\n          Resize the window to see the values changing.\n        </p>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-window-size-demo.tsx"
+    }
+  ]
+}

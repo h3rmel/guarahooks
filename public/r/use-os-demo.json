@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-os-demo",
+  "type": "registry:example",
+  "title": "UseOSDemo",
+  "description": "use-os's hook in action.",
+  "registryDependencies": ["card", "https://guarahooks.com/r/use-os.json"],
+  "files": [
+    {
+      "path": "registry/example/use-os-demo.tsx",
+      "content": "'use client';\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { OS, useOS } from '@/hooks/guarahooks/use-os';\n\nexport default function UseOSDemo() {\n  const os = useOS();\n\n  console.log(os);\n\n  const osLabel: Record<OS, string> = {\n    [OS.Undetermined]: 'Unable to determine the operating system.',\n    [OS.MacOS]: 'MacOS',\n    [OS.IOS]: 'iOS',\n    [OS.Windows]: 'Windows',\n    [OS.Android]: 'Android',\n    [OS.Linux]: 'Linux',\n  };\n\n  return (\n    <Card className=\"w-full max-w-md relative\">\n      <CardHeader>\n        <CardTitle>useOS</CardTitle>\n        <CardDescription>\n          This hook detects the user's operating system.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <p className=\"text-sm\">Operating System detected:</p>\n        <div className=\"font-bold\">{osLabel[os]}</div>\n      </CardContent>\n      <CardFooter className=\"gap-x-1\">\n        <p className=\"text-sm text-muted-foreground\">\n          Value returned from useOS:\n        </p>\n        <p className=\"text-sm\">{os}</p>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-os-demo.tsx"
+    }
+  ]
+}

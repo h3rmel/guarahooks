@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-on-unmount-demo",
+  "type": "registry:example",
+  "title": "UseOnUnmountDemo",
+  "description": "use-on-unmount's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "sonner",
+    "https://guarahooks.com/r/use-on-unmount.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-on-unmount-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\n\nimport { toast } from 'sonner';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { useOnUnmount } from '@/hooks/guarahooks/use-on-unmount';\n\nfunction ChildComponent() {\n  useOnUnmount(() => {\n    toast.success('Component unmounted successfully!');\n  });\n\n  return (\n    <div className=\"p-4 rounded-md bg-muted\">\n      <p>I am the child component. Click to unmount me!</p>\n    </div>\n  );\n}\n\nexport default function UseOnUnmountDemo() {\n  const [showChild, setShowChild] = useState(true);\n\n  return (\n    <Card className=\"relative max-w-md w-full\">\n      <CardHeader>\n        <CardTitle>useOnUnmount</CardTitle>\n        <CardDescription>\n          This example uses the <code>useOnMount</code> hook to execute a\n          function only once when the component is mounted.\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <Button onClick={() => setShowChild((prev) => !prev)}>\n          {showChild ? 'Unmount child component' : 'Mount child component'}\n        </Button>\n        <div className=\"mt-6 min-h-[60px]\">\n          {showChild && <ChildComponent />}\n        </div>\n      </CardContent>\n      <CardFooter>\n        <p className=\"text-muted-foreground text-sm\">\n          When the child component is unmounted, a toast will be displayed using\n          shadcn/ui.\n        </p>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-on-unmount-demo.tsx"
+    }
+  ]
+}

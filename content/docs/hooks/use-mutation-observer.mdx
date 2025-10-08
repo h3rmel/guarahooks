@@ -1,0 +1,181 @@
+---
+title: useMutationObserver
+date: 2024-03-19
+description: A React hook for observing changes to the DOM using the Mutation Observer API
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-mutation-observer-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-mutation-observer"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-mutation-observer" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop       | Type                         | Default   | Description                                 |
+| ---------- | ---------------------------- | --------- | ------------------------------------------- |
+| `target`   | `React.RefObject<T \| null>` | -         | The DOM element to observe                  |
+| `options`  | `MutationObserverInit`       | See below | Configuration for the mutation observer     |
+| `callback` | `MutationCallback`           | -         | Function called when mutations are observed |
+
+### Options
+
+| Prop         | Type      | Default | Description                                                            |
+| ------------ | --------- | ------- | ---------------------------------------------------------------------- |
+| `attributes` | `boolean` | `true`  | Whether to observe attribute changes                                   |
+| `childList`  | `boolean` | `true`  | Whether to observe child node changes                                  |
+| `subtree`    | `boolean` | `true`  | Whether to observe changes in the entire subtree of the target element |
+
+## Data
+
+The hook returns an object with the following properties:
+
+| Property     | Type         | Description                                  |
+| ------------ | ------------ | -------------------------------------------- |
+| `disconnect` | `() => void` | Function to disconnect the mutation observer |
+
+## Key Features & Details
+
+### Browser Support
+
+The Mutation Observer API is well-supported across modern browsers:
+
+- Chrome: Full support
+- Firefox: Full support
+- Safari: Full support
+- Edge: Full support
+- Opera: Full support
+
+### Cross-Browser Compatibility
+
+- The hook handles browser-specific implementations and edge cases
+- Provides consistent behavior across different browsers
+- Gracefully handles cases where the API might not be fully supported
+
+### Performance Considerations
+
+- The hook automatically disconnects observers when components unmount
+- Provides a `disconnect` function for manual cleanup
+- Supports configurable observation options to optimize performance
+- Handles edge cases where the target element might be null
+
+### Best Practices & Caveats
+
+1. Always provide a target element
+2. Use the disconnect function when you no longer need to observe changes
+3. Be mindful of performance when observing large subtrees
+4. Consider using specific options to limit the types of mutations you observe
+5. Clean up observers when components unmount
+6. Use appropriate options based on your use case
+7. Handle edge cases where the target element might be null
+8. Consider debouncing or throttling the callback for performance
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const [mutations, setMutations] = useState<MutationRecord[]>([]);
+const targetRef = useRef<HTMLDivElement | null>(null);
+
+useMutationObserver<HTMLDivElement>({
+  target: targetRef,
+  callback: (mutationsList) => {
+    setMutations((prev) => [...prev, ...mutationsList]);
+  },
+});
+
+return <div ref={targetRef}>Target Element</div>;
+```
+
+### With Custom Options
+
+```tsx
+useMutationObserver<HTMLDivElement>({
+  target: targetRef,
+  callback: (mutationsList) => {
+    // Handle mutations
+  },
+  options: {
+    attributes: true,
+    childList: false,
+    subtree: false,
+  },
+});
+```
+
+### With Disconnect
+
+```tsx
+const { disconnect } = useMutationObserver<HTMLDivElement>({
+  target: targetRef,
+  callback: (mutationsList) => {
+    // Handle mutations
+  },
+});
+
+// Later, when you want to stop observing
+disconnect();
+```
+
+## Usage
+
+```tsx
+import { useMutationObserver } from '@/hooks/use-mutation-observer';
+
+function MyComponent() {
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const [mutations, setMutations] = useState<MutationRecord[]>([]);
+
+  useMutationObserver<HTMLDivElement>({
+    target: targetRef,
+    callback: (mutationsList) => {
+      setMutations((prev) => [...prev, ...mutationsList]);
+    },
+  });
+
+  return <div ref={targetRef}>Target Element</div>;
+}
+```
+
+## Common Use Cases
+
+1. **Dynamic Content Loading**: Observe when new content is added to a container
+2. **Form Validation**: Watch for attribute changes on form elements
+3. **UI State Management**: Track changes to UI elements for state synchronization
+4. **Third-party Integration**: Monitor changes made by third-party scripts
+5. **Accessibility**: Track changes that might affect accessibility
+
+## Related
+
+- [MDN Mutation Observer Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
+- [React useRef Hook](https://react.dev/reference/react/useRef)

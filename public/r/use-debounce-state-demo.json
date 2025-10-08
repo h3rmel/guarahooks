@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-debounce-state-demo",
+  "type": "registry:example",
+  "title": "UseDebounceStateDemo",
+  "description": "use-debounce-state's hook in action.",
+  "registryDependencies": [
+    "card",
+    "input",
+    "https://guarahooks.com/r/use-debounce-state.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-debounce-state-demo.tsx",
+      "content": "'use client';\n\nimport { useState } from 'react';\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport { Input } from '@/components/ui/input';\n\nimport { useDebouncedState } from '@/hooks/guarahooks/use-debounce-state';\n\nexport default function UseDebounceStateDemo() {\n  const [immediateValue, setImmediateValue] = useState('');\n  const [debouncedValue, setDebouncedValue] = useDebouncedState('', 1000);\n\n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    setImmediateValue(e.target.value);\n    setDebouncedValue(e.target.value);\n  };\n\n  return (\n    <Card className=\"max-w-md w-full relative\">\n      <CardHeader>\n        <CardTitle>useDebounceState</CardTitle>\n        <CardDescription>\n          This component uses the <code>useDebounceState</code> hook to debounce\n          the state update.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <Input\n          type=\"text\"\n          value={immediateValue}\n          onChange={handleChange}\n          placeholder=\"Type something...\"\n        />\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1\">\n        <div className=\"flex flex-col gap-1\">\n          <span className=\"text-sm text-muted-foreground\">\n            Immediate value:\n          </span>\n          <span className=\"font-mono bg-muted rounded px-2 py-1\">\n            {immediateValue}\n          </span>\n        </div>\n        <div className=\"flex flex-col gap-1\">\n          <span className=\"text-sm text-muted-foreground\">\n            Debounced value:\n          </span>\n          <span className=\"font-mono bg-muted rounded px-2 py-1\">\n            {debouncedValue}\n          </span>\n        </div>\n        <span className=\"text-sm text-muted-foreground mt-2\">\n          The debounced value updates 1s after you stop typing.\n        </span>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-debounce-state-demo.tsx"
+    }
+  ]
+}

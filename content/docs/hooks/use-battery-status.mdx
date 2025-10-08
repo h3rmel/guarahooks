@@ -1,0 +1,103 @@
+---
+title: useBatteryStatus
+date: 2024-07-15
+description: A React hook to access system battery information via the Battery Status API
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-battery-status-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-battery-status"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-battery-status" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+The hook returns an object with the following properties:
+
+| Property          | Type      | Description                                           |
+| ----------------- | --------- | ----------------------------------------------------- |
+| `supported`       | `boolean` | Whether the Battery Status API is supported           |
+| `level`           | `number`  | Current battery level (0 to 1)                        |
+| `charging`        | `boolean` | Whether the battery is currently charging             |
+| `chargingTime`    | `number`  | Time in seconds until the battery is fully charged    |
+| `dischargingTime` | `number`  | Time in seconds until the battery is fully discharged |
+
+## Key Features & Details
+
+- Real-time battery information with automatic updates via the Battery Status API events.
+- Graceful fallback when the API is not supported.
+- Simple and declarative interface for easy integration.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const { supported, level, charging } = useBatteryStatus();
+
+if (supported) {
+  console.log(`Battery level: ${level * 100}%`);
+} else {
+  console.warn('Battery Status API not supported');
+}
+```
+
+### Full Example
+
+```tsx
+import React from 'react';
+
+import { useBatteryStatus } from '@/registry/hooks/use-battery-status';
+
+export default function BatteryComponent() {
+  const { supported, level, charging, chargingTime, dischargingTime } =
+    useBatteryStatus();
+
+  if (!supported) {
+    return <p>Battery API not supported</p>;
+  }
+
+  return (
+    <div>
+      <p>Level: {Math.round(level * 100)}%</p>
+      <p>Status: {charging ? 'Charging' : 'Discharging'}</p>
+      <p>Charging Time: {chargingTime}s</p>
+      <p>Discharging Time: {dischargingTime}s</p>
+    </div>
+  );
+}
+```
+
+## Related
+
+- [MDN Battery Status API](https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API)
+- [Battery Status API Specification](https://w3c.github.io/battery/)

@@ -1,0 +1,93 @@
+---
+title: useTimeout
+date: 2024-07-02
+description: Executes a callback after a specified delay.
+author: h3rmel
+published: true
+---
+
+<HookPreview name="use-timeout-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://guarahooks.com/r/use-timeout"
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<HookSource name="use-timeout" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Props
+
+| Prop       | Type             | Default    | Description                                 |
+| ---------- | ---------------- | ---------- | ------------------------------------------- |
+| `callback` | `() => void`     | `() => {}` | The function to execute after the delay.    |
+| `delay`    | `number \| null` | `null`     | The delay in milliseconds before execution. |
+
+## Key Features & Details
+
+- The hook sets a one-time timeout using `setTimeout` and cleans up with `clearTimeout`.
+- Passing `null` as `delay` cancels the timeout.
+- Ensures the latest callback is invoked by using a ref.
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import { useTimeout } from '@/registry/hooks/use-timeout';
+
+function Component() {
+  useTimeout(() => {
+    console.log('timeout!');
+  }, 2000);
+
+  return <div>Check the console after 2 seconds.</div>;
+}
+```
+
+### Pause and Resume
+
+```tsx
+import { useState } from 'react';
+
+import { useTimeout } from '@/registry/hooks/use-timeout';
+
+function TimeoutComponent() {
+  const [active, setActive] = useState(true);
+  const [message, setMessage] = useState('Waiting...');
+
+  useTimeout(() => setMessage('Done!'), active ? 3000 : null);
+
+  return (
+    <div>
+      <p>{message}</p>
+      <button onClick={() => setActive((a) => !a)}>
+        {active ? 'Pause' : 'Resume'}
+      </button>
+    </div>
+  );
+}
+```

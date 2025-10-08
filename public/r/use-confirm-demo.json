@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-confirm-demo",
+  "type": "registry:example",
+  "title": "UseConfirmDemo",
+  "description": "use-confirm's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "https://guarahooks.com/r/use-confirm.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-confirm-demo.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from '@/components/ui/dialog';\n\nimport { ConfirmationStatus, useConfirm } from '@/hooks/guarahooks/use-confirm';\n\nexport default function UseConfirmDemo() {\n  const [open, setOpen] = useState(false);\n  const { status, confirm, cancel, reset } = useConfirm();\n\n  const getStatusMessage = (status: ConfirmationStatus) => {\n    switch (status) {\n      case 'idle':\n        return 'Waiting for action...';\n      case 'confirming':\n        return 'Are you sure?';\n      case 'confirmed':\n        return 'Action confirmed!';\n      case 'cancelled':\n        return 'Action cancelled!';\n    }\n  };\n\n  const handleConfirm = () => {\n    confirm();\n    setOpen(false);\n  };\n\n  const handleCancel = () => {\n    cancel();\n    setOpen(false);\n  };\n\n  return (\n    <Card className=\"relative max-w-sm w-full\">\n      <CardHeader>\n        <CardTitle>useConfirm</CardTitle>\n        <CardDescription>\n          This component uses the <code>useConfirm</code> hook to handle user\n          confirmation actions.\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <p>\n          Status: <strong>{getStatusMessage(status)}</strong>\n        </p>\n      </CardContent>\n      <CardFooter className=\"flex gap-2\">\n        <Dialog open={open} onOpenChange={setOpen}>\n          <DialogTrigger asChild>\n            <Button>Delete Item</Button>\n          </DialogTrigger>\n          <DialogContent>\n            <DialogHeader>\n              <DialogTitle>Delete Item</DialogTitle>\n              <DialogDescription>\n                Are you sure you want to delete this item? This action cannot be\n                undone.\n              </DialogDescription>\n            </DialogHeader>\n            <DialogFooter>\n              <Button variant=\"outline\" onClick={handleCancel}>\n                Cancel\n              </Button>\n              <Button variant=\"destructive\" onClick={handleConfirm}>\n                Delete\n              </Button>\n            </DialogFooter>\n          </DialogContent>\n        </Dialog>\n        {(status === 'confirmed' || status === 'cancelled') && (\n          <Button onClick={reset}>Reset</Button>\n        )}\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-confirm-demo.tsx"
+    }
+  ]
+}

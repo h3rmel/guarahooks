@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-fullscreen-demo",
+  "type": "registry:example",
+  "title": "UseFullscreenDemo",
+  "description": "use-fullscreen's hook in action.",
+  "registryDependencies": [
+    "card",
+    "button",
+    "https://guarahooks.com/r/use-fullscreen.json"
+  ],
+  "files": [
+    {
+      "path": "registry/example/use-fullscreen-demo.tsx",
+      "content": "'use client';\n\nimport React, { useRef } from 'react';\n\nimport { Button } from '@/components/ui/button';\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@/components/ui/card';\n\nimport { useFullscreen } from '@/hooks/guarahooks/use-fullscreen';\n\nexport default function UseFullscreenDemo() {\n  const boxRef = useRef<HTMLDivElement>(null);\n  const [isFullscreen, enter, exit] = useFullscreen(\n    boxRef as React.RefObject<HTMLElement>,\n  );\n\n  return (\n    <Card className=\"relative max-w-md w-full\">\n      <CardHeader>\n        <CardTitle>useFullscreen</CardTitle>\n        <CardDescription>\n          This component uses the <code>useFullscreen</code> hook to toggle\n          fullscreen mode for a specific element.\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <p className=\"text-lg font-semibold text-primary\">\n          {isFullscreen ? 'In Fullscreen' : 'Not Fullscreen'}\n        </p>\n      </CardContent>\n      <CardFooter className=\"flex gap-2\">\n        <Button onClick={enter} disabled={isFullscreen} variant=\"secondary\">\n          Enter Fullscreen\n        </Button>\n        <Button onClick={exit} disabled={!isFullscreen} variant=\"destructive\">\n          Exit Fullscreen\n        </Button>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:example",
+      "target": "components/example/use-fullscreen-demo.tsx"
+    }
+  ]
+}
